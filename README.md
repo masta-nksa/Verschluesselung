@@ -127,13 +127,12 @@ der SuS gespeichert (nur lokal).
 | Antwort in Sätzen | `<div class="antwort" data-zeilen="2"></div>` (eigene Zeile, Leerzeilen rundherum) |
 | Multiple Choice | Task-Liste `- [ ] …` und direkt darunter `{: .mc data-antwort="2 3"}` |
 | nur am Bildschirm | `<div class="nur-online" markdown="1"> … </div>` (z. B. «Früh fertig?») |
+| Musterlösung zu einem Antwortfeld | `<div class="antwort" data-zeilen="2" data-loesung="…"></div>` |
+| nur im Druck | `class="nur-druck"` (z. B. Geheimtext-Kopie für Papier, wenn das Werkzeug nicht gedruckt wird) |
 
 Trennzeichen ist immer das **Semikolon** – ein `|` würde in Markdown-Tabellen die Spalten
 trennen. Schreiblinien nie als Unterstriche `____` setzen (kramdown macht daraus Fett/Kursiv).
 Die Kontrolle ist formativ: Wer den Seitenquelltext liest, sieht die Antworten.
-
-| Musterlösung zu einem Antwortfeld | `<div class="antwort" data-zeilen="2" data-loesung="…"></div>` |
-| nur im Druck | `class="nur-druck"` (z. B. Geheimtext-Kopie für Papier, wenn das Werkzeug nicht gedruckt wird) |
 
 **Lösungen einblenden (Easter Egg):** «kerckhoffs» tippen oder 5× auf den Seitentitel klicken.
 
