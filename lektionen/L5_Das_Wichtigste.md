@@ -74,12 +74,9 @@ vertraut.
 
 ## Das Gesamtbild
 
-| Schutzziel | Baustein |
-|---|---|
-| Vertraulichkeit | Verschlüsselung (symmetrisch, asymmetrisch, hybrid) |
-| Integrität | Hashfunktion, Signatur |
-| Authentizität | Signatur + Zertifikat |
-| Verbindlichkeit | Signatur |
+**Merksatz:** Verschlüsselung sichert die Vertraulichkeit, Hashwert und Signatur die Integrität,
+Signatur plus Zertifikat die Authentizität, die Signatur die Verbindlichkeit (vgl. die
+Schutzziel-Tabelle aus Lektion 1).
 
 ## Das sollten Sie jetzt können
 
