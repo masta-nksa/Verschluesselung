@@ -5,6 +5,7 @@ art: info
 titel: "Einstieg: Geheimbotschaft"
 kurz: "Eine abgefangene Nachricht – können Sie sie lesen?"
 reihenfolge: 5
+drucken: false
 ---
 
 # Eine abgefangene Nachricht
@@ -13,11 +14,11 @@ Diese Nachricht wurde heute Morgen auf dem Schulhausplatz gefunden:
 
 <p style="font-family: var(--font-mono); font-size: clamp(1.3rem, 3.5vw, 2rem); line-height: 1.6; letter-spacing: .08em; font-weight: 600;">AYLMMWBURA OLBAL UHJO KLY ZJOBSL ILPT IYBUULU. KHZ WHZZDVYA SHBALA YBIPRVU.</p>
 
-**Wie lautet das Passwort?**
+Versuchen Sie es zuerst ohne Hilfsmittel. Was fällt Ihnen am Geheimtext auf?
 
-Versuchen Sie es zuerst ohne Hilfsmittel. Notieren Sie, was Ihnen am Geheimtext auffällt.
+<div class="antwort" data-zeilen="2"></div>
 
-Was mir auffällt: <span class="fill-line"></span>
+**Wie lautet das Passwort?** <span class="luecke" data-antwort="Rubikon" data-breite="14"></span>
 
 <div class="kasten" markdown="1">
 

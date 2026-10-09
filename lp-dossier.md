@@ -19,6 +19,8 @@ verlinkt.
 
 **Lektionen auswählen:** <span id="dossier-auswahl" class="dossier-auswahl"></span>
 
+<label class="dossier-option"><input type="checkbox" id="dossier-neue-seite"> Jede Unterlage auf einer neuen Seite beginnen (sonst wird Papier gespart)</label>
+
 <span id="dossier-status" class="dossier-status">Unterlagen werden geladen …</span>
 
 </div>

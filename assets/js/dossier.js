@@ -51,6 +51,9 @@
     });
   }
 
+  var neueSeite = document.getElementById("dossier-neue-seite");
+  if (neueSeite) neueSeite.addEventListener("change", function () { ziel.classList.toggle("dossier-neue-seite", neueSeite.checked); });
+
   function laden(url) {
     return fetch(url, { credentials: "same-origin", cache: "no-cache" }).then(function (r) {
       if (!r.ok) throw new Error(r.status);
@@ -87,6 +90,7 @@
         fortschritt();
         var teil = document.createElement("div");
         teil.className = "dossier-teil";
+        teil.dataset.quelle = new URL(s.url, location.href).pathname;
         var art = doc.querySelector(".prose");
         teil.innerHTML = art ? art.innerHTML : "<p>(Inhalt von " + s.titel + " nicht gefunden.)</p>";
         return teil;
@@ -98,6 +102,7 @@
     });
   })).then(function () {
     schreiblinien(ziel);
+    if (window.Uebungen) Array.prototype.forEach.call(ziel.querySelectorAll(".dossier-teil[data-quelle]"), function (t) { window.Uebungen.start(t, t.dataset.quelle); });
     status.textContent = "Alle " + gesamt + " Seiten geladen. Wählen Sie oben die Lektionen und drucken Sie mit dem Knopf «Drucken» (oder Ctrl/Cmd + P → «Als PDF speichern»).";
     if (window.Krypto && window.Krypto.start) window.Krypto.start();
   }).catch(function (err) {

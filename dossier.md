@@ -16,11 +16,13 @@ wählen Sie im Druckdialog «Als PDF speichern».
 
 **Lektionen auswählen:** <span id="dossier-auswahl" class="dossier-auswahl"></span>
 
+<label class="dossier-option"><input type="checkbox" id="dossier-neue-seite"> Jede Unterlage auf einer neuen Seite beginnen (sonst wird Papier gespart)</label>
+
 <span id="dossier-status" class="dossier-status">Unterlagen werden geladen …</span>
 
 Tipp für den Druck: Im Druckdialog unter «Weitere Einstellungen» die Kopf- und Fusszeilen
-ausschalten. Jedes Arbeitsblatt beginnt auf einer neuen Seite. Die interaktiven Werkzeuge
-erscheinen auf Papier als Hinweis.
+ausschalten. Jede Lektion beginnt auf einer neuen Seite. Interaktive Werkzeuge und Knöpfe
+erscheinen nicht auf Papier; Ihre eigenen Eingaben werden mitgedruckt.
 
 </div>
 
@@ -29,7 +31,7 @@ erscheinen auf Papier als Hinweis.
 {%- assign lektionen = site.pages | where: "layout", "lektion" | sort: "lektion" %}
 <script type="application/json" id="dossier-daten">
 [{%- for l in lektionen -%}
-{%- assign material = site.pages | where: "typ", "material" | where: "lektion", l.lektion | where: "zielgruppe", "sus" | sort: "reihenfolge" -%}
+{%- assign material = site.pages | where: "typ", "material" | where: "lektion", l.lektion | where: "zielgruppe", "sus" | where_exp: "m", "m.drucken != false" | sort: "reihenfolge" -%}
 {"lektion": {{ l.lektion }}, "titel": {{ l.titel | jsonify }}, "url": {{ l.url | relative_url | jsonify }}, "seiten": [{%- for m in material -%}{"url": {{ m.url | relative_url | jsonify }}, "titel": {{ m.titel | jsonify }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}{%- unless forloop.last -%},{%- endunless -%}
 {%- endfor -%}]
 </script>

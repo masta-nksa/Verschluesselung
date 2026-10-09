@@ -14,6 +14,7 @@
    5. Design-spezifische Feinheiten
    6. Druckansicht
    7. Krypto-Werkzeuge, Dossier, Vigenère-Quadrat (Ergänzung dieser Einheit)
+   8. Interaktive Übungen und kompakter Druck
 
    EIN DESIGN ÄNDERN ODER ERGÄNZEN
    Ein Design ist nichts weiter als ein Variablenblock in Abschnitt 3. Wer ein
@@ -897,4 +898,109 @@ a { color: var(--accent); }
   .dossier-teil { page-break-before: always; border-top: 0; margin-top: 0; padding-top: 0; }
   .dossier-steuerung { display: none !important; }
   .prose .quadrat table { font-size: 7.5pt; }
+}
+
+/* --- 8. Interaktive Übungen und kompakter Druck -------------------------- */
+/* Die Felder baut assets/js/uebungen.js aus den Platzhaltern span.luecke,
+   span.wahl, div.antwort und Task-Listen. Im Druck erscheinen sie als
+   Schreiblinien bzw. als Optionen zum Einkreisen. */
+
+.luecke-feld {
+  font: inherit; font-size: .95em; color: var(--text);
+  padding: .05rem .35rem; margin: .05rem 0;
+  border: 0; border-bottom: 1.5px solid var(--border-strong);
+  border-radius: 3px 3px 0 0; background: var(--accent-soft);
+  max-width: 100%; box-sizing: border-box; vertical-align: baseline;
+}
+select.luecke-feld { cursor: pointer; }
+.luecke-feld:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.luecke-voll { width: 100%; }
+.luecke-feld.richtig { border-bottom-color: var(--sus); background: var(--sus-soft); }
+.luecke-feld.falsch  { border-bottom-color: #c0392b; background: color-mix(in srgb, #c0392b 14%, transparent); }
+
+.wahl-gruppe { display: inline-flex; flex-wrap: wrap; gap: .25rem; border-radius: 99px; }
+.chip {
+  font: inherit; font-size: .8rem; line-height: 1.3; cursor: pointer;
+  padding: .15rem .55rem; border-radius: 99px;
+  border: 1px solid var(--border-strong); background: var(--bg-elev); color: var(--text);
+}
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg-elev); }
+.wahl-gruppe.richtig .chip[aria-pressed="true"]   { background: var(--sus); border-color: var(--sus); }
+.wahl-gruppe.teilweise .chip[aria-pressed="true"] { background: var(--lp); border-color: var(--lp); }
+.wahl-gruppe.falsch .chip[aria-pressed="true"]    { background: #c0392b; border-color: #c0392b; color: #fff; }
+
+.antwort { margin: .3rem 0 1rem; }
+.antwort-feld {
+  display: block; width: 100%; box-sizing: border-box;
+  font: inherit; line-height: 1.6; color: var(--text);
+  padding: .4rem .6rem; resize: vertical;
+  min-height: calc(var(--zeilen, 2) * 1.6em + .8rem);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-code); background: var(--bg-elev);
+}
+.antwort-feld:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.prose .mc-liste input, .prose .checkliste input { cursor: pointer; }
+.prose ul.mc-liste.richtig { box-shadow: -4px 0 0 var(--sus); }
+.prose ul.mc-liste.falsch  { box-shadow: -4px 0 0 #c0392b; }
+
+.pruefen-leiste { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .8rem; margin: .2rem 0 1.4rem; }
+.pruefen-knopf {
+  font: inherit; font-size: .86rem; font-weight: 600; cursor: pointer;
+  padding: .3rem .9rem; border-radius: var(--radius-knopf);
+  border: 1px solid var(--accent); background: var(--accent); color: var(--bg-elev);
+}
+.pruefen-knopf:hover { filter: brightness(1.1); }
+.pruefen-meldung { font-size: .88rem; }
+.pruefen-meldung.ok { color: var(--sus); font-weight: 700; }
+.pruefen-meldung.noch-nicht { color: var(--lp); }
+.eingaben-loeschen { margin-top: 2.2rem; font-size: .82rem; }
+.link-knopf { font: inherit; background: none; border: 0; padding: 0; color: var(--text-muted); text-decoration: underline; cursor: pointer; }
+
+.dossier-option { display: inline-flex; align-items: center; gap: .35rem; }
+
+@media print {
+  @page { size: A4; margin: 11mm 13mm 12mm; }
+  body { font-size: 10pt; line-height: 1.32; }
+  .prose h1 { font-size: 15pt; margin: 0 0 .35em; }
+  .prose h2 { font-size: 11.5pt; margin: .75em 0 .3em; padding-bottom: .1em; }
+  .prose h3 { font-size: 10.5pt; margin: .65em 0 .2em; }
+  .prose h4 { font-size: 10pt; margin: .5em 0 .2em; }
+  .prose p, .prose ul, .prose ol { margin: 0 0 .35em; }
+  .prose li { margin-bottom: .1em; }
+  .prose blockquote { margin: .35em 0; padding: 0 0 0 .7em; }
+  .prose pre { font-size: 8pt; padding: .35em .5em; margin: .3em 0; }
+  .prose table { font-size: 8.5pt; }
+  .prose th, .prose td { padding: .18em .4em; }
+  .table-scroll { margin: 0 0 .5em; overflow: visible; }
+  .kasten { padding: .3em .6em; margin: .45em 0; }
+  .material-bar, .hinweis, .pruefen-leiste, .eingaben-loeschen, .dossier-steuerung { display: none !important; }
+  .krypto, .krypto:empty { display: none !important; }
+
+  /* «Ziel» als eine Zeile statt Überschrift + Absatz */
+  .prose h2#ziel { display: none; }
+  .prose h2#ziel + p { font-style: italic; margin-bottom: .5em; }
+  .prose h2#ziel + p::before { content: "Ziel: "; font-weight: 700; font-style: normal; }
+
+  /* Felder als Schreiblinien */
+  .luecke-feld {
+    background: none !important; color: #000; border: 0; border-bottom: 1px solid #444;
+    border-radius: 0; padding: 0 .15em; -webkit-appearance: none; appearance: none;
+  }
+  .chip {
+    font-size: 7.5pt; padding: 0 .35em; background: none !important; color: #000 !important;
+    border: 1px solid #777 !important;
+  }
+  .chip[aria-pressed="true"] { font-weight: 700; border: 2px solid #000 !important; }
+  .antwort { margin: .1em 0 .45em; }
+  .antwort-feld {
+    border: 0; border-radius: 0; padding: 0; resize: none; overflow: hidden;
+    font-size: 10pt; line-height: 7mm; min-height: 0; height: calc(var(--zeilen, 2) * 7mm);
+    background: repeating-linear-gradient(to bottom, transparent 0, transparent calc(7mm - 1px), #888 calc(7mm - 1px), #888 7mm) !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .fill-line.breit { height: 7mm; }
+  .prose ul.mc-liste, .prose ul.checkliste { box-shadow: none; }
+  .dossier-teil { page-break-before: auto; margin-top: 1.2em; padding-top: .8em; border-top: 1px solid #999; }
+  .dossier-teil.dossier-lektion, .dossier-neue-seite .dossier-teil { page-break-before: always; margin-top: 0; padding-top: 0; border-top: 0; }
 }
