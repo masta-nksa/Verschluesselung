@@ -89,9 +89,8 @@ Annahme: **10⁹ Schlüssel pro Sekunde**, ein Jahr ≈ 3,2 · 10⁷ Sekunden. S
 
 Eine Milliarde Computer probieren je 10¹² Schlüssel pro Sekunde. Wie lange dauert es für
 AES-128? <span class="luecke" data-typ="groesse" data-antwort="1.1e10" data-breite="10"></span> Jahre.
-Vergleichen Sie mit dem Alter des Universums (1,4 · 10¹⁰ Jahre):
-
-<div class="antwort" data-loesung="10⁹ · 10¹² = 10²¹ Versuche pro Sekunde → 3,4 · 10³⁸ / 10²¹ ≈ 3,4 · 10¹⁷ s ≈ 1,1 · 10¹⁰ Jahre, also rund 80 % des Alters des Universums. Im Durchschnitt findet man den Schlüssel nach der Hälfte der Zeit – immer noch rund 5 Milliarden Jahre." data-zeilen="1"></div>
+Das ist <span class="luecke" data-optionen="viel kürzer als;etwa so lang wie;viel länger als" data-antwort="etwa so lang wie"></span>
+das Alter des Universums (1,4 · 10¹⁰ Jahre).
 
 <div class="nur-online" markdown="1">
 
