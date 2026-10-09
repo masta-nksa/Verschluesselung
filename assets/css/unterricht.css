@@ -898,7 +898,10 @@ a { color: var(--accent); }
   .dossier-teil { page-break-before: always; border-top: 0; margin-top: 0; padding-top: 0; }
   .dossier-steuerung { display: none !important; }
   .prose .quadrat table { font-size: 6.6pt; }
-  .prose .quadrat th, .prose .quadrat td { padding: 0 .12em; line-height: 1.15; }
+  .prose .quadrat th, .prose .quadrat td { padding: 0 .12em; line-height: 1.1; font-size: 6.6pt; }
+  .prose ul.checkliste { column-count: 2; column-gap: 1.2em; }
+  .prose ul.checkliste li { break-inside: avoid; margin-bottom: .15em; }
+  .prose li > input[type="checkbox"] { width: .8rem; height: .8rem; }
 }
 
 /* --- 8. Interaktive Übungen und kompakter Druck -------------------------- */
