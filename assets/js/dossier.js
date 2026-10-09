@@ -52,7 +52,7 @@
   }
 
   function laden(url) {
-    return fetch(url, { credentials: "same-origin" }).then(function (r) {
+    return fetch(url, { credentials: "same-origin", cache: "no-cache" }).then(function (r) {
       if (!r.ok) throw new Error(r.status);
       return r.text();
     }).then(function (html) {
