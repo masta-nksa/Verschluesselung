@@ -24,6 +24,8 @@ kann mit **ihrem privaten Schlüssel** eine **Signatur** berechnen – und jede 
 
 ### Aufgabe 1 – Ablaufschema ergänzen
 
+Setzen Sie ein: *Hashwert, privaten, Signatur, öffentlichen, gleich, verändert*.
+
 **Alice signiert:** Sie berechnet den
 <span class="luecke" data-optionen="Hashwert;privaten;Signatur;öffentlichen;gleich;verändert" data-antwort="Hashwert"></span>
 des Dokuments und daraus mit ihrem

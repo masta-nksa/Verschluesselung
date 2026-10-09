@@ -130,6 +130,12 @@
       feld.addEventListener("change", function () { schreiben(key, feld.value); });
       Array.prototype.forEach.call(span.attributes, function (a) { if (a.name.indexOf("data-") === 0) feld.setAttribute(a.name, a.value); });
       span.parentNode.replaceChild(feld, span);
+      // Auf Papier sieht man die Optionen einer Auswahlliste nicht – kurze
+      // Listen darum klein neben die Schreiblinie drucken.
+      if (optionen && optionen.length <= 4 && optionen.join("").length <= 60) {
+        var hinweis = el("span", { class: "optionen-druck", "aria-hidden": "true" }, "(" + optionen.join(" / ") + ")");
+        feld.parentNode.insertBefore(hinweis, feld.nextSibling);
+      }
       alleFelder.push(function () { feld.value = ""; schreiben(key, ""); feld.classList.remove("richtig", "falsch"); });
       if (feld.dataset.antwort) {
         pruefbar.push({ element: feld, pruefe: function () {
