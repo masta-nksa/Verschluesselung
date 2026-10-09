@@ -11,9 +11,9 @@ sitemap: false
 
 # Dossier für die Lehrperson
 
-Pro Lektion: Ablauf der SuS-Seite, Ablaufplan, alle Unterlagen der Klasse und die
-Musterlösungen – zum Ausdrucken als Unterrichtsordner. Diese Seite ist wie `/LP/` nirgends
-verlinkt.
+<p class="dossier-intro">Pro Lektion: Ablauf der SuS-Seite, Ablaufplan, alle Unterlagen der Klasse und die
+Musterlösungen – zum Ausdrucken als Unterrichtsordner. Diese Seite ist wie <code>/LP/</code> nirgends
+verlinkt.</p>
 
 <div class="kasten dossier-steuerung" markdown="1">
 

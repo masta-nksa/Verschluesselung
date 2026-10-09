@@ -8,9 +8,9 @@ permalink: /dossier.html
 
 # Dossier: Verschlüsselung
 
-Hier sind alle Arbeitsblätter, Aufträge und Inputs der Einheit auf einer Seite gesammelt.
-Wählen Sie die Lektionen aus und klicken Sie oben rechts auf **Drucken**. Für eine PDF-Datei
-wählen Sie im Druckdialog «Als PDF speichern».
+<p class="dossier-intro">Hier sind alle Arbeitsblätter, Aufträge und Inputs der Einheit auf einer Seite gesammelt.
+Wählen Sie die Lektionen aus und klicken Sie oben rechts auf <strong>Drucken</strong>. Für eine PDF-Datei
+wählen Sie im Druckdialog «Als PDF speichern».</p>
 
 <div class="kasten dossier-steuerung" markdown="1">
 

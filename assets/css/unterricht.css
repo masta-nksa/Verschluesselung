@@ -1009,4 +1009,7 @@ select.luecke-feld { cursor: pointer; }
   .prose ul.mc-liste, .prose ul.checkliste { box-shadow: none; }
   .dossier-teil { page-break-before: auto; margin-top: 1.2em; padding-top: .8em; border-top: 1px solid #999; }
   .dossier-teil.dossier-lektion, .dossier-neue-seite .dossier-teil { page-break-before: always; margin-top: 0; padding-top: 0; border-top: 0; }
+  .dossier-intro { display: none; }
+  #dossier-inhalt > section:not([hidden]) ~ section .dossier-lektion { page-break-before: always; }
+  #dossier-inhalt > section:first-of-type .dossier-lektion { page-break-before: avoid; }
 }
