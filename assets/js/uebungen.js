@@ -137,6 +137,9 @@
         var hinweis = el("span", { class: "optionen-druck", "aria-hidden": "true" }, "(" + optionen.join(" / ") + ")");
         feld.parentNode.insertBefore(hinweis, feld.nextSibling);
       }
+      if (feld.dataset.antwort) {
+        feld.parentNode.insertBefore(el("span", { class: "loesung-tag" }, loesungText(feld)), (feld.nextSibling && feld.nextSibling.className === "optionen-druck") ? feld.nextSibling.nextSibling : feld.nextSibling);
+      }
       alleFelder.push(function () { feld.value = ""; schreiben(key, ""); feld.classList.remove("richtig", "falsch"); });
       if (feld.dataset.antwort) {
         pruefbar.push({ element: feld, pruefe: function () {
@@ -155,6 +158,8 @@
       var gewaehlt = (lesen(key) || "").split("|").filter(Boolean);
       span.dataset.optionen.split(";").forEach(function (o) {
         var b = el("button", { type: "button", class: "chip", "aria-pressed": gewaehlt.indexOf(o) !== -1 ? "true" : "false" }, o);
+        if (span.dataset.antwort && span.dataset.antwort.split("+").indexOf(o) !== -1) b.classList.add("ist-loesung");
+        else if (span.dataset.auch && span.dataset.auch.split("+").indexOf(o) !== -1) b.classList.add("auch-loesung");
         b.addEventListener("click", function () {
           b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true");
           gruppe.classList.remove("richtig", "falsch", "teilweise");
@@ -200,6 +205,7 @@
       var g = lesen(key); if (g != null) t.value = g;
       t.addEventListener("input", function () { schreiben(key, t.value); spiegeln(); });
       div.append(t, druck, text);
+      if (div.dataset.loesung) div.appendChild(el("div", { class: "loesung-box" }, div.dataset.loesung));
       spiegeln();
       alleFelder.push(function () { t.value = ""; schreiben(key, ""); spiegeln(); });
     });
@@ -218,6 +224,7 @@
       });
       if (ul.classList.contains("mc") && ul.dataset.antwort) {
         var richtigeNr = ul.dataset.antwort.split(/[\s,]+/).map(Number);
+        boxen.forEach(function (b, i) { if (richtigeNr.indexOf(i + 1) !== -1) b.parentNode.classList.add("ist-loesung"); });
         pruefbar.push({ element: ul, pruefe: function () {
           var ok = boxen.every(function (b, i) { return b.checked === (richtigeNr.indexOf(i + 1) !== -1); });
           ul.classList.toggle("richtig", ok); ul.classList.toggle("falsch", !ok);
@@ -263,6 +270,50 @@
       container.appendChild(reset);
     }
   }
+
+  // Lösung lesbar formatieren (erste Variante von data-antwort)
+  function loesungText(feld) {
+    var a = feld.dataset.antwort.split(";")[0], typ = feld.dataset.typ;
+    if (typ === "menge") a = a.split(/\s+/).join(" · ");
+    if (typ === "groesse") {
+      var z = zahlLesen(a);
+      if (z >= 1e6) { var e = Math.floor(Math.log10(z)), m = z / Math.pow(10, e); a = "≈ " + (Math.round(m * 10) / 10).toString().replace(".", ",") + " · 10^" + e; }
+      else a = "≈ " + a.replace(".", ",");
+    }
+    return a;
+  }
+
+  // ------------------------------------------------------------ Easter Egg
+  // «kerckhoffs» tippen (ausserhalb eines Eingabefelds) oder 5× schnell auf den
+  // Seitentitel klicken blendet alle Lösungen der Seite ein bzw. wieder aus.
+  // Passend zum Thema: Das Verfahren ist öffentlich, der «Schlüssel» das Wort.
+  function umschalten() {
+    var an = document.documentElement.classList.toggle("loesungen-an");
+    var banner = document.getElementById("loesungen-banner");
+    if (!banner) {
+      banner = el("div", { id: "loesungen-banner", role: "status" });
+      document.body.appendChild(banner);
+    }
+    banner.textContent = an ? "\uD83D\uDD11 Lösungen eingeblendet – nochmals auslösen zum Ausblenden" : "Lösungen ausgeblendet";
+    banner.className = an ? "an" : "";
+    clearTimeout(umschalten.t);
+    if (!an) umschalten.t = setTimeout(function () { banner.className = "weg"; }, 1500);
+  }
+  var getippt = "";
+  document.addEventListener("keydown", function (ev) {
+    var z = ev.target;
+    if (z && (z.tagName === "INPUT" || z.tagName === "TEXTAREA" || z.tagName === "SELECT" || z.isContentEditable)) return;
+    if (!ev.key || ev.key.length !== 1) return;
+    getippt = (getippt + ev.key.toLowerCase()).slice(-10);
+    if (getippt === "kerckhoffs") { getippt = ""; umschalten(); }
+  });
+  var klicks = [];
+  document.addEventListener("click", function (ev) {
+    if (!ev.target.closest || !ev.target.closest(".prose h1")) return;
+    var jetzt = Date.now();
+    klicks = klicks.filter(function (t) { return jetzt - t < 2500; }); klicks.push(jetzt);
+    if (klicks.length >= 5) { klicks = []; umschalten(); }
+  });
 
   function startSeite() {
     var art = document.querySelector("article.prose");

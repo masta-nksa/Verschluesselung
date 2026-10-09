@@ -58,7 +58,7 @@ Seit dem 15. März 2026 darf ein neues Zertifikat höchstens
 [CA/Browser Forum](https://cabforum.org/2025/04/11/ballot-sc081v3-introduce-schedule-of-reducing-validity-and-data-reuse-periods/)).
 Warum erhöhen kurze Laufzeiten die Sicherheit, und was bedeutet das für die Betreiber?
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Wird ein privater Schlüssel gestohlen oder ein Zertifikat irrtümlich ausgestellt, wird es bald von selbst ungültig. Das ist wichtig, weil das vorzeitige Sperren (Widerruf) in der Praxis schlecht funktioniert. Die Betreiber müssen die Erneuerung automatisieren (z. B. mit Let&#x27;s Encrypt und dem ACME-Protokoll)." data-zeilen="2"></div>
 
 <div class="nur-online" markdown="1">
 
@@ -69,7 +69,7 @@ Warum erhöhen kurze Laufzeiten die Sicherheit, und was bedeutet das für die Be
 [self-signed.badssl.com](https://self-signed.badssl.com). Was meldet der Browser, welches Glied
 der Kette ist verletzt, und was tun Sie bei einer solchen Warnung auf einer echten Website?
 
-<div class="antwort" data-zeilen="3"></div>
+<div class="antwort" data-loesung="expired: Zertifikat abgelaufen (Gültigkeitsdauer überschritten). wrong.host: gilt für einen anderen Namen (Identität passt nicht). self-signed: von niemandem signiert, dem der Browser vertraut (die Kette endet nicht bei einer Root-CA). Bei einer echten Website: nicht weiterklicken, keine Daten eingeben, Adresse prüfen; im öffentlichen WLAN kann ein Man-in-the-Middle-Angriff dahinterstecken." data-zeilen="3"></div>
 
 **Noch mehr?** CAs müssen jedes Zertifikat in öffentlichen Logbüchern eintragen (*Certificate
 Transparency*). Suchen Sie auf [crt.sh](https://crt.sh/?q=nksa.ch) alle Zertifikate für

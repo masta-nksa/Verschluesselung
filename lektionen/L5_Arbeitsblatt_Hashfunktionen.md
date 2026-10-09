@@ -39,7 +39,7 @@ Es gibt unendlich viele Texte, aber «nur» 2²⁵⁶ ≈ 10⁷⁷ Hashwerte –
 Texte mit gleichem Hashwert geben (**Kollision**). Warum ist das trotzdem kein praktisches
 Problem? (Tipp: Schlüsselraum von AES.)
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Um zwei Texte mit gleichem SHA-256-Wert zu finden, müsste man rund 2¹²⁸ ≈ 3,4 · 10³⁸ Hashwerte berechnen – so viele, wie AES-128 Schlüssel hat. Kollisionen existieren also, aber niemand kann sie finden (Kollisionsresistenz)." data-zeilen="2"></div>
 
 ### Aufgabe 3 – Wofür braucht man das?
 

@@ -20,6 +20,8 @@ geheimen Verfahren beruhen darf.
 Caesar soll seine Nachrichten so verschlüsselt haben: Jeder Buchstabe wird durch den Buchstaben
 ersetzt, der eine feste Anzahl Stellen weiter hinten im Alphabet steht; nach Z geht es bei A
 weiter. Bei Verschiebung 3 wird aus *caesar* **FDHVDU** (Klartext klein, Geheimtext GROSS).
+Zum Entschlüsseln schiebt man um dieselbe Zahl zurück: Caesar ist ein **symmetrisches**
+Verfahren – derselbe Schlüssel dient zum Ver- und zum Entschlüsseln.
 
 | Klartext | a | b | c | d | e | f | g | … | w | x | y | z |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -38,12 +40,15 @@ und eines <span class="luecke" data-antwort="Schlüssels;Schlüssel" data-breite
 umgekehrten Vorgang nennt man <span class="luecke" data-antwort="Entschlüsseln" data-breite="13"></span>.
 Liest eine Drittperson die Nachricht ohne Schlüssel, hat sie die Verschlüsselung
 <span class="luecke" data-antwort="geknackt;gebrochen" data-breite="11"></span>.
+Weil beide Seiten denselben Schlüssel brauchen, ist Caesar ein
+<span class="luecke" data-optionen="symmetrisches;asymmetrisches" data-antwort="symmetrisches"></span> Verfahren.
 
-<div class="krypto" data-tool="caesar" data-text="NUBSWRORJLH LVW GLH ZLVVHQVFKDIW GHU JHKHLPVFKULIWHQ" data-shift="3" data-mode="ent"></div>
+<div class="krypto" data-tool="caesar" data-text="caesar" data-shift="3"></div>
 
 ### Aufgabe 2 – Entschlüsseln (Schlüssel 3)
 
-Entschlüsseln Sie das erste Wort von Hand, den Rest mit dem Werkzeug:
+Entschlüsseln Sie das erste Wort von Hand. Für den Rest kopieren Sie den Geheimtext ins
+Werkzeug, wählen «entschlüsseln» und die Verschiebung 3:
 `NUBSWRORJLH LVW GLH ZLVVHQVFKDIW GHU JHKHLPVFKULIWHQ`
 
 Klartext: <span class="luecke" data-antwort="Kryptologie ist die Wissenschaft der Geheimschriften" data-breite="voll"></span>
@@ -53,7 +58,7 @@ Klartext: <span class="luecke" data-antwort="Kryptologie ist die Wissenschaft de
 Verschlüsseln Sie Ihren Vornamen von Hand mit Verschiebung 13: <span class="luecke" data-breite="16"></span>
 Verschlüsseln Sie das Ergebnis nochmals mit 13. Was stellen Sie fest – und warum gerade bei 13?
 
-<div class="antwort" data-zeilen="1"></div>
+<div class="antwort" data-loesung="Nach zweimal 13 steht wieder der ursprüngliche Name da, weil 13 + 13 = 26 einmal ganz um das Alphabet herum ist (ROT13). Beispiel: anna → NAAN → anna." data-zeilen="1"></div>
 
 ### Aufgabe 4 – Knacken (Schlüssel unbekannt)
 
@@ -73,7 +78,7 @@ Wie viele Versuche braucht man bei Caesar höchstens? <span class="luecke" data-
 Die Römer hielten das Caesar-Verfahren geheim. Warum reicht das nicht (denken Sie an Aufgabe 4)?
 Nennen Sie einen weiteren Grund, warum man ein Verfahren nicht lange geheim halten kann.
 
-<div class="antwort" data-zeilen="3"></div>
+<div class="antwort" data-loesung="Wer das Verfahren kennt, probiert die 25 Schlüssel in Sekunden durch – die Geheimhaltung des Verfahrens war also der einzige Schutz. Verfahren bleiben nicht lange geheim: Sie stecken in Geräten und Programmen, die man untersuchen kann, viele Menschen kennen sie (Boten, Offiziere, Programmierer), und ein einziger Verrat oder Diebstahl genügt. Zudem kann nur ein öffentliches Verfahren von vielen Fachleuten auf Schwächen geprüft werden." data-zeilen="3"></div>
 
 ### Aufgabe 6 – Codierung oder Verschlüsselung? *(früh fertig)*
 

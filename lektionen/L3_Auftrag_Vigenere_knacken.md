@@ -38,7 +38,7 @@ Arbeiten Sie mit dem Werkzeug.
 Welche Schlüssellänge vermuten Sie? <span class="luecke" data-typ="zahl" data-antwort="6" data-breite="4"></span>
 Begründen Sie mit den Abständen – und warum nicht 2 oder 3?
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Fast alle Abstände (z. B. 72, 108, 240, 300) sind durch 6 teilbar. Sie sind zwar auch durch 2 und 3 teilbar, das folgt aber automatisch aus der Teilbarkeit durch 6. Die grösste Zahl mit fast so vielen Treffern wie 2 und 3 ist die 6." data-zeilen="2"></div>
 
 ### Aufgabe 2 – Schlüsselwort
 
@@ -56,7 +56,7 @@ die Chiffre, benannt ist der Test aber nach <span class="luecke" data-antwort="K
 
 Nennen Sie zwei Dinge, die den Angriff deutlich schwieriger machen würden.
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Zum Beispiel: ein langes Schlüsselwort (im Idealfall so lang wie der Text), ein zufälliges statt eines echten Worts, kurze Nachrichten, einen Schlüssel nie wiederverwenden – zu Ende gedacht ist das der One-Time-Pad." data-zeilen="2"></div>
 
 <div class="nur-online" markdown="1">
 

@@ -17,7 +17,9 @@ Einwegfunktion ist, und können RSA mit kleinen Zahlen durchführen.
 ## 1 · Vom Schnappschloss zum Schlüsselpaar
 
 Im Kistenrätsel hat Bob offene Schnappschlösser verteilt: Jede Person kann damit verschliessen,
-nur Bob kann öffnen. Genau so funktioniert die **asymmetrische Verschlüsselung**:
+nur Bob kann öffnen. Genau so funktioniert die **asymmetrische Verschlüsselung** – im
+Gegensatz zu den **symmetrischen** Verfahren aus Lektion 1–3 gibt es zwei *verschiedene*
+Schlüssel:
 
 - Der **öffentliche Schlüssel** (*public key*) = das offene Schnappschloss. Alle dürfen ihn
   kennen und damit Nachrichten an Bob verschlüsseln.

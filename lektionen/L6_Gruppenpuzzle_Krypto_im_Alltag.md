@@ -25,7 +25,7 @@ Leitfragen (die Quellen helfen) und bereiten Sie eine **Vorstellung von 2 Minute
 
 Stichworte für Ihre Vorstellung:
 
-<div class="antwort" data-zeilen="4"></div>
+<div class="antwort" data-loesung="Vergleichen Sie Ihre Stichworte mit der Seite «Das Wichtigste: Kryptografie im Alltag» – dort steht zu jedem Thema der Kernsatz und welche Bausteine darin stecken." data-zeilen="4"></div>
 
 | Baustein | A | B | C | D | E |
 |---|---|---|---|---|---|

@@ -50,6 +50,9 @@ der Belgier Joan Daemen und Vincent Rijmen – seither **AES** (Advanced Encrypt
   Häufigkeiten oder Wiederholungen sind nicht mehr zu erkennen.
 - Der Schlüssel ist 128, 192 oder 256 Bit lang.
 
+**Alle bisherigen Verfahren sind symmetrisch:** Caesar, allgemeine Ersetzung, Vigenère,
+One-Time-Pad und AES – Sender und Empfänger brauchen denselben geheimen Schlüssel.
+
 AES schützt WLAN (WPA2/WPA3), HTTPS, Festplatten (BitLocker, FileVault) und Messenger. Da kein
 Angriff bekannt ist, der wesentlich besser ist als Durchprobieren, hängt die Sicherheit an
 der Grösse des Schlüsselraums.
@@ -75,7 +78,7 @@ Eine Milliarde Computer probieren je 10¹² Schlüssel pro Sekunde. Wie lange da
 AES-128? <span class="luecke" data-typ="groesse" data-antwort="1.1e10" data-breite="10"></span> Jahre.
 Vergleichen Sie mit dem Alter des Universums (1,4 · 10¹⁰ Jahre):
 
-<div class="antwort" data-zeilen="1"></div>
+<div class="antwort" data-loesung="10⁹ · 10¹² = 10²¹ Versuche pro Sekunde → 3,4 · 10³⁸ / 10²¹ ≈ 3,4 · 10¹⁷ s ≈ 1,1 · 10¹⁰ Jahre, also rund 80 % des Alters des Universums. Im Durchschnitt findet man den Schlüssel nach der Hälfte der Zeit – immer noch rund 5 Milliarden Jahre." data-zeilen="1"></div>
 
 <div class="nur-online" markdown="1">
 
@@ -83,14 +86,14 @@ Vergleichen Sie mit dem Alter des Universums (1,4 · 10¹⁰ Jahre):
 
 Der AES-Algorithmus ist vollständig veröffentlicht. Warum ist das ein *Vorteil*?
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Nach Kerckhoffs darf die Sicherheit nur vom Schlüssel abhängen. Weil AES öffentlich ist, haben Fachleute weltweit jahrelang versucht, es zu knacken – ohne Erfolg. Das schafft mehr Vertrauen als ein geheimes Verfahren, das niemand prüfen konnte, und alle können kompatible Programme bauen." data-zeilen="2"></div>
 
 ### Aufgabe 4 – Das verbleibende Problem *(früh fertig)*
 
 Warum können Sie mit AES allein keine geheime Nachricht an einen Online-Shop schicken, bei dem
 Sie zum ersten Mal einkaufen?
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Sie und der Shop bräuchten vorher denselben geheimen Schlüssel. Über das Internet verschickt, könnte Eve ihn mitlesen; ihn persönlich zu übergeben ist unpraktisch. Das ist das Schlüsselaustauschproblem." data-zeilen="2"></div>
 
 </div>
 

@@ -37,7 +37,7 @@ Die erste Nachricht ist im Werkzeug schon eingetragen.
 Beschreiben Sie in drei bis vier Schritten, wie man RSA knackt, wenn man nur den öffentlichen
 Schlüssel und den Geheimtext kennt.
 
-<div class="antwort" data-zeilen="3"></div>
+<div class="antwort" data-loesung="1. n faktorisieren: n = p · q (z. B. Probedivision bis √n). 2. φ = (p − 1) · (q − 1) berechnen. 3. d so bestimmen, dass (e · d) mod φ = 1. 4. Jeden Block mit m = cᵈ mod n entschlüsseln und die Zahlen in Buchstaben umwandeln." data-zeilen="3"></div>
 
 ### Aufgabe 3 – Wie lange dauert das bei echten Schlüsseln?
 
@@ -68,7 +68,7 @@ In Nachricht b wird das «A» zu <span class="luecke" data-typ="zahl" data-antwo
 Warum? Und warum ist es generell gefährlich, wenn gleiche Klartextblöcke immer gleiche
 Geheimtextblöcke ergeben? (Denken Sie an Lektion 2.)
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="A = 01, und 1ᵉ = 1 für jedes e (ebenso Leerzeichen: 0ᵉ = 0). Allgemein ergeben gleiche Klartextblöcke immer gleiche Geheimtextblöcke. Bei kurzen Blöcken kann Eve dann wie bei Caesar eine Häufigkeitsanalyse machen oder alle möglichen Blöcke selbst verschlüsseln und vergleichen – ganz ohne Faktorisieren. Darum braucht echtes RSA Padding." data-zeilen="2"></div>
 
 *Hinweis:* Echtes RSA hängt darum vor dem Verschlüsseln Zufallsbits an (*Padding*, z. B. OAEP).
 Dieselbe Nachricht ergibt so jedes Mal einen anderen Geheimtext.

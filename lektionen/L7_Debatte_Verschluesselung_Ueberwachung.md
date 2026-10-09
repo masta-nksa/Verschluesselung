@@ -77,4 +77,4 @@ entscheiden am Schluss, welcher Vorschlag Sie überzeugt. Begründen Sie Ihr Urt
 Welches Argument hat Sie am meisten überzeugt – auch wenn es nicht von Ihrer Rolle kam? Wie
 lautet *Ihre* persönliche Position?
 
-<div class="antwort" data-zeilen="3"></div>
+<div class="antwort" data-loesung="Keine Musterlösung – hier zählt Ihre begründete eigene Meinung. Die wichtigsten Argumente beider Seiten finden Sie auf der Seite «Das Wichtigste» zu Lektion 7." data-zeilen="3"></div>

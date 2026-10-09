@@ -49,7 +49,7 @@ damit **allein** sicher? <span class="luecke" data-optionen="Vertraulichkeit;Int
 
 Begründen Sie an Szenario 3 oder 6, warum die anderen Schutzziele nicht automatisch erfüllt sind.
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Nur die Vertraulichkeit. Szenario 6: Der Schüler kann eine verschlüsselte Notenliste zwar nicht lesen, aber Bits verändern oder eine ganz andere Datei schicken – ob der Inhalt unverändert ist und vom richtigen Absender stammt, verrät die Verschlüsselung nicht. Szenario 3: Auch Betrüger können verschlüsselte Mails schicken. Dafür braucht es Hashwerte und Signaturen (Lektion 5)." data-zeilen="2"></div>
 
 <div class="kasten" markdown="1">
 

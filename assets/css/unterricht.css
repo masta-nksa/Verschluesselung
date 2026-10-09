@@ -943,7 +943,32 @@ select.luecke-feld { cursor: pointer; }
   border: 1px solid var(--border-strong); border-radius: var(--radius-code); background: var(--bg-elev);
 }
 .antwort-feld:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
-.antwort-druck, .antwort-text, .optionen-druck { display: none; }
+.antwort-druck, .antwort-text, .optionen-druck, .nur-druck { display: none; }
+
+/* Lösungen (Easter Egg: «kerckhoffs» tippen oder 5× auf den Titel klicken) */
+.loesung-tag, .loesung-box { display: none; }
+.loesungen-an .loesung-tag {
+  display: inline-block; margin: 0 .3em; padding: 0 .4em; border-radius: var(--radius-code);
+  font-size: .8em; font-weight: 600; background: var(--sus-soft); color: var(--sus);
+  border: 1px dashed var(--sus);
+}
+.loesungen-an .loesung-tag::before { content: "\2713 "; }
+.loesungen-an .loesung-box {
+  display: block; margin-top: .4rem; padding: .5rem .7rem; font-size: .9rem;
+  background: var(--sus-soft); border-left: 3px solid var(--sus); border-radius: var(--radius-code);
+}
+.loesungen-an .loesung-box::before { content: "Musterlösung: "; font-weight: 700; color: var(--sus); }
+.loesungen-an .chip.ist-loesung { box-shadow: 0 0 0 2px var(--sus); }
+.loesungen-an .chip.auch-loesung { box-shadow: 0 0 0 2px var(--sus); border-style: dashed; }
+.loesungen-an .prose li.ist-loesung, .loesungen-an li.ist-loesung { color: var(--sus); font-weight: 650; }
+#loesungen-banner {
+  position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%); z-index: 50;
+  padding: .5rem 1rem; border-radius: 99px; font-size: .88rem; box-shadow: var(--shadow);
+  background: var(--bg-elev); border: 1px solid var(--border-strong); color: var(--text);
+  transition: opacity .4s;
+}
+#loesungen-banner.an { border-color: var(--sus); color: var(--sus); }
+#loesungen-banner.weg { opacity: 0; pointer-events: none; }
 
 .prose .mc-liste input, .prose .checkliste input { cursor: pointer; }
 .prose ul.mc-liste.richtig { box-shadow: -4px 0 0 var(--sus); }
@@ -1005,7 +1030,12 @@ select.luecke-feld { cursor: pointer; }
   .fill-line, .fill-line.breit { border-bottom-color: #888; }
   .fill-line.breit { height: 6.5mm; }
   .nur-online { display: none !important; }
+  .nur-druck { display: block; }
   .optionen-druck { display: inline; font-size: 7.5pt; color: #444; margin-left: .2em; }
+  #loesungen-banner { display: none !important; }
+  /* Mit eingeblendeten Lösungen druckt man einen Lösungsschlüssel */
+  .loesungen-an .loesung-tag, .loesungen-an .loesung-box { background: none !important; color: #000 !important; border-color: #000 !important; }
+  .loesungen-an .loesung-box { font-size: 8.5pt; padding: .2em .5em; }
   .prose ul.mc-liste, .prose ul.checkliste { box-shadow: none; }
   .dossier-teil { page-break-before: auto; margin-top: 1.2em; padding-top: .8em; border-top: 1px solid #999; }
   .dossier-teil.dossier-lektion, .dossier-neue-seite .dossier-teil { page-break-before: always; margin-top: 0; padding-top: 0; border-top: 0; }

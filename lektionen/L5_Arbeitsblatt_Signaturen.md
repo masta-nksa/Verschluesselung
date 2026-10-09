@@ -59,7 +59,7 @@ Alice, schulde Eve 500 Franken.», signiert mit *ihrem* privaten Schlüssel und 
 mit *ihrem* öffentlichen Schlüssel – «das ist der Schlüssel von Alice». Die Signatur ist
 <span class="luecke" data-optionen="gültig;ungültig" data-antwort="gültig"></span>. Was fehlt Bob?
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Die Signatur ist mathematisch gültig – aber sie passt zu Eves Schlüssel. Bob fehlt die Gewissheit, dass der öffentliche Schlüssel wirklich Alice gehört. Eine Signatur beweist nur: Wer den zu diesem öffentlichen Schlüssel passenden privaten Schlüssel hat, hat signiert. Die fehlende Gewissheit liefert ein Zertifikat." data-zeilen="2"></div>
 
 ### Aufgabe 4 – Verschlüsseln oder signieren?
 

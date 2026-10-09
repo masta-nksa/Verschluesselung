@@ -35,13 +35,13 @@ Anzahl möglicher Schlüssel: <span class="luecke" data-typ="zahl" data-antwort=
 
 Formulieren Sie das Prinzip von Kerckhoffs in einem Satz.
 
-<div class="antwort" data-zeilen="1"></div>
+<div class="antwort" data-loesung="Ein Verfahren muss auch dann sicher sein, wenn der Gegner es kennt; geheim ist nur der Schlüssel." data-zeilen="1"></div>
 
 ### 4 · Häufigkeitsanalyse
 
 Warum lässt sich eine allgemeine Ersetzung knacken, obwohl sie rund 4 · 10²⁶ Schlüssel hat?
 
-<div class="antwort" data-zeilen="1"></div>
+<div class="antwort" data-loesung="Jeder Buchstabe wird immer gleich ersetzt, darum bleiben die Buchstabenhäufigkeiten erhalten. Man findet den Schlüssel Buchstabe für Buchstabe, statt alle Schlüssel auszuprobieren." data-zeilen="1"></div>
 
 ### 5 · Vigenère
 
@@ -71,7 +71,7 @@ m = 2 verschlüsselt: c = <span class="luecke" data-typ="zahl" data-antwort="29"
 
 Was ist bei RSA die Einwegfunktion, und was ist die «Falltür»?
 
-<div class="antwort" data-zeilen="1"></div>
+<div class="antwort" data-loesung="Einwegfunktion: zwei grosse Primzahlen multiplizieren ist leicht, n wieder in p und q zerlegen (faktorisieren) ist praktisch unmöglich. Falltür: die Kenntnis von p und q – damit kann die Empfängerin d berechnen." data-zeilen="1"></div>
 
 ### 10 · Signatur
 
@@ -83,7 +83,7 @@ Schlüssel. Signiert wird der <span class="luecke" data-optionen="Hashwert;Gehei
 
 Was bestätigt eine CA mit einem Zertifikat, und warum vertraut Ihr Browser dieser Stelle?
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Die CA bestätigt mit ihrer Signatur, dass ein öffentlicher Schlüssel zu einem bestimmten Namen (Domain) gehört. Der Browser vertraut ihr, weil ihr Root-Zertifikat (bzw. das der übergeordneten CA) im Browser oder Betriebssystem vorinstalliert ist." data-zeilen="2"></div>
 
 ### 12 · Alltag
 

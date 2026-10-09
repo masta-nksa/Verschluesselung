@@ -16,9 +16,11 @@ warum gleiche Klartextbuchstaben dabei zu verschiedenen Geheimtextbuchstaben wer
 
 ## Die Idee
 
-Die Häufigkeitsanalyse funktioniert, weil jeder Buchstabe immer gleich ersetzt wird. Abhilfe:
-mehrere Alphabete abwechselnd verwenden (**polyalphabetische** Verschlüsselung). Die
-bekannteste Variante ist nach dem Franzosen Blaise de Vigenère (1586) benannt:
+Die Häufigkeitsanalyse funktioniert, weil **monoalphabetische** Verfahren jeden Buchstaben
+immer gleich ersetzen. Abhilfe: mehrere Ersatzalphabete abwechselnd verwenden – solche Verfahren
+heissen **polyalphabetisch**. Derselbe Klartextbuchstabe wird dann je nach Position zu
+verschiedenen Geheimtextbuchstaben. Die bekannteste Variante ist nach dem Franzosen Blaise de
+Vigenère (1586) benannt:
 
 - Man wählt ein **Schlüsselwort**, z. B. NKSA, und schreibt es so oft unter den Klartext, bis
   dieser abgedeckt ist.
@@ -89,7 +91,7 @@ Entschlüsseln Sie `RYMXTGSBD` mit dem Schlüsselwort LUFT:
 *eeeeee* mit dem Schlüssel ABC ergibt <span class="luecke" data-antwort="EFGEFG" data-breite="9"></span>.
 Was bedeutet das für die Häufigkeitsanalyse?
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Gleiche Klartextbuchstaben werden zu verschiedenen Geheimtextbuchstaben. Die Häufigkeit des e verteilt sich auf mehrere Zeichen – die einfache Häufigkeitsanalyse findet kein klares «e» mehr." data-zeilen="2"></div>
 
 Ein Schlüsselwort aus nur einem Buchstaben ergibt eine
 <span class="luecke" data-optionen="Caesar-Verschlüsselung;allgemeine Ersetzung;unknackbare Verschlüsselung" data-antwort="Caesar-Verschlüsselung"></span>.
@@ -97,7 +99,7 @@ Verschlüsseln Sie *eeeeeeeeeeee* (12-mal e) mit ABCD: Nach wie vielen Zeichen w
 Geheimtext? <span class="luecke" data-typ="zahl" data-antwort="4" data-breite="4"></span>
 Was kann ein Angreifer daraus über den Schlüssel lernen?
 
-<div class="antwort" data-zeilen="1"></div>
+<div class="antwort" data-loesung="Das Muster wiederholt sich im Abstand der Schlüssellänge. Wiederholungen im Geheimtext verraten also, wie lang das Schlüsselwort ist – damit knackt man Vigenère in Lektion 3." data-zeilen="1"></div>
 
 <div class="nur-online" markdown="1">
 

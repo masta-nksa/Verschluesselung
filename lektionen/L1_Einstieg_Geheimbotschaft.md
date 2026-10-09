@@ -16,7 +16,7 @@ Diese Nachricht wurde heute Morgen auf dem Schulhausplatz gefunden:
 
 Versuchen Sie es zuerst ohne Hilfsmittel. Was fällt Ihnen am Geheimtext auf?
 
-<div class="antwort" data-zeilen="2"></div>
+<div class="antwort" data-loesung="Zum Beispiel: Wortlängen und Satzzeichen sind erhalten, einige Buchstaben kommen sehr oft vor, das Wort KLY könnte ein Artikel sein. Lösung (Verschiebung 7): «Treffpunkt heute nach der Schule beim Brunnen. Das Passwort lautet Rubikon.»" data-zeilen="2"></div>
 
 **Wie lautet das Passwort?** <span class="luecke" data-antwort="Rubikon" data-breite="14"></span>
 
