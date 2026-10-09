@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.titel %}{{ page.titel }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.kurz | default: site.description | strip_html }}">
+  {%- if page.noindex %}
+  <meta name="robots" content="noindex, nofollow">
+  {%- endif %}
+  <meta name="color-scheme" content="light dark">
+  {%- comment -%}
+    Gewähltes Design setzen, BEVOR das Stylesheet greift – sonst blitzt beim
+    Laden kurz das Standarddesign auf. Deshalb steht dieses Skript hier oben
+    und nicht am Seitenende. Ohne JavaScript passiert nichts und es gilt das
+    Standarddesign.
+  {%- endcomment -%}
+  <script>
+    (function () {
+      var erlaubt = ["standard", "raster", "heft"];
+      try {
+        var t = localStorage.getItem("thema");
+        if (t && erlaubt.indexOf(t) !== -1 && t !== "standard") {
+          document.documentElement.setAttribute("data-thema", t);
+        }
+      } catch (e) { /* localStorage gesperrt (privates Fenster o. ä.) */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="{{ '/assets/css/unterricht.css' | relative_url }}">
+  {%- comment -%} Interaktive Krypto-Werkzeuge (nur aktiv, wo ein <div class="krypto"> steht) {%- endcomment -%}
+  <script src="{{ '/assets/js/krypto.js' | relative_url }}" defer></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128272;</text></svg>">
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Direkt zum Inhalt</a>
+
+  {%- assign lektionen = site.pages | where: "layout", "lektion" | sort: "lektion" -%}
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="{{ '/' | relative_url }}">
+        <span class="brand-icon" aria-hidden="true">&#128272;</span>
+        <span class="brand-text">
+          <strong>{{ site.title }}</strong>
+          <small>{{ site.untertitel }}</small>
+        </span>
+      </a>
+      <div class="header-tools">
+        <nav class="site-nav" aria-label="Lektionen">
+          {%- for l in lektionen %}
+          <a href="{{ l.url | relative_url }}"{% if page.url == l.url %} aria-current="page"{% endif %} title="{{ l.titel }}">{{ l.lektion }}</a>
+          {%- endfor %}
+        </nav>
+        {%- comment -%}
+          Bis das Skript am Seitenende den Knopf aktiviert, bleibt er
+          ausgeblendet – ohne JavaScript wäre er wirkungslos.
+        {%- endcomment -%}
+        <button type="button" class="thema-schalter" id="thema-schalter" hidden></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="inhalt">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>{{ site.title }} – {{ site.untertitel }} · {{ site.schule }}</p>
+      <p class="footer-meta">&copy; {{ site.time | date: "%Y" }} masta · zuletzt aktualisiert am {{ site.time | date: "%d.%m.%Y" }}</p>
+    </div>
+  </footer>
+
+  <script>
+    // 0) Design-Umschalter. Ein Klick schaltet zum nächsten Design weiter; die
+    //    Wahl bleibt im localStorage des Browsers – also auf diesem Gerät, in
+    //    diesem Browser, bis sie jemand löscht. Gesetzt wird sie beim Laden
+    //    bereits im <head>, hier wird nur die Bedienung nachgerüstet.
+    (function () {
+      var knopf = document.getElementById('thema-schalter');
+      if (!knopf) return;
+
+      var designs = [
+        { wert: 'standard', name: 'Standard' },
+        { wert: 'raster',   name: 'Raster' },
+        { wert: 'heft',     name: 'Arbeitsheft' }
+      ];
+
+      var aktuell = document.documentElement.getAttribute('data-thema') || 'standard';
+      var i = designs.findIndex(function (d) { return d.wert === aktuell; });
+      if (i === -1) i = 0;
+
+      function anzeigen() {
+        var d = designs[i];
+        var naechstes = designs[(i + 1) % designs.length];
+        knopf.textContent = d.name;
+        knopf.setAttribute('aria-label', 'Design: ' + d.name + '. Weiter zu ' + naechstes.name + '.');
+        knopf.title = 'Design wechseln';
+      }
+
+      anzeigen();
+      knopf.hidden = false;
+
+      knopf.addEventListener('click', function () {
+        i = (i + 1) % designs.length;
+        var wert = designs[i].wert;
+        if (wert === 'standard') {
+          document.documentElement.removeAttribute('data-thema');
+        } else {
+          document.documentElement.setAttribute('data-thema', wert);
+        }
+        try { localStorage.setItem('thema', wert); } catch (e) { /* gesperrt */ }
+        anzeigen();
+      });
+    })();
+
+    // 1) Breite Tabellen auf schmalen Bildschirmen horizontal scrollbar machen.
+    document.querySelectorAll('.prose table').forEach(function (t) {
+      var box = document.createElement('div');
+      box.className = 'table-scroll';
+      t.parentNode.insertBefore(box, t);
+      box.appendChild(t);
+    });
+
+    // 2) Fallback: Sollte der Markdown-Konverter Task-Listen einmal nicht als
+    //    Checkbox rendern, sondern als Text "[ ] …", hier nachträglich umwandeln.
+    document.querySelectorAll('.prose li').forEach(function (li) {
+      var first = li.firstChild;
+      if (!first || first.nodeType !== 3) return;
+      var m = first.nodeValue.match(/^\s*\[( |x|X)\]\s+/);
+      if (!m) return;
+      first.nodeValue = first.nodeValue.slice(m[0].length);
+      var box = document.createElement('input');
+      box.type = 'checkbox';
+      box.disabled = true;
+      if (m[1] !== ' ') box.checked = true;
+      li.classList.add('task-list-item');
+      li.insertBefore(document.createTextNode(' '), first);
+      li.insertBefore(box, li.firstChild);
+    });
+
+    // 3) Ausfülllinien (____) in echte Schreiblinien umwandeln – sie passen sich
+    //    der Spaltenbreite an und sehen im Druck sauber aus.
+    (function () {
+      var root = document.querySelector('.prose');
+      if (!root) return;
+      var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+      var nodes = [], n;
+      while ((n = walker.nextNode())) { if (/_{4,}/.test(n.nodeValue)) nodes.push(n); }
+      nodes.forEach(function (node) {
+        var frag = document.createDocumentFragment();
+        var parts = node.nodeValue.split(/(_{4,})/);
+        parts.forEach(function (p) {
+          if (/^_{4,}$/.test(p)) {
+            var s = document.createElement('span');
+            s.className = 'fill-line';
+            frag.appendChild(s);
+          } else if (p) {
+            frag.appendChild(document.createTextNode(p));
+          }
+        });
+        node.parentNode.replaceChild(frag, node);
+      });
+    })();
+  </script>
+</body>
+</html>

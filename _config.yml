@@ -1,0 +1,80 @@
+# ---------------------------------------------------------------------------
+#  Verschlüsselung – Unterrichtseinheit (7 Lektionen)
+#  Jekyll-Konfiguration für GitHub Pages
+# ---------------------------------------------------------------------------
+
+title: "Verschlüsselung"
+untertitel: "Von Caesar bis Post-Quanten: wie Geheimnisse im Netz geschützt werden"
+description: "Unterrichtseinheit Kryptologie für die 2. Klasse Gymnasium: symmetrische und asymmetrische Verschlüsselung, Hashfunktionen, Signaturen, Zertifikate und Kryptografie im Alltag."
+lang: "de-CH"
+
+# WICHTIG ------------------------------------------------------------------
+# baseurl muss dem Repository-Namen entsprechen, wenn die Seite unter
+#   https://<username>.github.io/<repo-name>/  läuft (= Normalfall).
+# Heisst das Repo z. B. "Verschluesselung", muss hier "/Verschluesselung" stehen.
+# Nur bei einem Repo namens "<username>.github.io" bleibt der Wert leer ("").
+baseurl: "/Verschluesselung"
+url: ""
+# ---------------------------------------------------------------------------
+
+# Fusszeile
+schule: "Neue Kantonsschule Aarau"
+
+# Kein Theme: Layouts und CSS liegen vollständig in diesem Repo. GitHub Pages
+# würde sonst das Standard-Theme "primer" laden, dessen Stylesheet den Pfad
+# assets/css/style.css belegt – darum heisst unseres unterricht.css.
+theme:
+
+markdown: kramdown
+kramdown:
+  input: GFM              # aktiviert u. a. Task-Listen  - [ ] / - [x]
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+plugins:
+  - jekyll-sitemap
+
+# Beschriftung der Material-Typen (Badges + Listen).
+# Neuer Typ? Hier ergänzen und im Frontmatter der Datei "art:" setzen.
+# Ohne Eintrag bleibt das Badge leer – der häufigste Grund für ein leeres Badge.
+art_labels:
+  ablaufplan:    "Ablaufplan"
+  arbeitsblatt:  "Arbeitsblatt"
+  musterloesung: "Musterlösung"
+  glossar:       "Glossar"
+  info:          "Information"
+  input:         "Theorie-Input"
+  auftrag:       "Auftrag"
+  konzept:       "Konzept"
+  werkzeug:      "Werkzeug"
+  dossier:       "Dossier"
+  zusammenfassung: "Das Wichtigste"
+
+# Alle Dateien in lektionen/ sind Unterrichtsmaterial und teilen dasselbe Layout.
+defaults:
+  - scope:
+      path: "lektionen"
+      type: "pages"
+    values:
+      layout: "material"
+      typ: "material"
+  # Musterlösungen liegen unter /lsg/ – sie werden nirgends von den SuS-Seiten aus
+  # verlinkt (die Lehrperson gibt den Link weiter) und bleiben aus Suchmaschinen
+  # heraus: noindex + kein Eintrag in der sitemap.xml.
+  - scope:
+      path: "lsg"
+      type: "pages"
+    values:
+      layout: "material"
+      typ: "material"
+      zielgruppe: "loesung"
+      art: "musterloesung"
+      noindex: true
+      sitemap: false
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .gitignore

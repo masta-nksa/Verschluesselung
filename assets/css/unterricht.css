@@ -1,0 +1,900 @@
+---
+# Diese Datei wird von Jekyll verarbeitet (leeres Frontmatter ist Absicht).
+---
+
+/* ==========================================================================
+   Verschlüsselung – Unterrichtsmaterialien
+   Layout, Typografie, Dark Mode und Druckansicht
+
+   AUFBAU
+   1. Schriften (@font-face, lokal im Repo)
+   2. Gestaltungsvariablen – Standarddesign
+   3. Wählbare Designs (data-thema am <html>)
+   4. Grundgerüst, Kopfzeile, Startseite, Lektionen, Material, Fliesstext
+   5. Design-spezifische Feinheiten
+   6. Druckansicht
+   7. Krypto-Werkzeuge, Dossier, Vigenère-Quadrat (Ergänzung dieser Einheit)
+
+   EIN DESIGN ÄNDERN ODER ERGÄNZEN
+   Ein Design ist nichts weiter als ein Variablenblock in Abschnitt 3. Wer ein
+   weiteres hinzufügen will, kopiert einen Block, vergibt einen neuen Namen und
+   trägt ihn in _layouts/default.html in beide Listen ein (erlaubt und designs).
+   ========================================================================== */
+
+/* --- 1. Schriften -------------------------------------------------------- */
+/* Die Dateien liegen im Repo (keine Anfrage an Google o. ä., siehe
+   assets/fonts/LIZENZ.md). Der Browser lädt eine Schrift erst, wenn ein Design
+   sie wirklich benutzt – das Standarddesign kommt ohne Download aus. */
+
+@font-face {
+  font-family: "Inter var";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("{{ '/assets/fonts/inter-latin-wght-normal.woff2' | relative_url }}") format("woff2-variations");
+}
+@font-face {
+  font-family: "Source Serif 4 var";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("{{ '/assets/fonts/source-serif-4-latin-wght-normal.woff2' | relative_url }}") format("woff2-variations");
+}
+@font-face {
+  font-family: "Source Serif 4 var";
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("{{ '/assets/fonts/source-serif-4-latin-wght-italic.woff2' | relative_url }}") format("woff2-variations");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("{{ '/assets/fonts/ibm-plex-mono-latin-400-normal.woff2' | relative_url }}") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("{{ '/assets/fonts/ibm-plex-mono-latin-500-normal.woff2' | relative_url }}") format("woff2");
+}
+
+/* --- 2. Gestaltungsvariablen – Standarddesign ---------------------------- */
+
+:root {
+  --bg:            #f7f8fa;
+  --bg-elev:       #ffffff;
+  --text:          #1b1f2a;
+  --text-muted:    #5b6478;
+  --border:        #dfe3ec;
+  --border-strong: #c6ccdb;
+  --accent:        #2f52c8;
+  --accent-soft:   #eef2ff;
+  --lp:            #9a6410;
+  --lp-soft:       #fdf5e6;
+  --sus:           #1f6a55;
+  --sus-soft:      #eaf7f2;
+
+  --font-body: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-head: var(--font-body);
+  --font-meta: var(--font-body);
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --head-weight:   700;
+  --label-transform: uppercase;
+  --label-tracking:  .04em;
+
+  /* Laufweite der Überschriften, von gross nach klein. Die Werte entsprechen
+     exakt dem bisherigen Stylesheet – ein Design kann sie geschlossen
+     verändern (Serifen mögen keine negative Laufweite). */
+  --tr-hero: -.025em;   /* Titel der Startseite */
+  --tr-h1:   -.02em;    /* Seitentitel */
+  --tr-h2:   -.015em;   /* Abschnittstitel im Fliesstext */
+  --tr-h3:   -.01em;    /* Zwischentitel, Kartentitel, Wortmarke */
+  --tr-h4:   -.005em;   /* Kacheltitel */
+
+  /* Eckenradien, ebenfalls unverändert übernommen. */
+  --radius-karte:  10px;   /* Karten, Blöcke, Pager */
+  --radius-feld:    9px;   /* Kacheln, Lektionsnummer */
+  --radius-block:   8px;   /* Hinweis, Codeblock, Tabelle */
+  --radius-knopf:   7px;   /* Navigation, Schaltflächen */
+  --radius-marke:   5px;   /* Badges, Mini-Nummer */
+  --radius-code:    4px;   /* Inline-Code, Kontrollkästchen */
+  --radius-pill:   99px;   /* Faktenliste */
+  --shadow:      0 1px 2px rgba(20, 25, 45, .06), 0 4px 14px rgba(20, 25, 45, .05);
+
+  --hero-bg:      linear-gradient(180deg, var(--accent-soft), transparent);
+  --header-bg:    color-mix(in srgb, var(--bg-elev) 92%, transparent);
+  --header-filter: saturate(1.4) blur(8px);
+  --block-line:   4px;   /* farbige Kante links am Materialblock */
+
+  --wrap:        min(64rem, 100% - 2.5rem);
+  --wrap-narrow: min(50rem, 100% - 2.5rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:            #12141a;
+    --bg-elev:       #1a1d26;
+    --text:          #e6e8ef;
+    --text-muted:    #9aa3b8;
+    --border:        #2b3040;
+    --border-strong: #3b4256;
+    --accent:        #8aa8ff;
+    --accent-soft:   #1c2340;
+    --lp:            #e0b055;
+    --lp-soft:       #2a2216;
+    --sus:           #6cc9aa;
+    --sus-soft:      #14261f;
+    --shadow:        0 1px 2px rgba(0, 0, 0, .4);
+  }
+}
+
+/* --- 3. Wählbare Designs ------------------------------------------------- */
+/* Die Auswahl sitzt als data-thema am <html>. Weil :root[data-thema] stärker
+   wiegt als :root allein, gewinnen diese Blöcke unabhängig von der Reihenfolge
+   – und der Dunkelblock eines Designs gewinnt über dessen Hellblock, weil er
+   später steht. Jedes Design setzt darum alle Farben in beiden Modi. */
+
+/* 3a. Raster – Schweizer Typografie: keine Karten, nur Linien und Schrift ---*/
+
+:root[data-thema="raster"] {
+  --bg:            #ffffff;
+  --bg-elev:       #ffffff;
+  --text:          #111318;
+  --text-muted:    #5c6270;
+  --border:        #d8dae0;
+  --border-strong: #a8adb8;
+  --accent:        #d0451b;
+  --accent-soft:   #fdf0ec;
+  --lp:            #7a5a1a;
+  --lp-soft:       #f8f2e6;
+  --sus:           #16624e;
+  --sus-soft:      #eaf3ef;
+
+  --font-body: "Inter var", "Segoe UI", system-ui, sans-serif;
+  --font-head: var(--font-body);
+  --font-meta: var(--font-body);
+  --head-weight:   600;
+  --tr-hero: -.035em; --tr-h1: -.03em; --tr-h2: -.02em; --tr-h3: -.015em; --tr-h4: -.01em;
+  --label-transform: uppercase;
+  --label-tracking:  .08em;
+
+  --radius-karte: 0; --radius-feld: 0; --radius-block: 0;
+  --radius-knopf: 0; --radius-marke: 0; --radius-code: 0; --radius-pill: 0;
+  --shadow: none;
+  --hero-bg: none;
+  --header-bg: var(--bg);
+  --header-filter: none;
+  --block-line: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-thema="raster"] {
+    --bg:            #101216;
+    --bg-elev:       #101216;
+    --text:          #e8eaee;
+    --text-muted:    #99a0ad;
+    --border:        #2a2e37;
+    --border-strong: #474d5a;
+    --accent:        #ff7a4d;
+    --accent-soft:   #2a1a13;
+    --lp:            #d9a95a;
+    --lp-soft:       #262015;
+    --sus:           #63c3a5;
+    --sus-soft:      #13241e;
+  }
+}
+
+/* 3b. Arbeitsheft – Papierton, Serifen-Überschriften, Monospace für Metadaten */
+
+:root[data-thema="heft"] {
+  --bg:            #faf7f2;
+  --bg-elev:       #fffdf9;
+  --text:          #23201c;
+  --text-muted:    #6b6459;
+  --border:        #e3dcd1;
+  --border-strong: #c4bcae;
+  --accent:        #9a4f2b;
+  --accent-soft:   #f4e9e2;
+  --lp:            #7a5c13;
+  --lp-soft:       #f7f0dd;
+  --sus:           #2c6350;
+  --sus-soft:      #e7f0ea;
+
+  --font-body: "Inter var", "Segoe UI", system-ui, sans-serif;
+  --font-head: "Source Serif 4 var", Georgia, "Times New Roman", serif;
+  --font-meta: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --head-weight:   600;
+  --tr-hero: 0; --tr-h1: 0; --tr-h2: 0; --tr-h3: 0; --tr-h4: 0;
+  --label-transform: none;
+  --label-tracking:  .1em;
+
+  --radius-karte: 3px; --radius-feld: 3px; --radius-block: 3px;
+  --radius-knopf: 3px; --radius-marke: 2px; --radius-code: 2px; --radius-pill: 3px;
+  --shadow: none;
+  --hero-bg: none;
+  --header-bg: var(--bg);
+  --header-filter: none;
+  --block-line: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-thema="heft"] {
+    --bg:            #1c1a17;
+    --bg-elev:       #242119;
+    --text:          #ece7de;
+    --text-muted:    #a49b8d;
+    --border:        #36312a;
+    --border-strong: #4e473d;
+    --accent:        #d98b62;
+    --accent-soft:   #33251d;
+    --lp:            #d7b06a;
+    --lp-soft:       #2e2718;
+    --sus:           #7cc3a6;
+    --sus-soft:      #1b2b24;
+  }
+}
+
+/* --- 4. Grundgerüst ------------------------------------------------------ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-head); font-weight: var(--head-weight); }
+
+a { color: var(--accent); }
+
+.wrap        { width: var(--wrap); margin-inline: auto; }
+.wrap-narrow { width: var(--wrap-narrow); margin-inline: auto; }
+
+.skip-link {
+  position: absolute; left: -9999px;
+  background: var(--accent); color: #fff; padding: .6rem 1rem; z-index: 100;
+}
+.skip-link:focus { left: 1rem; top: 1rem; }
+
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+/* --- Kopfzeile ----------------------------------------------------------- */
+
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--header-bg);
+  backdrop-filter: var(--header-filter);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; min-height: 4rem; padding-block: .55rem; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: inherit; }
+.brand-icon { font-size: 1.4rem; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.brand-text strong { font-family: var(--font-head); font-size: 1.05rem; letter-spacing: var(--tr-h3); }
+.brand-text small  { color: var(--text-muted); font-size: .78rem; }
+
+.header-tools { display: flex; align-items: center; gap: .8rem; margin-left: auto; }
+
+.site-nav { display: flex; gap: .3rem; }
+.site-nav a {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2.4rem; height: 2.2rem; padding-inline: .5rem;
+  border-radius: var(--radius-knopf); font-size: .92rem; font-weight: 600;
+  text-decoration: none; color: var(--text-muted);
+}
+.site-nav a:hover { background: var(--accent-soft); color: var(--accent); }
+.site-nav a[aria-current="page"] { background: var(--accent); color: #fff; }
+
+/* Design-Umschalter: ein kleiner Knopf, der der Reihe nach durchschaltet.
+   Ohne JavaScript bleibt er über das hidden-Attribut ausgeblendet – dann
+   greift schlicht das Standarddesign. */
+.thema-schalter {
+  font: inherit; font-size: .78rem; font-weight: 600;
+  padding: .2rem .55rem; cursor: pointer;
+  color: var(--text-muted); background: none;
+  border: 1px solid var(--border); border-radius: var(--radius-knopf);
+  white-space: nowrap;
+  transition: color .15s, border-color .15s;
+}
+.thema-schalter[hidden] { display: none; }
+.thema-schalter:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Auf dem Handy passen Wortmarke, Lektionsnummern und Knopf nicht in eine
+   Zeile – sie rücken darum auf eine zweite. */
+@media (max-width: 30rem) {
+  .header-inner { gap: .4rem; }
+  .header-tools { width: 100%; margin-left: 0; justify-content: space-between; gap: .5rem; }
+  .site-nav a { min-width: 2.1rem; padding-inline: .35rem; }
+}
+
+/* --- Startseite ---------------------------------------------------------- */
+
+.hero {
+  background: var(--hero-bg);
+  border-bottom: 1px solid var(--border);
+  padding-block: 3rem 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.eyebrow {
+  margin: 0 0 .4rem; font-family: var(--font-meta);
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .09em; text-transform: var(--label-transform); color: var(--accent);
+}
+.hero h1 { margin: 0; font-size: clamp(2rem, 5vw, 2.9rem); letter-spacing: var(--tr-hero); line-height: 1.1; }
+.hero-sub { margin: .35rem 0 0; font-size: 1.15rem; color: var(--text-muted); }
+.hero-text { max-width: 46rem; margin-top: 1.4rem; }
+.hero-text p:last-child { margin-bottom: 0; }
+
+.section-title {
+  font-size: 1.25rem; letter-spacing: var(--tr-h3);
+  margin: 2.8rem 0 1rem; padding-bottom: .5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.lektion-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; }
+.lektion-list > li > a {
+  display: flex; align-items: center; gap: 1.1rem;
+  padding: 1.05rem 1.2rem; text-decoration: none; color: inherit;
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: var(--radius-karte); box-shadow: var(--shadow);
+  transition: border-color .15s, transform .15s;
+}
+.lektion-list > li > a:hover { border-color: var(--accent); transform: translateY(-1px); }
+.lektion-nr {
+  flex: none; width: 2.9rem; height: 2.9rem; border-radius: var(--radius-feld);
+  display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent);
+  font-weight: 700; font-size: 1rem;
+}
+.lektion-body { display: flex; flex-direction: column; gap: .12rem; min-width: 0; }
+.lektion-body strong { font-size: 1.05rem; letter-spacing: var(--tr-h3); }
+.lektion-kurz { color: var(--text-muted); font-size: .93rem; }
+.lektion-meta { color: var(--text-muted); font-size: .8rem; opacity: .85; }
+.lektion-pfeil { margin-left: auto; color: var(--text-muted); font-size: 1.2rem; }
+
+.quicklinks { margin-bottom: 3rem; }
+.quick-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
+.quick-col {
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: var(--radius-karte); padding: 1.3rem 1.4rem;
+}
+.quick-col h3 { margin: 0 0 .4rem; font-size: 1.02rem; }
+.quick-col > p { margin: 0 0 .9rem; color: var(--text-muted); font-size: .92rem; }
+.link-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; }
+.link-list a {
+  display: flex; align-items: center; gap: .55rem;
+  padding: .4rem .5rem; border-radius: var(--radius-knopf);
+  text-decoration: none; color: inherit; font-size: .94rem;
+}
+.link-list a:hover { background: var(--accent-soft); color: var(--accent); }
+.mini-nr {
+  flex: none; display: grid; place-items: center;
+  width: 1.7rem; height: 1.7rem; border-radius: var(--radius-marke);
+  background: var(--accent-soft); color: var(--accent);
+  font-size: .74rem; font-weight: 700;
+}
+
+/* --- Lektionsseite ------------------------------------------------------- */
+
+.breadcrumb { margin: 1.6rem 0 1.2rem; font-family: var(--font-meta); font-size: .88rem; color: var(--text-muted); }
+.breadcrumb a { color: var(--text-muted); }
+.breadcrumb span { margin-inline: .4rem; opacity: .6; }
+
+.lektion-header { margin-bottom: 2rem; }
+.lektion-header h1 { margin: 0 0 .4rem; font-size: clamp(1.7rem, 4vw, 2.3rem); letter-spacing: var(--tr-h1); line-height: 1.15; }
+.lead { margin: 0; font-size: 1.1rem; color: var(--text-muted); max-width: 46rem; }
+
+.fact-list {
+  list-style: none; display: flex; flex-wrap: wrap; gap: .5rem;
+  margin: 1.2rem 0 0; padding: 0;
+}
+.fact-list li {
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: var(--radius-pill); padding: .3rem .85rem;
+  font-family: var(--font-meta); font-size: .86rem;
+}
+.fact-list li span { color: var(--text-muted); margin-right: .35rem; }
+
+.lektion-intro { margin-bottom: 2rem; }
+
+.material-block {
+  border: 1px solid var(--border); border-radius: var(--radius-karte);
+  background: var(--bg-elev); padding: 1.4rem 1.5rem 1.5rem;
+  margin-bottom: 1.4rem;
+}
+.material-block h2 {
+  display: flex; align-items: center; gap: .55rem;
+  margin: 0 0 .25rem; font-size: 1.15rem; letter-spacing: var(--tr-h3);
+}
+.block-icon { font-size: 1.1rem; }
+.block-hint { margin: 0 0 1.1rem; color: var(--text-muted); font-size: .9rem; }
+.block-ablauf { border-left: var(--block-line) solid var(--accent); }
+.block-ablauf h2 { color: var(--accent); }
+.block-lehrperson { border-left: var(--block-line) solid var(--lp); }
+.block-lehrperson h2 { color: var(--lp); }
+.block-sus { border-left: var(--block-line) solid var(--sus); }
+.block-sus h2 { color: var(--sus); }
+
+/* Quellenangabe unter einem Text */
+.quellen {
+  margin-top: 1.6rem; padding-top: .9rem;
+  border-top: 1px solid var(--border);
+  font-size: .82rem; line-height: 1.7; color: var(--text-muted);
+}
+.quellen strong { color: var(--text-muted); font-weight: 650; }
+.quellen a { color: var(--text-muted); text-decoration-color: var(--border-strong); }
+.quellen a:hover { color: var(--accent); }
+
+/* Ablauf einer Lektion: nummerierte Schritte mit Richtzeit */
+.ablauf { max-width: none; }
+.ablauf > *:last-child { margin-bottom: 0; }
+.ablauf ol { list-style: none; counter-reset: schritt; margin: 0 0 1rem; padding: 0; }
+.ablauf ol > li {
+  counter-increment: schritt; position: relative;
+  padding-left: 2.6rem; margin-bottom: .85rem;
+}
+.ablauf ol > li::before {
+  content: counter(schritt); position: absolute; left: 0; top: .1rem;
+  width: 1.8rem; height: 1.8rem; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent);
+  font-family: var(--font-meta); font-size: .85rem; font-weight: 700;
+}
+.ablauf ol > li em {
+  font-style: normal; font-size: .85em; font-weight: 600;
+  color: var(--text-muted); white-space: nowrap;
+}
+
+.card-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+.card-list-breit { grid-template-columns: 1fr; margin-bottom: 1.4rem; }
+.card code {
+  font-family: var(--font-mono);
+  font-size: .9em; padding: .1em .35em;
+  background: var(--accent-soft); border-radius: var(--radius-code);
+}
+.card a {
+  display: flex; flex-direction: column; gap: .3rem; height: 100%;
+  padding: .95rem 1rem; text-decoration: none; color: inherit;
+  border: 1px solid var(--border); border-radius: var(--radius-feld); background: var(--bg);
+  transition: border-color .15s, background .15s;
+}
+.card a:hover { border-color: var(--accent); background: var(--accent-soft); }
+.card strong { letter-spacing: var(--tr-h4); }
+.card-kurz { color: var(--text-muted); font-size: .87rem; line-height: 1.45; }
+
+/* --- Badges -------------------------------------------------------------- */
+
+.badge {
+  align-self: flex-start;
+  display: inline-block; padding: .1rem .5rem;
+  border-radius: var(--radius-marke);
+  font-family: var(--font-meta); font-size: .7rem; font-weight: 700;
+  letter-spacing: var(--label-tracking); text-transform: var(--label-transform);
+  background: var(--border); color: var(--text-muted);
+}
+.badge-arbeitsblatt  { background: #e3ecff; color: #24479c; }
+.badge-musterloesung { background: #dff3e6; color: #1c6b3a; }
+.badge-ablaufplan    { background: #ecebf7; color: #4a3f9e; }
+.badge-glossar       { background: #f3e8f7; color: #7a3388; }
+.badge-auftrag       { background: #e2f2f4; color: #17636e; }
+.badge-input         { background: #fdeee0; color: #94531a; }
+.badge-info          { background: #ecedf1; color: #4b5263; }
+.badge-konzept       { background: #ffeaea; color: #99323b; }
+.badge-zielgruppe-lp  { background: var(--lp-soft); color: var(--lp); }
+.badge-zielgruppe-sus { background: var(--sus-soft); color: var(--sus); }
+
+@media (prefers-color-scheme: dark) {
+  .badge-arbeitsblatt  { background: #1c2b4d; color: #9fbcff; }
+  .badge-musterloesung { background: #16321f; color: #7fd6a0; }
+  .badge-ablaufplan    { background: #262246; color: #b3a9ee; }
+  .badge-glossar       { background: #331c38; color: #dda6e8; }
+  .badge-auftrag       { background: #12343a; color: #7fd0da; }
+  .badge-input         { background: #3a2612; color: #eab278; }
+  .badge-info          { background: #262a35; color: #a7afc2; }
+  .badge-konzept       { background: #3b1c20; color: #eb98a1; }
+}
+
+/* --- Materialseite ------------------------------------------------------- */
+
+.material-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem;
+}
+.material-tags { display: flex; gap: .4rem; flex-wrap: wrap; }
+.print-btn {
+  font: inherit; font-size: .85rem; font-weight: 600;
+  padding: .35rem .9rem; cursor: pointer;
+  background: var(--bg-elev); color: var(--text-muted);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-knopf);
+}
+.print-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.hinweis {
+  border-radius: var(--radius-block); padding: .8rem 1rem; margin: 0 0 1.6rem;
+  font-size: .93rem; border: 1px solid var(--border);
+}
+.hinweis-loesung { background: var(--sus-soft); border-color: color-mix(in srgb, var(--sus) 35%, transparent); }
+.hinweis-lp      { background: var(--lp-soft);  border-color: color-mix(in srgb, var(--lp) 35%, transparent); }
+
+/* --- Fliesstext (aus Markdown) ------------------------------------------- */
+
+.prose { max-width: 46rem; }
+.prose > *:first-child { margin-top: 0; }
+.prose h1 { font-size: clamp(1.7rem, 4vw, 2.2rem); letter-spacing: var(--tr-h1); line-height: 1.2; margin: 0 0 1rem; }
+.prose h2 { font-size: 1.4rem; letter-spacing: var(--tr-h2); margin: 2.4rem 0 .8rem; padding-bottom: .35rem; border-bottom: 1px solid var(--border); }
+.prose h3 { font-size: 1.13rem; margin: 1.9rem 0 .6rem; }
+.prose h4 { font-size: 1rem; margin: 1.5rem 0 .5rem; color: var(--text-muted); }
+.prose p, .prose ul, .prose ol { margin: 0 0 1rem; }
+.prose li { margin-bottom: .35rem; }
+.prose li > ul, .prose li > ol { margin-top: .35rem; }
+.prose strong { font-weight: 650; }
+.prose hr { border: 0; border-top: 1px solid var(--border); margin: 2.2rem 0; }
+.prose em { color: inherit; }
+
+.prose blockquote {
+  margin: 1.4rem 0; padding: .2rem 0 .2rem 1.1rem;
+  border-left: 3px solid var(--border-strong); color: var(--text-muted);
+}
+.prose code {
+  font-family: var(--font-mono);
+  font-size: .87em; padding: .12em .38em;
+  background: var(--accent-soft); border-radius: var(--radius-code);
+}
+.prose pre {
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: var(--radius-block); padding: 1rem; overflow-x: auto;
+}
+.prose pre code { background: none; padding: 0; }
+
+/* Tabellen */
+.table-scroll { overflow-x: auto; margin: 0 0 1.4rem; }
+.prose table {
+  width: 100%; border-collapse: collapse;
+  font-size: .93rem; background: var(--bg-elev);
+  border: 1px solid var(--border); border-radius: var(--radius-block);
+}
+.prose th, .prose td {
+  border-bottom: 1px solid var(--border);
+  padding: .55rem .75rem; text-align: left; vertical-align: top;
+}
+.prose th { background: var(--accent-soft); font-weight: 650; font-size: .87rem; }
+.prose tbody tr:last-child td { border-bottom: 0; }
+/* Kopfzeilen ohne Beschriftung (z. B. bei den Steckbrief-Tabellen) ausblenden */
+.prose thead tr:not(:has(th:not(:empty))) { display: none; }
+.prose td:empty::after { content: ""; display: block; min-height: 1.4rem; }
+
+/* Task-Listen (- [ ] / - [x])
+   Zwei Selektoren, weil kramdown die Klasse .task-list-item nicht in jeder
+   Version setzt – so greift die Formatierung in beiden Fällen. */
+.prose .task-list-item,
+.prose li:has(> input[type="checkbox"]) { list-style: none; margin-left: -1.4rem; padding-left: 0; }
+.prose .task-list-item input[type="checkbox"],
+.prose li > input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 1.05rem; height: 1.05rem; margin-right: .55rem;
+  vertical-align: -.16rem;
+  border: 1.5px solid var(--border-strong); border-radius: var(--radius-code);
+  background: var(--bg-elev);
+}
+.prose li > input[type="checkbox"]:checked {
+  background: var(--accent); border-color: var(--accent);
+}
+.prose li > input[type="checkbox"]:checked::after {
+  content: "\2713"; color: #fff; font-size: .78rem;
+  display: grid; place-items: center; height: 100%;
+}
+
+/* Schreiblinien zum Ausfüllen.
+   In den Markdown-Dateien als <span class="fill-line"></span> setzen –
+   eine Zeile aus Unterstrichen wäre in Markdown eine Trennlinie (<hr>)
+   bzw. würde als Fettschrift gelesen und zerbricht die Nummerierung. */
+.fill-line {
+  display: inline-block; min-width: 12rem; max-width: 100%;
+  vertical-align: baseline;
+  border-bottom: 1px solid var(--border-strong);
+  height: 1.35em; margin-bottom: -.25em;
+}
+.fill-line.breit { display: block; width: 100%; min-width: 0; height: 1.7em; }
+
+/* --- Pager & Fusszeile --------------------------------------------------- */
+
+.pager {
+  display: flex; gap: .7rem; flex-wrap: wrap;
+  margin: 2.4rem 0 3rem;
+}
+.pager a {
+  flex: 1 1 14rem; display: flex; flex-direction: column; gap: .1rem;
+  padding: .8rem 1rem; text-decoration: none; color: inherit;
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: var(--radius-karte); font-size: .95rem;
+}
+.pager a:hover { border-color: var(--accent); }
+.pager a span { color: var(--text-muted); font-size: .78rem; font-weight: 600; }
+.pager-next { text-align: right; }
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding-block: 1.6rem 2.4rem;
+  color: var(--text-muted); font-size: .86rem;
+}
+.site-footer p { margin: 0 0 .25rem; }
+.footer-meta { font-family: var(--font-meta); opacity: .75; font-size: .8rem; }
+
+/* --- 5. Design-spezifische Feinheiten ------------------------------------ */
+
+/* Die Emoji-Symbole gehören zum Standarddesign; die beiden anderen kommen
+   ohne aus. Sie stehen im Markup und werden hier nur ausgeblendet. */
+:root[data-thema="raster"] .brand-icon,
+:root[data-thema="heft"] .brand-icon,
+:root[data-thema="raster"] .block-icon,
+:root[data-thema="heft"] .block-icon { display: none; }
+
+/* Raster: keine Flächen. Lektionen sind Zeilen in einer Liste, die Nummer ist
+   ein typografischer Anker statt eines gefüllten Quadrats. */
+:root[data-thema="raster"] .site-header { border-bottom-width: 2px; border-bottom-color: var(--text); }
+:root[data-thema="raster"] .hero { padding-block: 3.5rem 2.5rem; }
+:root[data-thema="raster"] .lektion-list { gap: 0; border-top: 1px solid var(--border-strong); }
+:root[data-thema="raster"] .lektion-list > li > a {
+  border: 0; border-bottom: 1px solid var(--border); padding-inline: 0;
+}
+:root[data-thema="raster"] .lektion-list > li > a:hover { transform: none; background: var(--accent-soft); }
+:root[data-thema="raster"] .lektion-nr {
+  background: none; width: auto; min-width: 2.6rem; height: auto;
+  place-items: baseline start; font-size: 2rem; font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+:root[data-thema="raster"] .material-block,
+:root[data-thema="raster"] .quick-col,
+:root[data-thema="raster"] .pager a { background: none; }
+:root[data-thema="raster"] .badge {
+  background: none; color: var(--text-muted);
+  border: 1px solid var(--border-strong); padding: .05rem .45rem;
+}
+:root[data-thema="raster"] .badge-zielgruppe-lp  { color: var(--lp);  border-color: var(--lp); }
+:root[data-thema="raster"] .badge-zielgruppe-sus { color: var(--sus); border-color: var(--sus); }
+:root[data-thema="raster"] .section-title { border-bottom-color: var(--text); border-bottom-width: 2px; }
+
+/* Einseitige Kanten und runde Ecken vertragen sich schlecht. Im Standarddesign
+   bleibt es wie bisher; wo ein Design eigene Radien setzt, wird links gerade. */
+:root[data-thema="heft"] .block-ablauf,
+:root[data-thema="heft"] .block-lehrperson,
+:root[data-thema="heft"] .block-sus {
+  border-start-start-radius: 0; border-end-start-radius: 0;
+}
+
+/* Arbeitsheft: Vorspann und Kennzeichnungen in Monospace, ruhigere Kanten. */
+:root[data-thema="heft"] .hero { border-bottom-style: solid; }
+:root[data-thema="heft"] .eyebrow { font-weight: 500; }
+:root[data-thema="heft"] .lead { font-family: var(--font-head); font-style: italic; }
+:root[data-thema="heft"] .lektion-nr { font-family: var(--font-meta); font-weight: 500; }
+:root[data-thema="heft"] .badge { font-weight: 500; }
+:root[data-thema="heft"] .prose h2 { border-bottom-color: var(--border-strong); }
+
+/* Die Badge-Farben des Standarddesigns sind kühl abgestimmt und beissen sich
+   mit dem Papierton. Hier dieselben Bedeutungen in Erdtönen – die Farbfamilie
+   bleibt erkennbar, die Sättigung sinkt. */
+:root[data-thema="heft"] .badge-arbeitsblatt  { background: #e2e5ec; color: #3c4a63; }
+:root[data-thema="heft"] .badge-musterloesung { background: #e8ead9; color: #46521f; }
+:root[data-thema="heft"] .badge-ablaufplan    { background: #eae0e8; color: #59374f; }
+:root[data-thema="heft"] .badge-glossar       { background: #f2e1e3; color: #6b343f; }
+:root[data-thema="heft"] .badge-auftrag       { background: #dee9e5; color: #2c554e; }
+:root[data-thema="heft"] .badge-input         { background: #f4e7d3; color: #765012; }
+:root[data-thema="heft"] .badge-info          { background: #e9e4db; color: #524d3d; }
+:root[data-thema="heft"] .badge-konzept       { background: #f4e1d8; color: #763822; }
+
+@media (prefers-color-scheme: dark) {
+  :root[data-thema="heft"] .badge-arbeitsblatt  { background: #262a35; color: #adb9d1; }
+  :root[data-thema="heft"] .badge-musterloesung { background: #262a1a; color: #b6c383; }
+  :root[data-thema="heft"] .badge-ablaufplan    { background: #2c2230; color: #c6a9c0; }
+  :root[data-thema="heft"] .badge-glossar       { background: #33222a; color: #d8a3ac; }
+  :root[data-thema="heft"] .badge-auftrag       { background: #1c2e2b; color: #91c7bc; }
+  :root[data-thema="heft"] .badge-input         { background: #33270f; color: #e0b369; }
+  :root[data-thema="heft"] .badge-info          { background: #2a2822; color: #bbb3a3; }
+  :root[data-thema="heft"] .badge-konzept       { background: #331f18; color: #dc997d; }
+}
+
+/* --- 6. Druckansicht ----------------------------------------------------- */
+/* :root[data-thema] wiegt gleich schwer wie die Designblöcke oben und steht
+   später – so drucken alle vier Designs identisch. */
+
+@media print {
+  :root, :root[data-thema] {
+    --bg: #fff; --bg-elev: #fff; --text: #000; --text-muted: #333;
+    --border: #bbb; --border-strong: #666; --accent: #000; --accent-soft: #f2f2f2;
+    --shadow: none; --hero-bg: none; --header-filter: none;
+    --radius-karte: 0; --radius-feld: 0; --radius-block: 0;
+    --radius-knopf: 0; --radius-marke: 0; --radius-code: 0; --radius-pill: 0;
+  }
+  body { font-size: 11.5pt; line-height: 1.45; background: #fff; }
+  .site-header, .site-footer, .pager, .breadcrumb, .print-btn, .skip-link, .thema-schalter { display: none !important; }
+  .wrap, .wrap-narrow { width: 100%; }
+  .prose { max-width: none; }
+  .material-bar { margin-bottom: .8rem; }
+  .badge { border: 1px solid #999; background: none !important; color: #000 !important; }
+  .hinweis { border: 1px solid #999; background: none; }
+  .prose table { font-size: 10pt; page-break-inside: auto; }
+  .prose tr, .prose img { page-break-inside: avoid; }
+  .prose thead { display: table-header-group; }
+  .prose h1, .prose h2, .prose h3 { page-break-after: avoid; }
+  .prose td:empty::after { min-height: 2.2rem; }
+  .fill-line { border-bottom: 1px solid #444; }
+  a { color: #000; text-decoration: none; }
+}
+
+/* --- 7. Krypto-Werkzeuge, Dossier und Vigenère-Quadrat ------------------- */
+/* Die Werkzeuge baut assets/js/krypto.js in leere <div class="krypto">-
+   Platzhalter. Alle Farben kommen aus den Variablen oben, damit Dark Mode und
+   die drei Designs ohne Zusatzpflege funktionieren. */
+
+.badge-werkzeug { background: #e6f4ea; color: #1d6b3c; }
+.badge-dossier  { background: #fff1d6; color: #8a5a00; }
+.badge-zusammenfassung { background: #fde7f0; color: #9b2257; }
+@media (prefers-color-scheme: dark) {
+  .badge-werkzeug { background: #15301f; color: #86d9a4; }
+  .badge-dossier  { background: #33270f; color: #e9c174; }
+  .badge-zusammenfassung { background: #3a1626; color: #f29bbf; }
+}
+
+.krypto {
+  margin: 1.4rem 0 1.8rem; padding: 1rem 1.1rem 1.1rem;
+  background: var(--bg-elev); border: 1px solid var(--border-strong);
+  border-left: var(--block-line) solid var(--accent);
+  border-radius: var(--radius-karte); box-shadow: var(--shadow);
+  font-size: .93rem;
+}
+.krypto:empty::before { content: "Das interaktive Werkzeug wird geladen … (JavaScript nötig)"; color: var(--text-muted); }
+.kt-titel { margin: 0 0 .8rem; font-weight: 700; color: var(--accent); }
+.kt-label { margin: .9rem 0 .3rem; font-weight: 650; font-size: .88rem; }
+.kt-hilfe { display: block; margin: .3rem 0 .5rem; color: var(--text-muted); font-size: .84rem; }
+.kt-feld { display: flex; flex-direction: column; gap: .25rem; margin: 0 0 .7rem; flex: 1 1 10rem; min-width: 0; }
+.kt-feld label { font-weight: 600; font-size: .86rem; }
+.krypto textarea, .krypto input[type="text"], .krypto input[type="number"], .krypto select {
+  font: inherit; font-family: var(--font-mono); font-size: .9rem;
+  color: var(--text); background: var(--bg);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-code);
+  padding: .4rem .5rem; width: 100%; box-sizing: border-box;
+}
+.krypto select { font-family: inherit; }
+.krypto textarea { resize: vertical; }
+.krypto input[type="range"] { width: 100%; accent-color: var(--accent); }
+.krypto :focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.kt-reihe { display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: flex-end; }
+.kt-knopfreihe { display: flex; flex-wrap: wrap; gap: .5rem; margin: .6rem 0; }
+.kt-knopf {
+  font: inherit; font-size: .86rem; cursor: pointer;
+  padding: .38rem .8rem; border-radius: var(--radius-knopf);
+  border: 1px solid var(--accent); background: var(--accent-soft); color: var(--accent);
+}
+.kt-knopf:hover { background: var(--accent); color: var(--bg-elev); }
+.kt-knopf.kt-klein { padding: .15rem .55rem; font-size: .8rem; }
+.kt-zahl {
+  display: inline-block; min-width: 2.2rem; text-align: center; font-family: var(--font-mono);
+  font-weight: 600; padding: .2rem .45rem; border-radius: var(--radius-code); background: var(--accent-soft);
+}
+.kt-schluessel { letter-spacing: .12em; }
+.kt-mono, .kt-ausgabe { font-family: var(--font-mono); }
+.kt-ausgabe {
+  min-height: 2.2rem; padding: .55rem .7rem; white-space: pre-wrap; word-break: break-word;
+  background: var(--bg); border: 1px dashed var(--border-strong); border-radius: var(--radius-code);
+}
+.kt-ausgabe:empty::before { content: "–"; color: var(--text-muted); }
+.kt-liste { max-height: 22rem; overflow-y: auto; margin-top: .4rem; }
+.kt-klartext { line-height: 1.7; }
+.kt-ersetzt { color: var(--sus); font-weight: 700; }
+.kt-anders { background: color-mix(in srgb, var(--lp) 30%, transparent); color: var(--text); border-radius: 2px; }
+.kt-hash { font-size: .82rem; word-break: break-all; }
+.kt-fehler { color: #c0392b; font-weight: 600; margin: .4rem 0; }
+.kt-ok { color: var(--sus); font-weight: 700; margin: .4rem 0; }
+@media (prefers-color-scheme: dark) { .kt-fehler { color: #ff8a7a; } }
+
+/* Alphabetzeilen beim Caesar-Werkzeug */
+.kt-alphabet { overflow-x: auto; margin: .3rem 0 .4rem; font-family: var(--font-mono); font-size: .85rem; }
+.kt-zeile { display: flex; white-space: nowrap; }
+.kt-zeile span { flex: 0 0 1.35rem; text-align: center; padding: .1rem 0; border-bottom: 1px solid var(--border); }
+.kt-zeile .kt-zeilenkopf { flex: 0 0 6rem; text-align: left; font-family: var(--font-body); color: var(--text-muted); font-size: .78rem; }
+.kt-zeile + .kt-zeile span:not(.kt-zeilenkopf) { font-weight: 700; color: var(--accent); }
+
+/* Balkendiagramme */
+.kt-balken { display: flex; align-items: flex-end; gap: 2px; height: 9rem; padding-top: 1rem; overflow-x: auto; }
+.kt-balken-klein { height: 6rem; }
+.kt-balken-spalte { flex: 1 1 0; min-width: .7rem; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.kt-balken-bar { width: 72%; background: var(--accent); border-radius: 2px 2px 0 0; min-height: 1px; }
+.kt-balken-wert { font-size: .62rem; color: var(--text-muted); }
+.kt-balken-buchstabe { font-family: var(--font-mono); font-size: .78rem; font-weight: 600; }
+
+/* Ersetzungstabelle */
+.kt-subst { display: grid; grid-template-columns: repeat(auto-fill, minmax(2.1rem, 1fr)); gap: 3px; }
+.kt-subst-zelle { display: flex; flex-direction: column; align-items: center; font-family: var(--font-mono); font-weight: 700; font-size: .8rem; }
+.krypto .kt-subst-zelle input { text-align: center; padding: .25rem 0; color: var(--sus); font-weight: 700; }
+.krypto .kt-subst-zelle input.kt-doppelt { border-color: #c0392b; background: color-mix(in srgb, #c0392b 15%, transparent); }
+
+/* Vigenère-Raster und Tabellen */
+.kt-raster-wrap { overflow-x: auto; margin: .4rem 0; }
+.kt-raster { border-collapse: collapse; font-family: var(--font-mono); font-size: .85rem; }
+.kt-raster th { text-align: left; font-family: var(--font-body); font-weight: 600; font-size: .78rem; color: var(--text-muted); padding-right: .6rem; white-space: nowrap; }
+.kt-raster td { width: 1.3rem; text-align: center; border: 1px solid var(--border); padding: .1rem 0; }
+.kt-raster .kt-schluesselzeile td { color: var(--lp); }
+.krypto .kt-tabelle { border-collapse: collapse; font-size: .84rem; margin: .3rem 0; background: none; border: 0; width: auto; }
+.krypto .kt-tabelle th, .krypto .kt-tabelle td { border: 1px solid var(--border); padding: .25rem .5rem; text-align: left; }
+.krypto .kt-tabelle th { background: var(--accent-soft); }
+.krypto .kt-ergebniszeile td { font-weight: 700; color: var(--accent); }
+
+/* Vigenère knacken: Spaltenkarten */
+.kt-spalten { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .7rem; margin: .5rem 0 .8rem; }
+.kt-spalte { border: 1px solid var(--border); border-radius: var(--radius-block); padding: .5rem .6rem; background: var(--bg); }
+.kt-spalte-kopf { display: flex; align-items: center; gap: .35rem; flex-wrap: wrap; margin-bottom: .3rem; }
+.kt-spalte-kopf strong { margin-right: auto; font-size: .86rem; }
+.kt-mini { display: flex; align-items: flex-end; height: 4.5rem; gap: 1px; }
+.kt-mini-spalte { position: relative; flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+.kt-mini-ref { position: absolute; bottom: .9rem; left: 0; right: 0; max-height: calc(100% - .9rem); background: color-mix(in srgb, var(--lp) 22%, transparent); border-top: 2px solid var(--lp); }
+.kt-mini-bar { position: relative; width: 60%; background: var(--accent); margin-bottom: .9rem; min-height: 1px; max-height: calc(100% - .9rem); }
+.kt-mini-b { position: absolute; bottom: 0; font-size: .6rem; font-family: var(--font-mono); color: var(--text-muted); }
+
+/* RSA- und Signatur-Werkzeug */
+.kt-teil { border: 1px solid var(--border); border-radius: var(--radius-block); padding: .7rem .8rem; margin: .8rem 0; }
+.kt-teil-empfaenger { border-left: 3px solid var(--sus); }
+.kt-teil-sender { border-left: 3px solid var(--lp); }
+.kt-teiltitel { margin: 0 0 .6rem; font-weight: 700; }
+.kt-rechenweg { font-family: var(--font-body); }
+.kt-rechenweg:empty { display: none; }
+.kt-kv { display: flex; flex-wrap: wrap; gap: .2rem .7rem; align-items: baseline; padding: .25rem 0; border-bottom: 1px dotted var(--border); }
+.kt-kv > span { flex: 0 0 14rem; color: var(--text-muted); font-size: .84rem; }
+.kt-kv code { font-family: var(--font-mono); word-break: break-all; }
+.kt-kv-gross { margin-top: .4rem; }
+.kt-kv-gross code { font-size: 1rem; font-weight: 700; }
+.kt-geheim code, .kt-geheim .kt-klecks-text { color: #c0392b; }
+@media (prefers-color-scheme: dark) { .kt-geheim code, .kt-geheim .kt-klecks-text { color: #ff8a7a; } }
+
+/* Diffie-Hellman-Farbmischung */
+.kt-dh { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; margin: .6rem 0; }
+.kt-dh-spalte { display: flex; flex-direction: column; gap: .5rem; padding: .5rem; border: 1px solid var(--border); border-radius: var(--radius-block); }
+.kt-dh-eve { background: var(--bg); border-style: dashed; }
+.kt-klecks { display: flex; align-items: center; gap: .5rem; font-size: .8rem; }
+.kt-klecks-farbe { flex: 0 0 2.2rem; height: 2.2rem; border-radius: 50%; border: 1px solid var(--border-strong); }
+@media (max-width: 40rem) { .kt-dh { grid-template-columns: 1fr; } .kt-kv > span { flex-basis: 100%; } }
+
+/* Vigenère-Quadrat zum Ausdrucken */
+.quadrat { overflow-x: auto; margin: 1rem 0; }
+.prose .quadrat table { width: auto; font-family: var(--font-mono); font-size: .72rem; border-collapse: collapse; }
+.prose .quadrat th, .prose .quadrat td { padding: .05rem .22rem; text-align: center; border: 1px solid var(--border); }
+.prose .quadrat th { background: var(--accent-soft); }
+
+/* Info-Kasten im Fliesstext (z. B. «Gut zu wissen») */
+.kasten {
+  margin: 1.2rem 0; padding: .8rem 1rem; border-radius: var(--radius-block);
+  background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.kasten > :last-child { margin-bottom: 0; }
+
+/* Dossier: alle Unterlagen auf einer Seite */
+.dossier-teil { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 2px solid var(--border-strong); }
+.dossier-status { color: var(--text-muted); }
+.dossier-auswahl label { display: inline-flex; align-items: center; gap: .3rem; margin-right: .9rem; white-space: nowrap; }
+
+@media print {
+  .krypto { box-shadow: none; border: 1px dashed #888; padding: .4rem .7rem; }
+  .krypto > * { display: none !important; }
+  .krypto::before, .krypto:empty::before {
+    content: "Interaktives Werkzeug – nur auf der Website verfügbar."; display: block;
+    font-style: italic; color: #333;
+  }
+  .kasten { background: none; border: 1px solid #999; }
+  .dossier-teil { page-break-before: always; border-top: 0; margin-top: 0; padding-top: 0; }
+  .dossier-steuerung { display: none !important; }
+  .prose .quadrat table { font-size: 7.5pt; }
+}
