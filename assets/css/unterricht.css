@@ -939,6 +939,7 @@ select.luecke-feld { cursor: pointer; }
   border: 1px solid var(--border-strong); border-radius: var(--radius-code); background: var(--bg-elev);
 }
 .antwort-feld:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.antwort-druck, .antwort-text { display: none; }
 
 .prose .mc-liste input, .prose .checkliste input { cursor: pointer; }
 .prose ul.mc-liste.richtig { box-shadow: -4px 0 0 var(--sus); }
@@ -992,14 +993,14 @@ select.luecke-feld { cursor: pointer; }
     border: 1px solid #777 !important;
   }
   .chip[aria-pressed="true"] { font-weight: 700; border: 2px solid #000 !important; }
-  .antwort { margin: .1em 0 .45em; }
-  .antwort-feld {
-    border: 0; border-radius: 0; padding: 0; resize: none; overflow: hidden;
-    font-size: 10pt; line-height: 7mm; min-height: 0; height: calc(var(--zeilen, 2) * 7mm);
-    background: repeating-linear-gradient(to bottom, transparent 0, transparent calc(7mm - 1px), #888 calc(7mm - 1px), #888 7mm) !important;
-    -webkit-print-color-adjust: exact; print-color-adjust: exact;
-  }
-  .fill-line.breit { height: 7mm; }
+  .antwort { margin: 0 0 .4em; }
+  .antwort-feld { display: none !important; }
+  .antwort-druck { display: block; }
+  .antwort.hat-text .antwort-druck { display: none; }
+  .antwort.hat-text .antwort-text { display: block; white-space: pre-wrap; border-bottom: 1px solid #888; padding: .1em 0 .2em; }
+  .fill-line, .fill-line.breit { border-bottom-color: #888; }
+  .fill-line.breit { height: 6.5mm; }
+  .nur-online { display: none !important; }
   .prose ul.mc-liste, .prose ul.checkliste { box-shadow: none; }
   .dossier-teil { page-break-before: auto; margin-top: 1.2em; padding-top: .8em; border-top: 1px solid #999; }
   .dossier-teil.dossier-lektion, .dossier-neue-seite .dossier-teil { page-break-before: always; margin-top: 0; padding-top: 0; border-top: 0; }

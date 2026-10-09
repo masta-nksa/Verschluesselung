@@ -9,8 +9,6 @@ reihenfolge: 80
 
 # Das Wichtigste: Häufigkeitsanalyse und Vigenère
 
-**Lektion 2 – Besprechung im Plenum | ca. 10 Min.**
-
 ## Zum Besprechen
 
 1. Die allgemeine Ersetzung hat rund 4 · 10²⁶ Schlüssel. Warum haben Sie den Brief trotzdem in

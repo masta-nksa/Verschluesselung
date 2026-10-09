@@ -9,8 +9,6 @@ reihenfolge: 20
 
 # Von Vigenère zu AES
 
-**Lektion 3 – Einzelarbeit | ca. 14 Min. (6 Min. lesen, 8 Min. Aufgaben 1–2; Aufgaben 3–4 für Schnelle)**
-
 ## Ziel
 
 Sie erklären, wie moderne Verfahren mit Bits statt Buchstaben arbeiten, schätzen die Grösse
@@ -18,100 +16,84 @@ eines Schlüsselraums ab und begründen, warum AES als sicher gilt.
 
 ## 1 · Computer verschlüsseln Bits
 
-Computer verschlüsseln keine Buchstaben, sondern Bits. Die wichtigste Grundoperation ist
-**XOR** (⊕, «entweder–oder»): Das Ergebnis ist 1, wenn genau eines der beiden Bits 1 ist.
+Die wichtigste Grundoperation ist **XOR** (⊕, «entweder–oder»): Das Ergebnis ist 1, wenn genau
+eines der beiden Bits 1 ist: 0⊕0 = 0, 0⊕1 = 1, 1⊕0 = 1, 1⊕1 = 0. Wendet man XOR zweimal mit
+demselben Schlüssel an, erhält man wieder den Klartext: (Klartext ⊕ Schlüssel) ⊕ Schlüssel =
+Klartext. Verschlüsseln und Entschlüsseln sind dieselbe Operation – typisch **symmetrisch**.
 
-| a | b | a ⊕ b |
-|---|---|---|
-| 0 | 0 | 0 |
-| 0 | 1 | 1 |
-| 1 | 0 | 1 |
-| 1 | 1 | 0 |
-
-Das Besondere: Wendet man XOR zweimal mit demselben Schlüssel an, erhält man wieder den
-Klartext: (Klartext ⊕ Schlüssel) ⊕ Schlüssel = Klartext. Verschlüsseln und Entschlüsseln sind
-also dieselbe Operation – ein typisch **symmetrisches** Verfahren.
+Kurz geprüft: 1 ⊕ 1 = <span class="luecke" data-typ="zahl" data-antwort="0" data-breite="3"></span> ·
+1 ⊕ 0 = <span class="luecke" data-typ="zahl" data-antwort="1" data-breite="3"></span> ·
+1011 ⊕ 0110 = <span class="luecke" data-antwort="1101" data-breite="6"></span> ·
+(1101 ⊕ 0110) = <span class="luecke" data-antwort="1011" data-breite="6"></span>
 
 <div class="krypto" data-tool="xor" data-text="HALLO" data-key="KEY"></div>
 
 <div class="kasten" markdown="1">
 
 **Das One-Time-Pad – die perfekte Verschlüsselung.** Ist der Schlüssel *völlig zufällig*,
-*genauso lang wie die Nachricht* und wird er *nur ein einziges Mal* verwendet, ist XOR
-beweisbar nicht zu knacken: Jeder denkbare Klartext gleicher Länge wäre gleich
-wahrscheinlich. Der heisse Draht zwischen Washington und Moskau wurde so gesichert.
-Im Alltag ist das unpraktisch: Für jedes Gigabyte Daten bräuchten beide Seiten vorher ein
-Gigabyte geheimen Schlüssel.
+*so lang wie die Nachricht* und wird er *nur einmal* verwendet, ist XOR beweisbar unknackbar:
+Jeder Klartext gleicher Länge wäre gleich wahrscheinlich. Der heisse Draht Washington–Moskau
+wurde so gesichert. Im Alltag unpraktisch: Für jedes Gigabyte Daten bräuchten beide Seiten
+vorher ein Gigabyte geheimen Schlüssel.
 
 </div>
 
 ## 2 · AES – der Standard von heute
 
-1997 schrieb das US-Normungsinstitut NIST einen **öffentlichen Wettbewerb** für ein neues
-Verfahren aus. Fachleute aus aller Welt reichten Vorschläge ein und versuchten jahrelang, die
-Vorschläge der anderen zu knacken. 2001 gewann *Rijndael* der beiden Belgier Joan Daemen und
-Vincent Rijmen. Es heisst seither **AES** (Advanced Encryption Standard).
+1997 schrieb das US-Normungsinstitut NIST einen **öffentlichen Wettbewerb** aus; Fachleute aus
+aller Welt versuchten jahrelang, die Vorschläge der anderen zu knacken. 2001 gewann *Rijndael*
+der Belgier Joan Daemen und Vincent Rijmen – seither **AES** (Advanced Encryption Standard).
 
-So funktioniert AES im Groben:
-
-- Die Daten werden in Blöcke von 128 Bit (16 Byte) zerlegt.
-- Jeder Block durchläuft 10 bis 14 **Runden**. In jeder Runde werden Bytes ersetzt (wie bei
-  einer Substitution), verschoben und vermischt, und der Block wird mit einem Teil des
-  Schlüssels per XOR verknüpft.
-- Nach wenigen Runden hängt jedes Bit des Geheimtexts von *jedem* Bit des Klartexts und des
-  Schlüssels ab. Buchstabenhäufigkeiten oder Wiederholungen sind nicht mehr zu erkennen.
+- Die Daten werden in Blöcke von 128 Bit zerlegt. Jeder Block durchläuft 10 bis 14 **Runden**:
+  Bytes ersetzen, verschieben, vermischen und mit einem Teil des Schlüssels per XOR verknüpfen.
+- Danach hängt jedes Bit des Geheimtexts von *jedem* Bit des Klartexts und des Schlüssels ab.
+  Häufigkeiten oder Wiederholungen sind nicht mehr zu erkennen.
 - Der Schlüssel ist 128, 192 oder 256 Bit lang.
 
-AES schützt heute Ihr WLAN (WPA2/WPA3), jede HTTPS-Verbindung, Ihre Festplatte (BitLocker,
-FileVault) und die Nachrichten in Messengern wie Signal, Threema oder WhatsApp. Da kein
+AES schützt WLAN (WPA2/WPA3), HTTPS, Festplatten (BitLocker, FileVault) und Messenger. Da kein
 Angriff bekannt ist, der wesentlich besser ist als Durchprobieren, hängt die Sicherheit an
 der Grösse des Schlüsselraums.
 
 ## 3 · Rechenaufgaben zum Schlüsselraum
 
-Nehmen Sie an, ein Angreifer probiert **eine Milliarde (10⁹) Schlüssel pro Sekunde** aus.
-Ein Jahr hat rund 3,2 · 10⁷ Sekunden. Rechnen Sie mit dem Taschenrechner.
+Annahme: **10⁹ Schlüssel pro Sekunde**, ein Jahr ≈ 3,2 · 10⁷ Sekunden. Schreibweise im Feld z. B.
+`3.4e38` oder `3,4·10^38`.
 
 ### Aufgabe 1 – Tabelle ergänzen
 
 | Verfahren | Anzahl Schlüssel | Zeit für alle Schlüssel |
 |---|---|---|
 | Caesar | 26 | 26 Nanosekunden |
-| Vigenère, Schlüsselwort mit 6 Buchstaben | 26⁶ = <span class="fill-line"></span> | <span class="fill-line"></span> |
+| Vigenère, Schlüsselwort mit 6 Buchstaben | 26⁶ = <span class="luecke" data-typ="groesse" data-toleranz="0.02" data-antwort="308915776" data-breite="12"></span> | <span class="luecke" data-typ="groesse" data-toleranz="0.15" data-antwort="0.31" data-breite="8"></span> Sekunden |
 | allgemeine Ersetzung (L2) | 26! ≈ 4 · 10²⁶ | ≈ 1,3 · 10¹⁰ Jahre |
-| AES-128 | 2¹²⁸ ≈ 3,4 · 10³⁸ | <span class="fill-line"></span> Jahre |
-| AES-256 | 2²⁵⁶ ≈ 1,2 · 10⁷⁷ | <span class="fill-line"></span> Jahre |
+| AES-128 | 2¹²⁸ ≈ 3,4 · 10³⁸ | <span class="luecke" data-typ="groesse" data-antwort="1.1e22" data-breite="10"></span> Jahre |
+| AES-256 | 2²⁵⁶ ≈ 1,2 · 10⁷⁷ | <span class="luecke" data-typ="groesse" data-antwort="3.7e60" data-breite="10"></span> Jahre |
 
 ### Aufgabe 2 – Mit der ganzen Welt
 
-Angenommen, eine Milliarde Computer probieren je eine Billion (10¹²) Schlüssel pro Sekunde.
-Wie lange dauert es dann für AES-128? Vergleichen Sie mit dem Alter des Universums
-(rund 1,4 · 10¹⁰ Jahre).
+Eine Milliarde Computer probieren je 10¹² Schlüssel pro Sekunde. Wie lange dauert es für
+AES-128? <span class="luecke" data-typ="groesse" data-antwort="1.1e10" data-breite="10"></span> Jahre.
+Vergleichen Sie mit dem Alter des Universums (1,4 · 10¹⁰ Jahre):
 
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="1"></div>
 
 ### Aufgabe 3 – Kerckhoffs bei AES *(früh fertig)*
 
-Der AES-Algorithmus ist vollständig veröffentlicht – jede Person kann ihn nachlesen. Warum ist
-das ein *Vorteil* und keine Schwäche? Denken Sie an Lektion 1 und an den Wettbewerb.
+Der AES-Algorithmus ist vollständig veröffentlicht. Warum ist das ein *Vorteil*?
 
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="2"></div>
 
-### Aufgabe 4 – Das verbleibende Problem *(früh fertig – kommt auch in der Besprechung)*
+### Aufgabe 4 – Das verbleibende Problem *(früh fertig)*
 
-AES ist praktisch nicht zu knacken. Trotzdem können Sie mit AES allein keine geheime
-Nachricht an einen Online-Shop schicken, bei dem Sie zum ersten Mal einkaufen. Warum nicht?
+Warum können Sie mit AES allein keine geheime Nachricht an einen Online-Shop schicken, bei dem
+Sie zum ersten Mal einkaufen?
 
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="2"></div>
 
 <div class="kasten" markdown="1">
 
-**Und Quantencomputer?** Ein Quantencomputer könnte das Durchprobieren mit dem
-Grover-Algorithmus etwa so beschleunigen, als wäre der Schlüssel nur halb so lang. AES-256
-bliebe damit so sicher wie AES-128 heute – also weiterhin sicher. Für die asymmetrischen
-Verfahren der nächsten Lektion sieht es anders aus (Lektion 6).
+**Und Quantencomputer?** Sie könnten das Durchprobieren (Grover-Algorithmus) so beschleunigen,
+als wäre der Schlüssel halb so lang. AES-256 bliebe so sicher wie AES-128 heute. Für die
+asymmetrischen Verfahren der nächsten Lektion sieht es anders aus (Lektion 6).
 
 </div>

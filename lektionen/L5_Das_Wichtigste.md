@@ -9,8 +9,6 @@ reihenfolge: 80
 
 # Das Wichtigste: Hashfunktionen, Signaturen und Zertifikate
 
-**Lektion 5 – Besprechung im Plenum | ca. 9 Min.**
-
 ## Zum Besprechen
 
 1. Was ist der Unterschied zwischen *verschlüsseln* und *signieren*?

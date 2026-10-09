@@ -9,8 +9,6 @@ reihenfolge: 80
 
 # Das Wichtigste: Wie sicher ist RSA? Verschlüsselung und Überwachung
 
-**Lektion 7 – Besprechung im Plenum | ca. 8 Min.**
-
 ## Zum Besprechen
 
 1. Wie knackt man RSA – und warum gelingt das bei echten Schlüsseln nicht?

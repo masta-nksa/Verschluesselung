@@ -9,8 +9,6 @@ reihenfolge: 20
 
 # Debatte: Verschlüsselung und Überwachung
 
-**Lektion 7 – Rollenspiel | ca. 17 Min.**
-
 ## Ziel
 
 Sie vertreten in einer Debatte eine Position zur Frage, ob Behörden Zugriff auf verschlüsselte
@@ -79,6 +77,4 @@ entscheiden am Schluss, welcher Vorschlag Sie überzeugt. Begründen Sie Ihr Urt
 Welches Argument hat Sie am meisten überzeugt – auch wenn es nicht von Ihrer Rolle kam? Wie
 lautet *Ihre* persönliche Position?
 
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="3"></div>

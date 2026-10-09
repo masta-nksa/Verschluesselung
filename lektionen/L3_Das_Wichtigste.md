@@ -9,8 +9,6 @@ reihenfolge: 25
 
 # Das Wichtigste: Vigenère knacken, AES und das Schlüsselproblem
 
-**Lektion 3 – Besprechung im Plenum | ca. 8 Min. (vor dem Kistenrätsel)**
-
 ## Zum Besprechen
 
 1. In welchen zwei Schritten knackt man eine Vigenère-Verschlüsselung?

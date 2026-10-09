@@ -184,10 +184,17 @@
       var zeilen = parseInt(div.dataset.zeilen, 10) || 2;
       var t = el("textarea", { class: "antwort-feld", rows: String(zeilen), "aria-label": "Antwort", spellcheck: "true" });
       t.style.setProperty("--zeilen", zeilen);
+      // Für den Druck: leere Schreiblinien oder – falls schon etwas getippt
+      // wurde – der Text selbst (Textfelder druckt Chrome unzuverlässig).
+      var druck = el("span", { class: "antwort-druck", "aria-hidden": "true" });
+      for (var i = 0; i < zeilen; i++) druck.appendChild(el("span", { class: "fill-line breit" }));
+      var text = el("div", { class: "antwort-text", "aria-hidden": "true" });
+      function spiegeln() { text.textContent = t.value; div.classList.toggle("hat-text", t.value.trim() !== ""); }
       var g = lesen(key); if (g != null) t.value = g;
-      t.addEventListener("input", function () { schreiben(key, t.value); });
-      div.appendChild(t);
-      alleFelder.push(function () { t.value = ""; schreiben(key, ""); });
+      t.addEventListener("input", function () { schreiben(key, t.value); spiegeln(); });
+      div.append(t, druck, text);
+      spiegeln();
+      alleFelder.push(function () { t.value = ""; schreiben(key, ""); spiegeln(); });
     });
 
     // --- Task-Listen: Multiple Choice oder Checkliste

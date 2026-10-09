@@ -3,100 +3,95 @@ lektion: 6
 zielgruppe: sus
 art: arbeitsblatt
 titel: "Selbsttest zur ganzen Einheit"
-kurz: "Hausaufgabe: zwölf Fragen von Caesar bis Post-Quanten – allein lösen, danach mit der Lösung vergleichen."
+kurz: "Hausaufgabe: zwölf Fragen von Caesar bis Post-Quanten – mit sofortiger Kontrolle."
 reihenfolge: 20
 ---
 
 # Selbsttest: Verschlüsselung
 
-**Hausaufgabe nach Lektion 6 – Einzelarbeit | ca. 15 Min.**
-
 ## Ziel
 
 Sie überprüfen, welche Lernziele der Einheit Sie schon sicher erreichen und wo Sie nochmals
-nachschauen sollten. Der Test wird nicht benotet.
+nachschauen sollten. Der Test wird nicht benotet. Offene Fragen vergleichen Sie mit den Seiten
+«Das Wichtigste».
 
 ### 1 · Schutzziele
 
 Eine Bank schickt Ihnen einen signierten, aber unverschlüsselten Kontoauszug. Welche
-Schutzziele sind erfüllt? (Mehrere Antworten möglich.)
+Schutzziele sind erfüllt?
 
 - [ ] Vertraulichkeit
 - [ ] Integrität
 - [ ] Authentizität
 - [ ] Verbindlichkeit
+{: .mc data-antwort="2 3 4"}
 
 ### 2 · Caesar
 
-Entschlüsseln Sie `FDHVDU` (Verschiebung 3) und nennen Sie die Anzahl möglicher Schlüssel.
-
-Klartext: <span class="fill-line"></span> Anzahl Schlüssel: <span class="fill-line"></span>
+`FDHVDU` (Verschiebung 3) heisst <span class="luecke" data-antwort="caesar" data-breite="10"></span>.
+Anzahl möglicher Schlüssel: <span class="luecke" data-typ="zahl" data-antwort="26;25" data-breite="5"></span>
 
 ### 3 · Kerckhoffs
 
 Formulieren Sie das Prinzip von Kerckhoffs in einem Satz.
 
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="1"></div>
 
 ### 4 · Häufigkeitsanalyse
 
-Warum lässt sich eine allgemeine monoalphabetische Ersetzung knacken, obwohl sie rund 4 · 10²⁶
-Schlüssel hat?
+Warum lässt sich eine allgemeine Ersetzung knacken, obwohl sie rund 4 · 10²⁶ Schlüssel hat?
 
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="1"></div>
 
 ### 5 · Vigenère
 
-Verschlüsseln Sie *abc* mit dem Schlüsselwort BB. Wie unterscheidet sich Vigenère grundsätzlich
-von Caesar?
-
-Geheimtext: <span class="fill-line"></span> Unterschied: <span class="fill-line"></span>
+*abc* mit dem Schlüsselwort BB ergibt <span class="luecke" data-antwort="BCD" data-breite="6"></span>.
+Vigenère ist im Gegensatz zu Caesar
+<span class="luecke" data-optionen="polyalphabetisch;monoalphabetisch;asymmetrisch" data-antwort="polyalphabetisch"></span>.
 
 ### 6 · Schlüsselraum
 
-Ein Verfahren hat 2⁴⁰ ≈ 10¹² Schlüssel. Ein Angreifer schafft 10⁹ Versuche pro Sekunde. Wie
-lange dauert es höchstens? Ist das Verfahren sicher?
-
-<span class="fill-line breit"></span>
+2⁴⁰ ≈ 10¹² Schlüssel, 10⁹ Versuche pro Sekunde: höchstens
+<span class="luecke" data-typ="groesse" data-toleranz="0.1" data-antwort="1000" data-breite="7"></span> Sekunden.
+Das Verfahren ist <span class="luecke" data-optionen="sicher;unsicher" data-antwort="unsicher"></span>.
 
 ### 7 · Schlüsselaustausch
 
-Welches Problem der symmetrischen Verschlüsselung löst die asymmetrische Verschlüsselung?
-
-<span class="fill-line breit"></span>
+Welches Problem der symmetrischen Verschlüsselung löst die asymmetrische?
+<span class="luecke" data-antwort="Schlüsselaustausch;Schlüsselaustauschproblem;das Schlüsselaustauschproblem;der Schlüsselaustausch" data-breite="28"></span>
 
 ### 8 · RSA
 
-Gegeben: p = 3, q = 11, e = 7. Berechnen Sie n, φ und d. Verschlüsseln Sie m = 2.
-
-n = <span class="fill-line"></span> φ = <span class="fill-line"></span> d = <span class="fill-line"></span> c = <span class="fill-line"></span>
+p = 3, q = 11, e = 7: n = <span class="luecke" data-typ="zahl" data-antwort="33" data-breite="4"></span>
+φ = <span class="luecke" data-typ="zahl" data-antwort="20" data-breite="4"></span>
+d = <span class="luecke" data-typ="zahl" data-antwort="3" data-breite="4"></span>
+m = 2 verschlüsselt: c = <span class="luecke" data-typ="zahl" data-antwort="29" data-breite="4"></span>
 
 ### 9 · Einwegfunktion
 
 Was ist bei RSA die Einwegfunktion, und was ist die «Falltür»?
 
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="1"></div>
 
 ### 10 · Signatur
 
-Ordnen Sie zu: Alice signiert mit ihrem <span class="fill-line"></span> Schlüssel, Bob prüft mit Alices
-<span class="fill-line"></span> Schlüssel. Signiert wird nicht das ganze Dokument, sondern sein
-<span class="fill-line"></span>.
+Alice signiert mit ihrem <span class="luecke" data-optionen="privaten;öffentlichen" data-antwort="privaten"></span>
+Schlüssel, Bob prüft mit Alices <span class="luecke" data-optionen="privaten;öffentlichen" data-antwort="öffentlichen"></span>
+Schlüssel. Signiert wird der <span class="luecke" data-optionen="Hashwert;Geheimtext;Schlüssel" data-antwort="Hashwert"></span> des Dokuments.
 
 ### 11 · Zertifikate
 
-Was bestätigt eine Zertifizierungsstelle mit einem Zertifikat? Warum vertraut Ihr Browser
-dieser Stelle?
+Was bestätigt eine CA mit einem Zertifikat, und warum vertraut Ihr Browser dieser Stelle?
 
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="2"></div>
 
 ### 12 · Alltag
 
-Welche Aussagen stimmen? (Mehrere Antworten möglich.)
+Welche Aussagen stimmen?
 
 - [ ] Bei HTTPS werden die Daten mit RSA verschlüsselt.
 - [ ] Ende-zu-Ende-Verschlüsselung schützt auch die Metadaten.
 - [ ] Ein Passkey überträgt beim Anmelden nie ein Geheimnis an den Server.
 - [ ] Ein Quantencomputer würde AES-256 genauso leicht brechen wie RSA.
 - [ ] Die Schweizer E-ID ist ein vom Bund signierter Nachweis in einer App.
+{: .mc data-antwort="3 5"}

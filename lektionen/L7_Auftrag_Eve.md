@@ -9,8 +9,6 @@ reihenfolge: 10
 
 # Eve-Modus: RSA knacken
 
-**Lektion 7 – Partnerarbeit | ca. 18 Min.**
-
 ## Ziel
 
 Sie knacken RSA mit kleinen Schlüsseln durch Faktorisieren, beschreiben das Vorgehen
@@ -19,63 +17,58 @@ ist.
 
 ## Die Lage
 
-Sie sind Eve. Sie haben im Kanal drei öffentliche Schlüssel und die zugehörigen
-Geheimtexte mitgelesen. Die Absender haben leider (für sie) viel zu kleine Primzahlen gewählt.
+Sie sind Eve und haben im Kanal drei öffentliche Schlüssel samt Geheimtexten mitgelesen. Die
+Absender haben viel zu kleine Primzahlen gewählt.
 
 <div class="krypto" data-tool="rsa-eve" data-pub="(9, 667)" data-cipher="250 1"></div>
 
 ### Aufgabe 1 – Knacken
 
-Knacken Sie die Nachrichten. Die erste ist im Werkzeug schon eingetragen.
+Die erste Nachricht ist im Werkzeug schon eingetragen.
 
-| | Öffentlicher Schlüssel (e, n) | Geheimtext | p, q | d | Klartext |
+| | (e, n) | Geheimtext | p und q | d | Klartext |
 |---|---|---|---|---|---|
-| a | (9, 667) | 250 1 | | | |
-| b | (43, 5561) | 1635 4570 1 2860 1841 | | | |
-| c | (5, 301201) | 225375 101670 16807 242659 | | | |
+| a | (9, 667) | 250 1 | <span class="luecke" data-typ="menge" data-antwort="23 29" data-breite="9"></span> | <span class="luecke" data-typ="zahl" data-antwort="137" data-breite="7"></span> | <span class="luecke" data-antwort="ja" data-breite="9"></span> |
+| b | (43, 5561) | 1635 4570 1 2860 1841 | <span class="luecke" data-typ="menge" data-antwort="67 83" data-breite="9"></span> | <span class="luecke" data-typ="zahl" data-antwort="4531" data-breite="7"></span> | <span class="luecke" data-antwort="exakt" data-breite="9"></span> |
+| c | (5, 301201) | 225375 101670 16807 242659 | <span class="luecke" data-typ="menge" data-antwort="359 839" data-breite="9"></span> | <span class="luecke" data-typ="zahl" data-antwort="60001" data-breite="7"></span> | <span class="luecke" data-antwort="sehr gut" data-breite="9"></span> |
 
 ### Aufgabe 2 – Das Rezept
 
 Beschreiben Sie in drei bis vier Schritten, wie man RSA knackt, wenn man nur den öffentlichen
 Schlüssel und den Geheimtext kennt.
 
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="3"></div>
 
 ### Aufgabe 3 – Wie lange dauert das bei echten Schlüsseln?
 
-Das Werkzeug probiert alle ungeraden Zahlen bis √n als Teiler durch (*Probedivision*). Nehmen
-Sie an, ein Computer schafft **10⁹ Versuche pro Sekunde**.
+Das Werkzeug probiert Teiler bis √n durch (*Probedivision*). Annahme: **10⁹ Versuche pro
+Sekunde**. Schreibweise z. B. `7400` oder `8,3·10^6`.
 
-| n | ungefähr √n (Anzahl Versuche) | Zeit |
+| n | √n ≈ Anzahl Versuche | Zeit |
 |---|---|---|
 | 667 | 26 | 26 Nanosekunden |
-| 54 501 301 | | |
-| 68 490 271 405 273 | | |
-| RSA-2048: n hat 617 Stellen, also n ≈ 10⁶¹⁷ | | Jahre |
+| 54 501 301 | <span class="luecke" data-typ="groesse" data-toleranz="0.1" data-antwort="7400" data-breite="9"></span> | <span class="luecke" data-breite="12"></span> |
+| 68 490 271 405 273 | <span class="luecke" data-typ="groesse" data-toleranz="0.1" data-antwort="8.3e6" data-breite="9"></span> | <span class="luecke" data-breite="12"></span> |
+| RSA-2048: n ≈ 10⁶¹⁷ | <span class="luecke" data-typ="groesse" data-toleranz="0.6" data-antwort="1e308" data-breite="9"></span> | <span class="luecke" data-breite="12"></span> Jahre |
 
-Probieren Sie die Schlüssel (17, 54501301) und (85, 68490271405273) auch im Werkzeug aus. Wie
-lange braucht Ihr Browser?
+Probieren Sie (17, 54501301) und (85, 68490271405273) auch im Werkzeug aus.
 
 <div class="kasten" markdown="1">
 
-**Es geht schneller – aber nicht schnell genug.** Fachleute verwenden viel bessere Verfahren
-als die Probedivision (das *Zahlkörpersieb*). Der aktuelle Rekord: 2020 wurde eine Zahl mit 250
-Stellen (829 Bit) faktorisiert – mit Rechenzeit, für die ein einzelner Prozessorkern rund
-2700 Jahre gebraucht hätte. RSA-2048 ist davon noch weit entfernt. Die eigentliche Gefahr sind
-Quantencomputer (Lektion 6, Thema E).
+**Es geht schneller – aber nicht schnell genug.** Fachleute verwenden viel bessere Verfahren als
+die Probedivision (*Zahlkörpersieb*). Rekord 2020: eine Zahl mit 250 Stellen (829 Bit) – mit
+Rechenzeit, für die ein einzelner Prozessorkern rund 2700 Jahre gebraucht hätte. RSA-2048 ist
+weit entfernt. Die eigentliche Gefahr sind Quantencomputer (Lektion 6, Thema E).
 
 </div>
 
 ### Aufgabe 4 – Ein verräterisches Muster
 
-Schauen Sie sich Nachricht b an: Warum wird das «A» zu 1? Was würde mit einem Leerzeichen
-passieren? Und warum ist es generell gefährlich, wenn gleiche Klartextblöcke immer gleiche
+In Nachricht b wird das «A» zu <span class="luecke" data-typ="zahl" data-antwort="1" data-breite="4"></span>.
+Warum? Und warum ist es generell gefährlich, wenn gleiche Klartextblöcke immer gleiche
 Geheimtextblöcke ergeben? (Denken Sie an Lektion 2.)
 
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="2"></div>
 
-*Hinweis:* Echtes RSA hängt darum vor dem Verschlüsseln Zufallsbits an die Nachricht
-(*Padding*, z. B. OAEP). Dieselbe Nachricht ergibt so jedes Mal einen anderen Geheimtext.
+*Hinweis:* Echtes RSA hängt darum vor dem Verschlüsseln Zufallsbits an (*Padding*, z. B. OAEP).
+Dieselbe Nachricht ergibt so jedes Mal einen anderen Geheimtext.

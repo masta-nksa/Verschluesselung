@@ -9,8 +9,6 @@ reihenfolge: 20
 
 # Vigenère-Verschlüsselung
 
-**Lektion 2 – Einzelarbeit | ca. 13 Min.**
-
 ## Ziel
 
 Sie ver- und entschlüsseln einen Text mit dem Vigenère-Verfahren von Hand und erklären,
@@ -77,36 +75,34 @@ ganz links in dieser Zeile den Klartextbuchstaben ablesen.
 ### Aufgabe 1 – Verschlüsseln von Hand
 
 Verschlüsseln Sie *januar* mit dem Schlüsselwort NKSA fertig (Tabelle oben).
-
-Geheimtext: W K <span class="fill-line"></span>
+Geheimtext: <span class="luecke" data-antwort="WKFUNB" data-breite="10"></span>
 
 ### Aufgabe 2 – Entschlüsseln von Hand
 
-Entschlüsseln Sie `RYMXTGSBD` mit dem Schlüsselwort LUFT.
-
-Klartext: <span class="fill-line"></span>
+Entschlüsseln Sie `RYMXTGSBD` mit dem Schlüsselwort LUFT:
+<span class="luecke" data-antwort="geheimnis" data-breite="12"></span>
 
 ### Aufgabe 3 – Beobachten mit dem Werkzeug
 
 <div class="krypto" data-tool="vigenere" data-text="eeeeee" data-key="ABC"></div>
 
-1. Verschlüsseln Sie *eeeeee* mit dem Schlüssel ABC. Was beobachten Sie? Was bedeutet das
-   für die Häufigkeitsanalyse?
-2. Was passiert, wenn das Schlüsselwort nur aus einem einzigen Buchstaben besteht?
-3. Welcher Teil des Geheimtexts wiederholt sich, wenn Sie *eeeeeeeeeeee* (12-mal e) mit ABCD
-   verschlüsseln? Was könnte ein Angreifer daraus über den Schlüssel lernen?
+*eeeeee* mit dem Schlüssel ABC ergibt <span class="luecke" data-antwort="EFGEFG" data-breite="9"></span>.
+Was bedeutet das für die Häufigkeitsanalyse?
 
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
-<span class="fill-line breit"></span>
+<div class="antwort" data-zeilen="2"></div>
 
+Ein Schlüsselwort aus nur einem Buchstaben ergibt eine
+<span class="luecke" data-optionen="Caesar-Verschlüsselung;allgemeine Ersetzung;unknackbare Verschlüsselung" data-antwort="Caesar-Verschlüsselung"></span>.
+Verschlüsseln Sie *eeeeeeeeeeee* (12-mal e) mit ABCD: Nach wie vielen Zeichen wiederholt sich der
+Geheimtext? <span class="luecke" data-typ="zahl" data-antwort="4" data-breite="4"></span>
+Was kann ein Angreifer daraus über den Schlüssel lernen?
+
+<div class="antwort" data-zeilen="1"></div>
 
 ## Früh fertig?
 
-Ihre Kollegin hat Ihnen mit dem Schlüssel ZUG eine Nachricht geschickt:
-`SLKEZVTHQSUGQUAAUNMBUE`. Wo treffen Sie sich?
+Ihre Kollegin schickt mit dem Schlüssel ZUG: `SLKEZVTHQSUGQUAAUNMBUE`. Wo treffen Sie sich?
+<span class="luecke" data-antwort="treffpunkt aarau bahnhof;aarau bahnhof;bahnhof aarau" data-breite="24"></span>
 
-Ort: <span class="fill-line"></span>
-
-Vigenère galt rund 300 Jahre lang als *le chiffre indéchiffrable* – die unentzifferbare
-Chiffre. In der nächsten Lektion knacken Sie sie trotzdem.
+Vigenère galt rund 300 Jahre lang als *le chiffre indéchiffrable*. In der nächsten Lektion
+knacken Sie sie trotzdem.

@@ -9,8 +9,6 @@ reihenfolge: 15
 
 # Das Wichtigste: Kryptografie im Alltag
 
-**Lektion 6 – Besprechung im Plenum nach den Kurzvorstellungen | ca. 10 Min.**
-
 ## Zum Besprechen
 
 1. Welche Bausteine der Einheit kommen in fast allen fünf Themen vor?

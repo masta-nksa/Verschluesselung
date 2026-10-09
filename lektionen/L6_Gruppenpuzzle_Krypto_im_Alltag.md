@@ -9,8 +9,6 @@ reihenfolge: 10
 
 # Gruppenpuzzle: Kryptografie im Alltag
 
-**Lektion 6 – Expertengruppen | ca. 18 Min. Erarbeitung + 2 Min. Vorstellung pro Gruppe**
-
 ## Ziel
 
 Sie erklären an einem Alltagsbeispiel, welche Bausteine der Einheit darin zusammenwirken, und
@@ -25,13 +23,17 @@ Leitfragen (die Quellen helfen) und bereiten Sie eine **Vorstellung von 2 Minute
 - **Welche Bausteine der Einheit stecken darin?** – kreuzen Sie in der Tabelle an
 - **Was ist neu, umstritten oder überraschend?**
 
+Stichworte für Ihre Vorstellung:
+
+<div class="antwort" data-zeilen="4"></div>
+
 | Baustein | A | B | C | D | E |
 |---|---|---|---|---|---|
-| symmetrische Verschlüsselung (AES) | | | | | |
-| asymmetrische Verfahren / Schlüsselaustausch | | | | | |
-| Hashfunktion | | | | | |
-| digitale Signatur | | | | | |
-| Zertifikat / Vertrauensregister | | | | | |
+| symmetrische Verschlüsselung (AES) | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> |
+| asymmetrische Verfahren / Schlüsselaustausch | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> |
+| Hashfunktion | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> |
+| digitale Signatur | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> |
+| Zertifikat / Vertrauensregister | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> | <span class="wahl" data-optionen="✓"></span> |
 
 ---
 
@@ -189,8 +191,8 @@ im Frühling 2026 schon über zwei Drittel des Browser-Verkehrs auf ihrem Netz s
 
 | Thema | Mein Kernsatz |
 |---|---|
-| A HTTPS | |
-| B Ende-zu-Ende | |
-| C Passkeys | |
-| D E-ID | |
-| E Post-Quanten | |
+| A HTTPS | <span class="luecke" data-breite="voll"></span> |
+| B Ende-zu-Ende | <span class="luecke" data-breite="voll"></span> |
+| C Passkeys | <span class="luecke" data-breite="voll"></span> |
+| D E-ID | <span class="luecke" data-breite="voll"></span> |
+| E Post-Quanten | <span class="luecke" data-breite="voll"></span> |

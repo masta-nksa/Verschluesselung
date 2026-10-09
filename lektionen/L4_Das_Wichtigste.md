@@ -9,8 +9,6 @@ reihenfolge: 80
 
 # Das Wichtigste: Asymmetrische Verschlüsselung und RSA
 
-**Lektion 4 – Besprechung im Plenum | ca. 8 Min.**
-
 ## Zum Besprechen
 
 1. Sie schicken Lea eine Nachricht. Welchen Schlüssel brauchen Sie, welchen braucht Lea, und

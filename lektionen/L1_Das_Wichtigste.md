@@ -9,8 +9,6 @@ reihenfolge: 80
 
 # Das Wichtigste: Schutzziele und Caesar
 
-**Lektion 1 – Besprechung im Plenum | ca. 10 Min.**
-
 ## Zum Besprechen
 
 1. Welches Schutzziel sichert eine Verschlüsselung – und welche nicht?

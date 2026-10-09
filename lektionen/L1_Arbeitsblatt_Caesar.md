@@ -82,6 +82,8 @@ Nennen Sie einen weiteren Grund, warum man ein Verfahren nicht lange geheim halt
 Morse, Braille und ASCII ersetzen auch Zeichen – und sind trotzdem keine Verschlüsselung.
 Was fehlt ihnen? <span class="luecke" data-antwort="Schlüssel;ein Schlüssel;der Schlüssel" data-breite="16"></span>
 
+<div class="nur-online" markdown="1">
+
 ## Früh fertig? Die Rätselkette
 
 Jeder Text verrät den Schlüssel für den nächsten. Den ersten müssen Sie knacken.
@@ -93,3 +95,5 @@ Jeder Text verrät den Schlüssel für den nächsten. Den ersten müssen Sie kna
 | `MGTEMJQHHU UCIV: FKG UKEJGTJGKV NKGIV KO UEJNWGUUGN, PKEJV KO XGTHCJTGP` | <span class="luecke" data-typ="zahl" data-antwort="2" data-breite="4"></span> |
 
 Noch mehr Übung: [Hour of Code «Encryption»](https://studio.code.org/s/hoc-encryption) (englisch).
+
+</div>
