@@ -882,6 +882,13 @@ a { color: var(--accent); }
 }
 .kasten > :last-child { margin-bottom: 0; }
 
+/* Schriftliche Rechnung untereinander (z. B. XOR hin und zurück) */
+.prose table.rechnung { width: auto; border: 0; background: none; font-family: var(--font-mono); margin: .3rem 0 .8rem 1.4rem; }
+.prose table.rechnung th, .prose table.rechnung td { border: 0; padding: .1rem .5rem; background: none; }
+.prose table.rechnung td:first-child { font-weight: 700; color: var(--accent); text-align: center; }
+.prose table.rechnung td:last-child { font-family: var(--font-body); color: var(--text-muted); font-size: .88em; }
+.prose table.rechnung tr:nth-child(3) td:nth-child(2), .prose table.rechnung tr:nth-child(5) td:nth-child(2) { border-top: 2px solid var(--text); }
+
 /* Dossier: alle Unterlagen auf einer Seite */
 .dossier-teil { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 2px solid var(--border-strong); }
 .dossier-status { color: var(--text-muted); }
@@ -1001,7 +1008,7 @@ select.luecke-feld { cursor: pointer; }
   body { font-size: 9.6pt; line-height: 1.3; }
   .prose h1 { font-size: 15pt; margin: 0 0 .35em; }
   .prose h2 { font-size: 11.5pt; margin: .75em 0 .3em; padding-bottom: .1em; }
-  .prose h3 { font-size: 10.5pt; margin: .65em 0 .2em; }
+  .prose h3 { font-size: 10.5pt; margin: .55em 0 .15em; }
   .prose h4 { font-size: 10pt; margin: .5em 0 .2em; }
   .prose p, .prose ul, .prose ol { margin: 0 0 .35em; }
   .prose li { margin-bottom: .1em; }
@@ -1035,7 +1042,7 @@ select.luecke-feld { cursor: pointer; }
   .antwort.hat-text .antwort-druck { display: none; }
   .antwort.hat-text .antwort-text { display: block; white-space: pre-wrap; border-bottom: 1px solid #888; padding: .1em 0 .2em; }
   .fill-line, .fill-line.breit { border-bottom-color: #888; }
-  .fill-line.breit { height: 6.5mm; }
+  .fill-line.breit { height: 6.2mm; }
   .nur-online { display: none !important; }
   .nur-druck { display: block; }
   .optionen-druck { display: inline; font-size: 7.5pt; color: #444; margin-left: .2em; }

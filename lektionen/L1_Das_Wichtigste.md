@@ -9,6 +9,20 @@ reihenfolge: 80
 
 # Das Wichtigste: Schutzziele und Caesar
 
+## Lernziele dieser Lektion
+
+Sie können …
+
+- [ ] die Schutzziele Vertraulichkeit, Integrität, Authentizität und Verbindlichkeit an Beispielen erklären und unterscheiden
+- [ ] die Fachbegriffe Klartext, Geheimtext, Algorithmus, Schlüssel, ver-/entschlüsseln und knacken korrekt verwenden
+- [ ] Texte mit dem Caesar-Verfahren von Hand und mit dem Werkzeug ver- und entschlüsseln
+- [ ] einen Caesar-Text ohne Schlüssel knacken und erklären, warum das so leicht geht
+- [ ] erklären, was ein symmetrisches Verfahren ist
+- [ ] das Prinzip von Kerckhoffs formulieren und begründen
+- [ ] Codierung und Verschlüsselung unterscheiden
+
+Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
+
 ## Zum Besprechen
 
 1. Welches Schutzziel sichert eine Verschlüsselung – und welche nicht?
@@ -63,12 +77,3 @@ verlassen – nennt man *Security by Obscurity*.
 Morsecode, Brailleschrift oder ASCII ersetzen ebenfalls Zeichen durch andere Zeichen. Aber sie
 haben **keinen Schlüssel**: Die Tabelle ist öffentlich und für alle gleich. Eine Codierung dient
 der Darstellung, nicht der Geheimhaltung.
-
-## Das sollten Sie jetzt können
-
-- [ ] die vier Schutzziele an Beispielen erklären und unterscheiden
-- [ ] die Fachbegriffe Klartext, Geheimtext, Algorithmus, Schlüssel, knacken korrekt verwenden
-- [ ] einen Text mit Caesar von Hand ver- und entschlüsseln
-- [ ] einen Caesar-Text ohne Schlüssel knacken und erklären, warum das so leicht geht
-- [ ] das Prinzip von Kerckhoffs formulieren und begründen
-- [ ] Codierung und Verschlüsselung unterscheiden

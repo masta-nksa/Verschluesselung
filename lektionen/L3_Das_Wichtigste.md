@@ -9,6 +9,19 @@ reihenfolge: 25
 
 # Das Wichtigste: Vigenère knacken, AES und das Schlüsselproblem
 
+## Lernziele dieser Lektion
+
+Sie können …
+
+- [ ] die zwei Schritte zum Knacken von Vigenère beschreiben (Kasiski-Test, Spaltenanalyse)
+- [ ] XOR berechnen und erklären, warum XOR symmetrisch ist
+- [ ] die Bedingungen für einen sicheren One-Time-Pad nennen
+- [ ] die Grösse eines Schlüsselraums abschätzen und die Zeit fürs Durchprobieren berechnen
+- [ ] erklären, warum AES als sicher gilt, obwohl der Algorithmus öffentlich ist
+- [ ] das Schlüsselaustauschproblem symmetrischer Verfahren formulieren
+
+Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
+
 ## Zum Besprechen
 
 1. In welchen zwei Schritten knackt man eine Vigenère-Verschlüsselung?
@@ -60,12 +73,3 @@ Online-Shop, bei dem man zum ersten Mal einkauft?
 
 **Merksatz:** Symmetrische Verfahren sind schnell und sicher, lösen aber das
 Schlüsselaustauschproblem nicht. → Kistenrätsel und Lektion 4
-
-## Das sollten Sie jetzt können
-
-- [ ] die zwei Schritte zum Knacken von Vigenère beschreiben
-- [ ] XOR berechnen und erklären, warum XOR symmetrisch ist
-- [ ] die Bedingungen für einen sicheren One-Time-Pad nennen
-- [ ] die Grösse eines Schlüsselraums abschätzen und die Zeit fürs Durchprobieren berechnen
-- [ ] erklären, warum AES als sicher gilt, obwohl der Algorithmus öffentlich ist
-- [ ] das Schlüsselaustauschproblem formulieren

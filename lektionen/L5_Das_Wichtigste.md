@@ -9,6 +9,18 @@ reihenfolge: 80
 
 # Das Wichtigste: Hashfunktionen, Signaturen und Zertifikate
 
+## Lernziele dieser Lektion
+
+Sie können …
+
+- [ ] die Eigenschaften einer kryptografischen Hashfunktion nennen und Anwendungen beschreiben
+- [ ] den Ablauf einer digitalen Signatur skizzieren und erklären, welche Schutzziele sie sichert
+- [ ] Verschlüsseln und Signieren vergleichen
+- [ ] erklären, was ein Zertifikat bestätigt, welche Aufgabe eine CA hat und wie die Vertrauenskette aufgebaut ist
+- [ ] ein Zertifikat im Browser finden und lesen
+
+Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
+
 ## Zum Besprechen
 
 1. Was ist der Unterschied zwischen *verschlüsseln* und *signieren*?
@@ -77,11 +89,3 @@ vertraut.
 **Merksatz:** Verschlüsselung sichert die Vertraulichkeit, Hashwert und Signatur die Integrität,
 Signatur plus Zertifikat die Authentizität, die Signatur die Verbindlichkeit (vgl. die
 Schutzziel-Tabelle aus Lektion 1).
-
-## Das sollten Sie jetzt können
-
-- [ ] die Eigenschaften einer kryptografischen Hashfunktion nennen und Anwendungen beschreiben
-- [ ] den Ablauf einer digitalen Signatur skizzieren und erklären, welche Schutzziele sie sichert
-- [ ] Verschlüsseln und Signieren vergleichen
-- [ ] erklären, was ein Zertifikat bestätigt, welche Aufgabe eine CA hat und wie die Vertrauenskette aufgebaut ist
-- [ ] ein Zertifikat im Browser finden und lesen

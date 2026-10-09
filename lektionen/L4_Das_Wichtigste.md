@@ -9,6 +9,18 @@ reihenfolge: 80
 
 # Das Wichtigste: Asymmetrische Verschlüsselung und RSA
 
+## Lernziele dieser Lektion
+
+Sie können …
+
+- [ ] die Idee von öffentlichem und privatem Schlüssel beschreiben: wer welchen Schlüssel wofür verwendet
+- [ ] symmetrische und asymmetrische Verschlüsselung vergleichen (mindestens drei Unterschiede)
+- [ ] den Begriff Einwegfunktion an einem Beispiel erklären und mit RSA verbinden
+- [ ] RSA mit kleinen Zahlen durchrechnen (n, φ, e, d, c, m)
+- [ ] begründen, warum RSA sicher ist, und erklären, was hybride Verschlüsselung ist
+
+Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
+
 ## Zum Besprechen
 
 1. Sie schicken Lea eine Nachricht. Welchen Schlüssel brauchen Sie, welchen braucht Lea, und
@@ -58,11 +70,3 @@ asymmetrisch nur einen geheimen Sitzungsschlüssel und verschlüsselt die Daten 
 ## Offene Frage
 
 Woher weiss ich, dass der öffentliche Schlüssel im Kanal wirklich von Lea stammt? → Lektion 5
-
-## Das sollten Sie jetzt können
-
-- [ ] erklären, welcher Schlüssel von wem wofür verwendet wird
-- [ ] symmetrische und asymmetrische Verschlüsselung vergleichen (mindestens drei Unterschiede)
-- [ ] den Begriff Einwegfunktion an einem Beispiel erklären und mit RSA verbinden
-- [ ] RSA mit kleinen Zahlen durchrechnen (n, φ, e, d, c, m)
-- [ ] begründen, warum RSA sicher ist, und erklären, was hybride Verschlüsselung ist

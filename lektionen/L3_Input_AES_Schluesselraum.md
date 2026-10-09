@@ -25,8 +25,19 @@ Kurz geprüft:
 
 - 1 ⊕ 1 = <span class="luecke" data-typ="zahl" data-antwort="0" data-breite="3"></span>
 - 1 ⊕ 0 = <span class="luecke" data-typ="zahl" data-antwort="1" data-breite="3"></span>
-- 1011 ⊕ 0110 = <span class="luecke" data-antwort="1101" data-breite="6"></span>
-- 1101 ⊕ 0110 = <span class="luecke" data-antwort="1011" data-breite="6"></span> (Was fällt Ihnen auf?)
+- Verschlüsseln und wieder entschlüsseln – rechnen Sie untereinander wie bei einer
+  schriftlichen Addition:
+
+| | | |
+|---|---|---|
+| | 1011 | Klartext |
+| ⊕ | 0110 | Schlüssel |
+| = | <span class="luecke" data-antwort="1101" data-breite="6"></span> | Geheimtext |
+| ⊕ | 0110 | *derselbe* Schlüssel nochmals |
+| = | <span class="luecke" data-antwort="1011" data-breite="6"></span> | Ergebnis |
+{: .rechnung}
+
+Was fällt Ihnen beim Ergebnis auf? Es ist <span class="luecke" data-optionen="wieder der Klartext;wieder der Schlüssel;eine zufällige Zahl" data-antwort="wieder der Klartext"></span>.
 
 <div class="krypto" data-tool="xor" data-text="HALLO" data-key="KEY"></div>
 

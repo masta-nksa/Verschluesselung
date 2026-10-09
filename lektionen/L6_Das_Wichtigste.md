@@ -9,6 +9,18 @@ reihenfolge: 15
 
 # Das Wichtigste: Kryptografie im Alltag
 
+## Lernziele dieser Lektion
+
+Sie können …
+
+- [ ] für HTTPS, Ende-zu-Ende-Verschlüsselung, Passkeys, E-ID und Post-Quanten-Kryptografie in einem Satz erklären, worum es geht
+- [ ] bei jedem dieser Themen die beteiligten Bausteine der Einheit nennen
+- [ ] Transport- und Ende-zu-Ende-Verschlüsselung unterscheiden
+- [ ] erklären, warum Passkeys sicherer sind als Passwörter
+- [ ] erklären, warum Quantencomputer RSA bedrohen, AES aber kaum
+
+Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
+
 ## Zum Besprechen
 
 1. Welche Bausteine der Einheit kommen in fast allen fünf Themen vor?
@@ -69,11 +81,3 @@ neuen doch Schwächen haben.
 **Merksatz:** Moderne Sicherheit entsteht aus wenigen Bausteinen, die immer neu kombiniert
 werden: symmetrisch für die Daten, asymmetrisch für Schlüssel und Signaturen, Hashwerte für die
 Integrität, Zertifikate für das Vertrauen.
-
-## Das sollten Sie jetzt können
-
-- [ ] für jedes der fünf Themen in einem Satz erklären, worum es geht
-- [ ] bei jedem Thema die beteiligten Bausteine der Einheit nennen
-- [ ] Transport- und Ende-zu-Ende-Verschlüsselung unterscheiden
-- [ ] erklären, warum Passkeys sicherer sind als Passwörter
-- [ ] erklären, warum Quantencomputer RSA bedrohen, AES aber kaum

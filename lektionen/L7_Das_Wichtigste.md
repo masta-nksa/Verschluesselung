@@ -9,6 +9,17 @@ reihenfolge: 80
 
 # Das Wichtigste: Wie sicher ist RSA? Verschlüsselung und Überwachung
 
+## Lernziele dieser Lektion
+
+Sie können …
+
+- [ ] RSA mit kleinen Zahlen knacken und das Vorgehen beschreiben
+- [ ] erklären, wie der Aufwand mit der Schlüssellänge wächst
+- [ ] erklären, warum Textbook-RSA angreifbar ist und wozu Padding dient
+- [ ] je zwei Argumente für und gegen staatlichen Zugriff auf verschlüsselte Kommunikation nennen
+
+Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
+
 ## Zum Besprechen
 
 1. Wie knackt man RSA – und warum gelingt das bei echten Schlüsseln nicht?
@@ -49,10 +60,3 @@ und vergleichen. Echtes RSA mischt darum vor dem Verschlüsseln **Zufallsbits** 
 Wichtig für die Debatte: Wer das **Endgerät** kontrolliert, muss die Verschlüsselung gar nicht
 brechen (gezieltes Hacken, in der Schweiz bei schweren Straftaten erlaubt). Und **Metadaten**
 sind auch bei Ende-zu-Ende-Verschlüsselung sichtbar.
-
-## Das sollten Sie jetzt können
-
-- [ ] RSA mit kleinen Zahlen knacken und das Vorgehen beschreiben
-- [ ] erklären, wie der Aufwand mit der Schlüssellänge wächst
-- [ ] erklären, warum Textbook-RSA angreifbar ist und wozu Padding dient
-- [ ] je zwei Argumente für und gegen staatlichen Zugriff auf verschlüsselte Kommunikation nennen

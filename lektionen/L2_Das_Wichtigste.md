@@ -9,6 +9,18 @@ reihenfolge: 80
 
 # Das Wichtigste: Häufigkeitsanalyse und Vigenère
 
+## Lernziele dieser Lektion
+
+Sie können …
+
+- [ ] erklären, was eine monoalphabetische Verschlüsselung ist, und Beispiele nennen
+- [ ] eine monoalphabetische Verschlüsselung mit einer Häufigkeitsanalyse knacken
+- [ ] begründen, warum ein grosser Schlüsselraum allein keine Sicherheit garantiert
+- [ ] mono- und polyalphabetische Verfahren unterscheiden
+- [ ] mit dem Vigenère-Quadrat von Hand ver- und entschlüsseln
+
+Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
+
 ## Zum Besprechen
 
 1. Die allgemeine Ersetzung hat rund 4 · 10²⁶ Schlüssel. Warum haben Sie den Brief trotzdem in
@@ -57,10 +69,3 @@ Die Häufigkeiten verwischen; die einfache Häufigkeitsanalyse findet kein klare
 
 **Merksatz:** Polyalphabetische Verfahren verwischen die Buchstabenhäufigkeiten. Ihre
 Schwachstelle: Das Schlüsselwort wiederholt sich (→ Lektion 3).
-
-## Das sollten Sie jetzt können
-
-- [ ] mono- und polyalphabetische Verfahren unterscheiden und je ein Beispiel nennen
-- [ ] erklären, wie eine Häufigkeitsanalyse funktioniert und warum sie bei monoalphabetischen Verfahren gelingt
-- [ ] begründen, warum ein grosser Schlüsselraum allein keine Sicherheit garantiert
-- [ ] mit dem Vigenère-Quadrat von Hand ver- und entschlüsseln
