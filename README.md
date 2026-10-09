@@ -20,6 +20,7 @@ Die Website wird von GitHub Pages direkt aus diesem Repository mit Jekyll gebaut
 ├── _layouts/              HTML-Gerüst (default / startseite / lektion / material)
 ├── assets/js/krypto.js    interaktive Werkzeuge (Caesar … Diffie-Hellman), laufen lokal im Browser
 ├── assets/js/dossier.js   sammelt Seiten für die Dossiers
+├── assets/js/uebungen.js  interaktive Übungen (Lücken, Auswahl, Prüfen-Knopf)
 └── assets/css/unterricht.css   Gestaltung inkl. Dark Mode, Druckansicht, Werkzeuge (Abschnitt 7)
 ```
 
@@ -108,3 +109,28 @@ Geheimtexte für den Druck deshalb zusätzlich als Text ins Arbeitsblatt setzen.
 
 Welche Angaben vor jedem Durchlauf zu prüfen sind (E-ID-Start, Zertifikatslaufzeiten,
 Post-Quanten-Anteil, VÜPF), steht als Kommentar in `index.md`.
+
+## Interaktive Übungen schreiben
+
+`assets/js/uebungen.js` macht aus Platzhaltern Eingabefelder mit Kontrolle. Auf Papier
+erscheinen sie als Schreiblinien bzw. als Optionen zum Einkreisen. Pro Abschnitt (`##`/`###`)
+mit prüfbaren Feldern erscheint automatisch ein Knopf «Prüfen»; Eingaben bleiben im Browser
+der SuS gespeichert (nur lokal).
+
+| Was | Markdown |
+|---|---|
+| Lücke mit Kontrolle | `<span class="luecke" data-antwort="Klartext;Klartexts"></span>` |
+| Zahl / Grössenordnung / Zahlenmenge | `data-typ="zahl"` · `data-typ="groesse"` (z. B. 1,1·10^22) · `data-typ="menge"` (z. B. Faktoren) |
+| freie Eingabe ohne Kontrolle | `<span class="luecke" data-breite="20"></span>` (`data-breite="voll"` in Tabellen) |
+| Auswahlliste | `<span class="luecke" data-optionen="ja;nein" data-antwort="ja"></span>` |
+| Chips (eine/mehrere) | `<span class="wahl" data-optionen="A;B;C" data-antwort="A+B" data-auch="C"></span>` |
+| Antwort in Sätzen | `<div class="antwort" data-zeilen="2"></div>` (eigene Zeile, Leerzeilen rundherum) |
+| Multiple Choice | Task-Liste `- [ ] …` und direkt darunter `{: .mc data-antwort="2 3"}` |
+| nur am Bildschirm | `<div class="nur-online" markdown="1"> … </div>` (z. B. «Früh fertig?») |
+
+Trennzeichen ist immer das **Semikolon** – ein `|` würde in Markdown-Tabellen die Spalten
+trennen. Schreiblinien nie als Unterstriche `____` setzen (kramdown macht daraus Fett/Kursiv).
+Die Kontrolle ist formativ: Wer den Seitenquelltext liest, sieht die Antworten.
+
+Seiten, die nicht ins Dossier sollen (z. B. eine Projektionsseite): `drucken: false` im
+Frontmatter.

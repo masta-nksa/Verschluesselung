@@ -65,6 +65,7 @@
   var HOCH = { "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9", "⁻": "-" };
   function zahlLesen(s) {
     s = String(s).trim().toLowerCase()
+      .replace(/^[a-zäöüφ\s=:]+/, "").replace(/[a-zäöüµ\s.]+$/, "")   // «c = 8», «200 Tage»
       .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g, function (m) { return "^" + m.split("").map(function (c) { return HOCH[c]; }).join(""); })
       .replace(/[\s'’ ]/g, "").replace(/,/g, ".").replace(/[·×x*]/g, "*")
       .replace(/hoch/g, "^").replace(/\*\*/g, "^");
