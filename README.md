@@ -132,5 +132,10 @@ Trennzeichen ist immer das **Semikolon** – ein `|` würde in Markdown-Tabellen
 trennen. Schreiblinien nie als Unterstriche `____` setzen (kramdown macht daraus Fett/Kursiv).
 Die Kontrolle ist formativ: Wer den Seitenquelltext liest, sieht die Antworten.
 
+| Musterlösung zu einem Antwortfeld | `<div class="antwort" data-zeilen="2" data-loesung="…"></div>` |
+| nur im Druck | `class="nur-druck"` (z. B. Geheimtext-Kopie für Papier, wenn das Werkzeug nicht gedruckt wird) |
+
+**Lösungen einblenden (Easter Egg):** «kerckhoffs» tippen oder 5× auf den Seitentitel klicken.
+
 Seiten, die nicht ins Dossier sollen (z. B. eine Projektionsseite): `drucken: false` im
 Frontmatter.

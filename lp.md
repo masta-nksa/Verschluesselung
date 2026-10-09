@@ -40,6 +40,13 @@ Unterlagen, `lsg/` die Lösungen, `lektion-1.md` bis `lektion-7.md` die
 Lektionsseiten samt Ablauf für die SuS. Änderungen an einer `.md`-Datei erscheinen
 ein bis zwei Minuten nach dem Push automatisch auf der Website.
 
+**Lösungen direkt im Arbeitsblatt (Easter Egg):** Auf jeder Unterlage «kerckhoffs» tippen
+(nicht in einem Eingabefeld) oder fünfmal schnell auf den Seitentitel klicken. Dann erscheinen
+alle Lösungen: Marken neben den Lücken, Musterlösungen unter den offenen Fragen, markierte Chips
+und Multiple-Choice-Antworten. Nochmals auslösen blendet sie aus. Wer in diesem Zustand druckt,
+erhält einen Lösungsschlüssel. Ob und wann Sie den Trick der Klasse verraten, entscheiden Sie.
+Passend zum Thema: Das Verfahren steht im öffentlichen Quelltext, das Geheimnis ist das Wort.
+
 ## Grundlagen
 
 </div>
