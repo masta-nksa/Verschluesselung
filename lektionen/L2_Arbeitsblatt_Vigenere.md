@@ -93,10 +93,11 @@ Was bedeutet das für die Häufigkeitsanalyse?
 
 <div class="antwort" data-loesung="Gleiche Klartextbuchstaben werden zu verschiedenen Geheimtextbuchstaben. Die Häufigkeit des e verteilt sich auf mehrere Zeichen – die einfache Häufigkeitsanalyse findet kein klares «e» mehr." data-zeilen="2"></div>
 
-Ein Schlüsselwort aus nur einem Buchstaben ergibt eine
-<span class="luecke" data-optionen="Caesar-Verschlüsselung;allgemeine Ersetzung;unknackbare Verschlüsselung" data-antwort="Caesar-Verschlüsselung"></span>.
-Verschlüsseln Sie *eeeeeeeeeeee* (12-mal e) mit ABCD: Nach wie vielen Zeichen wiederholt sich der
-Geheimtext? <span class="luecke" data-typ="zahl" data-antwort="4" data-breite="4"></span>
+- Ein Schlüsselwort aus nur einem Buchstaben ergibt eine
+  <span class="luecke" data-optionen="Caesar-Verschlüsselung;allgemeine Ersetzung;unknackbare Verschlüsselung" data-antwort="Caesar-Verschlüsselung"></span>.
+- Verschlüsseln Sie *eeeeeeeeeeee* (12-mal e) mit ABCD: Nach wie vielen Zeichen wiederholt sich
+  der Geheimtext? <span class="luecke" data-typ="zahl" data-antwort="4" data-breite="4"></span>
+
 Was kann ein Angreifer daraus über den Schlüssel lernen?
 
 <div class="antwort" data-loesung="Das Muster wiederholt sich im Abstand der Schlüssellänge. Wiederholungen im Geheimtext verraten also, wie lang das Schlüsselwort ist – damit knackt man Vigenère in Lektion 3." data-zeilen="1"></div>

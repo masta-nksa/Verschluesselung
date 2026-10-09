@@ -34,8 +34,8 @@ Gelehrte al-Kindi schon im 9. Jahrhundert.
 |---|---|---|---|---|---|---|---|---|---|
 | 17 % | 10 % | 8 % | 7 % | 7 % | 7 % | 6 % | 5 % | 5 % | 4 % |
 
-Ist Caesar monoalphabetisch? <span class="luecke" data-optionen="ja;nein" data-antwort="ja"></span>
-Hilft die Häufigkeitsanalyse auch bei Caesar? <span class="luecke" data-optionen="ja;nein" data-antwort="ja"></span>
+- Ist Caesar monoalphabetisch? <span class="luecke" data-optionen="ja;nein" data-antwort="ja"></span>
+- Hilft die Häufigkeitsanalyse auch bei Caesar? <span class="luecke" data-optionen="ja;nein" data-antwort="ja"></span>
 
 ## Der Auftrag
 
@@ -55,10 +55,10 @@ und farbig – so sehen Sie sofort, ob Wörter entstehen.
 
 ### Aufgabe 1 – Auswertung
 
-Der häufigste Geheimtextbuchstabe ist <span class="luecke" data-antwort="I" data-breite="4"></span>
-und steht für <span class="luecke" data-antwort="e" data-breite="4"></span>.
-Um welche Königin geht es? <span class="luecke" data-antwort="Maria Stuart;Maria;Stuart" data-breite="16"></span>
-Wer hat ihre Briefe geknackt? <span class="luecke" data-antwort="Thomas Phelippes;Phelippes" data-breite="18"></span>
+- Der häufigste Geheimtextbuchstabe ist <span class="luecke" data-antwort="I" data-breite="4"></span>
+  und steht für <span class="luecke" data-antwort="e" data-breite="4"></span>.
+- Um welche Königin geht es? <span class="luecke" data-antwort="Maria Stuart;Maria;Stuart" data-breite="16"></span>
+- Wer hat ihre Briefe geknackt? <span class="luecke" data-antwort="Thomas Phelippes;Phelippes" data-breite="18"></span>
 
 ### Aufgabe 2 – Warum hat der riesige Schlüsselraum nicht geholfen?
 

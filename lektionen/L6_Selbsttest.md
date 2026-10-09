@@ -28,8 +28,8 @@ Schutzziele sind erfüllt?
 
 ### 2 · Caesar
 
-`FDHVDU` (Verschiebung 3) heisst <span class="luecke" data-antwort="caesar" data-breite="10"></span>.
-Anzahl möglicher Schlüssel: <span class="luecke" data-typ="zahl" data-antwort="26;25" data-breite="5"></span>
+- `FDHVDU` (Verschiebung 3) heisst <span class="luecke" data-antwort="caesar" data-breite="10"></span>.
+- Anzahl möglicher Schlüssel: <span class="luecke" data-typ="zahl" data-antwort="26;25" data-breite="5"></span>
 
 ### 3 · Kerckhoffs
 
@@ -45,15 +45,16 @@ Warum lässt sich eine allgemeine Ersetzung knacken, obwohl sie rund 4 · 10²�
 
 ### 5 · Vigenère
 
-*abc* mit dem Schlüsselwort BB ergibt <span class="luecke" data-antwort="BCD" data-breite="6"></span>.
-Vigenère ist im Gegensatz zu Caesar
-<span class="luecke" data-optionen="polyalphabetisch;monoalphabetisch;asymmetrisch" data-antwort="polyalphabetisch"></span>.
+- *abc* mit dem Schlüsselwort BB ergibt <span class="luecke" data-antwort="BCD" data-breite="6"></span>.
+- Vigenère ist im Gegensatz zu Caesar
+  <span class="luecke" data-optionen="polyalphabetisch;monoalphabetisch;asymmetrisch" data-antwort="polyalphabetisch"></span>.
 
 ### 6 · Schlüsselraum
 
-2⁴⁰ ≈ 10¹² Schlüssel, 10⁹ Versuche pro Sekunde: höchstens
-<span class="luecke" data-typ="groesse" data-toleranz="0.1" data-antwort="1000" data-breite="7"></span> Sekunden.
-Das Verfahren ist <span class="luecke" data-optionen="sicher;unsicher" data-antwort="unsicher"></span>.
+2⁴⁰ ≈ 10¹² Schlüssel, 10⁹ Versuche pro Sekunde:
+
+- Durchprobieren dauert höchstens <span class="luecke" data-typ="groesse" data-toleranz="0.1" data-antwort="1000" data-breite="7"></span> Sekunden.
+- Das Verfahren ist <span class="luecke" data-optionen="sicher;unsicher" data-antwort="unsicher"></span>.
 
 ### 7 · Schlüsselaustausch
 
@@ -62,10 +63,11 @@ Welches Problem der symmetrischen Verschlüsselung löst die asymmetrische?
 
 ### 8 · RSA
 
-p = 3, q = 11, e = 7: n = <span class="luecke" data-typ="zahl" data-antwort="33" data-breite="4"></span>
-φ = <span class="luecke" data-typ="zahl" data-antwort="20" data-breite="4"></span>
-d = <span class="luecke" data-typ="zahl" data-antwort="3" data-breite="4"></span>
-m = 2 verschlüsselt: c = <span class="luecke" data-typ="zahl" data-antwort="29" data-breite="4"></span>
+Gegeben: p = 3, q = 11, e = 7.
+
+| n | φ | d | c (für m = 2) |
+|---|---|---|---|
+| <span class="luecke" data-typ="zahl" data-antwort="33" data-breite="5"></span> | <span class="luecke" data-typ="zahl" data-antwort="20" data-breite="5"></span> | <span class="luecke" data-typ="zahl" data-antwort="3" data-breite="5"></span> | <span class="luecke" data-typ="zahl" data-antwort="29" data-breite="5"></span> |
 
 ### 9 · Einwegfunktion
 

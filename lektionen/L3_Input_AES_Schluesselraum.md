@@ -21,10 +21,12 @@ eines der beiden Bits 1 ist: 0⊕0 = 0, 0⊕1 = 1, 1⊕0 = 1, 1⊕1 = 0. Wendet 
 demselben Schlüssel an, erhält man wieder den Klartext: (Klartext ⊕ Schlüssel) ⊕ Schlüssel =
 Klartext. Verschlüsseln und Entschlüsseln sind dieselbe Operation – typisch **symmetrisch**.
 
-Kurz geprüft: 1 ⊕ 1 = <span class="luecke" data-typ="zahl" data-antwort="0" data-breite="3"></span> ·
-1 ⊕ 0 = <span class="luecke" data-typ="zahl" data-antwort="1" data-breite="3"></span> ·
-1011 ⊕ 0110 = <span class="luecke" data-antwort="1101" data-breite="6"></span> ·
-(1101 ⊕ 0110) = <span class="luecke" data-antwort="1011" data-breite="6"></span>
+Kurz geprüft:
+
+- 1 ⊕ 1 = <span class="luecke" data-typ="zahl" data-antwort="0" data-breite="3"></span>
+- 1 ⊕ 0 = <span class="luecke" data-typ="zahl" data-antwort="1" data-breite="3"></span>
+- 1011 ⊕ 0110 = <span class="luecke" data-antwort="1101" data-breite="6"></span>
+- 1101 ⊕ 0110 = <span class="luecke" data-antwort="1011" data-breite="6"></span> (Was fällt Ihnen auf?)
 
 <div class="krypto" data-tool="xor" data-text="HALLO" data-key="KEY"></div>
 

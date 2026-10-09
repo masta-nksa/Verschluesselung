@@ -47,17 +47,18 @@ in die andere sehr schwer zu berechnen ist – eine **Einwegfunktion**.
 
 ### Aufgabe 2 – Leicht und schwer
 
-19 · 31 = <span class="luecke" data-typ="zahl" data-antwort="589" data-breite="6"></span>
-(Zeit: <span class="luecke" data-breite="5"></span> s) ·
-731 = <span class="luecke" data-typ="menge" data-antwort="17 43" data-breite="9"></span> (zwei Primzahlen, z. B. «a · b»; Zeit: <span class="luecke" data-breite="5"></span> s)
+| Aufgabe | Ergebnis | Zeit |
+|---|---|---|
+| 19 · 31 = ? | <span class="luecke" data-typ="zahl" data-antwort="589" data-breite="8"></span> | <span class="luecke" data-breite="5"></span> s |
+| 731 = ? · ? (zwei Primzahlen) | <span class="luecke" data-typ="menge" data-antwort="17 43" data-breite="9"></span> | <span class="luecke" data-breite="5"></span> s |
 
 Multiplizieren ist leicht, **Faktorisieren** schwer – bei Zahlen mit 600 Stellen selbst für
 alle Computer der Welt. Eine zweite Einwegfunktion nutzt den **Rest bei der Division**
 (*modulo*): 17 mod 5 = 2, weil 17 = 3 · 5 + 2.
 
-4³ mod 29 = <span class="luecke" data-typ="zahl" data-antwort="6" data-breite="4"></span> ·
-Für welches x zwischen 0 und 28 gilt x³ mod 29 = 2? x = <span class="luecke" data-typ="zahl" data-antwort="26" data-breite="4"></span>
-Wie sind Sie vorgegangen? <span class="luecke" data-breite="28"></span>
+- 4³ mod 29 = <span class="luecke" data-typ="zahl" data-antwort="6" data-breite="4"></span>
+- Für welches x zwischen 0 und 28 gilt x³ mod 29 = 2? x = <span class="luecke" data-typ="zahl" data-antwort="26" data-breite="4"></span>
+- Wie sind Sie vorgegangen? <span class="luecke" data-breite="28"></span>
 
 Eine Einwegfunktion allein nützt nichts – auch die Empfängerin könnte nicht zurückrechnen. Man
 braucht eine **Falltür**: eine geheime Zusatzinformation, mit der das Umkehren leicht wird. Bei

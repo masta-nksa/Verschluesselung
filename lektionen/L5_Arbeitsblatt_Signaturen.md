@@ -47,10 +47,10 @@ oder die Signatur stammt nicht von Alice.
 
 ### Aufgabe 2 – Fälschen
 
-Ändern Sie bei Bob «20 Franken» in «200 Franken». Die Signatur ist dann
-<span class="luecke" data-optionen="gültig;ungültig" data-antwort="ungültig"></span>.
-Ändern Sie stattdessen eine Ziffer der Signatur: <span class="luecke" data-optionen="gültig;ungültig" data-antwort="ungültig"></span>.
-Gesichert wird damit vor allem: <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Integrität" data-auch="Authentizität+Verbindlichkeit"></span>
+- Ändern Sie bei Bob «20 Franken» in «200 Franken». Die Signatur ist dann
+  <span class="luecke" data-optionen="gültig;ungültig" data-antwort="ungültig"></span>.
+- Ändern Sie stattdessen eine Ziffer der Signatur: <span class="luecke" data-optionen="gültig;ungültig" data-antwort="ungültig"></span>.
+- Gesichert wird damit vor allem: <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Integrität" data-auch="Authentizität+Verbindlichkeit"></span>
 
 ### Aufgabe 3 – Der schlaue Angreifer
 

@@ -67,8 +67,8 @@ Knacken Sie mit «Alle 26 Schlüssel durchprobieren»:
 
 Klartext: <span class="luecke" data-antwort="Wer den Schluessel nicht kennt, probiert einfach alle aus" data-breite="voll"></span>
 
-Schlüssel: <span class="luecke" data-typ="zahl" data-antwort="11" data-breite="5"></span>
-Wie viele Versuche braucht man bei Caesar höchstens? <span class="luecke" data-typ="zahl" data-antwort="25;26" data-breite="5"></span>
+- Schlüssel: <span class="luecke" data-typ="zahl" data-antwort="11" data-breite="5"></span>
+- Wie viele Versuche braucht man bei Caesar höchstens? <span class="luecke" data-typ="zahl" data-antwort="25;26" data-breite="5"></span>
 
 ### Aufgabe 5 – Das Prinzip von Kerckhoffs
 
@@ -82,10 +82,10 @@ Nennen Sie einen weiteren Grund, warum man ein Verfahren nicht lange geheim halt
 
 ### Aufgabe 6 – Codierung oder Verschlüsselung? *(früh fertig)*
 
-Übersetzen Sie mit einer [Morsetabelle](https://de.wikipedia.org/wiki/Morsecode#Standard-Codetabelle):
-`··· ·- -- ··- · ·-··` = <span class="luecke" data-antwort="Samuel" data-breite="10"></span>
-Morse, Braille und ASCII ersetzen auch Zeichen – und sind trotzdem keine Verschlüsselung.
-Was fehlt ihnen? <span class="luecke" data-antwort="Schlüssel;ein Schlüssel;der Schlüssel" data-breite="16"></span>
+- Übersetzen Sie mit einer [Morsetabelle](https://de.wikipedia.org/wiki/Morsecode#Standard-Codetabelle):
+  `··· ·- -- ··- · ·-··` = <span class="luecke" data-antwort="Samuel" data-breite="10"></span>
+- Morse, Braille und ASCII ersetzen auch Zeichen – und sind trotzdem keine Verschlüsselung.
+  Was fehlt ihnen? <span class="luecke" data-antwort="Schlüssel;ein Schlüssel;der Schlüssel" data-breite="16"></span>
 
 <div class="nur-online" markdown="1">
 
