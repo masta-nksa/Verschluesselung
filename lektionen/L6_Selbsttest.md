@@ -11,9 +11,8 @@ reihenfolge: 20
 
 ## Ziel
 
-Sie überprüfen, welche Lernziele der Einheit Sie schon sicher erreichen und wo Sie nochmals
-nachschauen sollten. Der Test wird nicht benotet. Offene Fragen vergleichen Sie mit den Seiten
-«Das Wichtigste».
+Sie überprüfen, welche Lernziele Sie sicher erreichen (nicht benotet). Offene Fragen vergleichen
+Sie mit den Seiten «Das Wichtigste».
 
 ### 1 · Schutzziele
 
@@ -24,7 +23,7 @@ Schutzziele sind erfüllt?
 - [ ] Integrität
 - [ ] Authentizität
 - [ ] Verbindlichkeit
-{: .mc data-antwort="2 3 4"}
+{: .mc .kurz data-antwort="2 3 4"}
 
 ### 2 · Caesar
 

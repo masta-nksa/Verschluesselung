@@ -900,7 +900,7 @@ a { color: var(--accent); }
   .prose .quadrat table { font-size: 6.6pt; }
   .prose .quadrat th, .prose .quadrat td { padding: 0 .12em; line-height: 1.1; font-size: 6.6pt; }
   .prose ul.checkliste { column-count: 2; column-gap: 1.2em; }
-  .prose ul.mc-liste { column-count: 2; column-gap: 1.2em; }
+  .prose ul.mc-liste.kurz { column-count: 2; column-gap: 1.2em; }
   .prose ul.mc-liste li { break-inside: avoid; }
   .prose ul, .prose ol { padding-left: 1.3em; }
   .prose li { margin-bottom: .05em; }

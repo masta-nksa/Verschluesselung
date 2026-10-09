@@ -84,8 +84,7 @@ Bewiesen ist das nicht – und Quantencomputer könnten es ändern (Lektion 6).
 <div class="kasten" markdown="1">
 
 **In der Praxis: hybrid.** Asymmetrische Verfahren sind rund tausendmal langsamer als AES. Man
-vereinbart asymmetrisch nur einen geheimen Sitzungsschlüssel und verschlüsselt die Daten dann
-mit AES. So funktionieren HTTPS und alle modernen Messenger.
+vereinbart asymmetrisch nur einen Sitzungsschlüssel und verschlüsselt die Daten mit AES (HTTPS, Messenger).
 
 </div>
 
