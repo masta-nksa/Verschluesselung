@@ -77,6 +77,8 @@ Vergleichen Sie mit dem Alter des Universums (1,4 · 10¹⁰ Jahre):
 
 <div class="antwort" data-zeilen="1"></div>
 
+<div class="nur-online" markdown="1">
+
 ### Aufgabe 3 – Kerckhoffs bei AES *(früh fertig)*
 
 Der AES-Algorithmus ist vollständig veröffentlicht. Warum ist das ein *Vorteil*?
@@ -89,6 +91,8 @@ Warum können Sie mit AES allein keine geheime Nachricht an einen Online-Shop sc
 Sie zum ersten Mal einkaufen?
 
 <div class="antwort" data-zeilen="2"></div>
+
+</div>
 
 <div class="kasten" markdown="1">
 

@@ -88,8 +88,12 @@ mit AES. So funktionieren HTTPS und alle modernen Messenger.
 
 </div>
 
+<div class="nur-online" markdown="1">
+
 ## Früh fertig?
 
 Verschlüsseln Sie m = 2 von Hand mit dem öffentlichen Schlüssel (3, 55):
 c = <span class="luecke" data-typ="zahl" data-antwort="8" data-breite="5"></span>
 Kontrollieren Sie das Entschlüsseln im RSA-Werkzeug (p = 5, q = 11, e = 3).
+
+</div>

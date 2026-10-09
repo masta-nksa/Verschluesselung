@@ -99,6 +99,8 @@ Was kann ein Angreifer daraus über den Schlüssel lernen?
 
 <div class="antwort" data-zeilen="1"></div>
 
+<div class="nur-online" markdown="1">
+
 ## Früh fertig?
 
 Ihre Kollegin schickt mit dem Schlüssel ZUG: `SLKEZVTHQSUGQUAAUNMBUE`. Wo treffen Sie sich?
@@ -106,3 +108,5 @@ Ihre Kollegin schickt mit dem Schlüssel ZUG: `SLKEZVTHQSUGQUAAUNMBUE`. Wo treff
 
 Vigenère galt rund 300 Jahre lang als *le chiffre indéchiffrable*. In der nächsten Lektion
 knacken Sie sie trotzdem.
+
+</div>
