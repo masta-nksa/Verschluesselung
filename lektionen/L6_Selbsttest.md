@@ -30,7 +30,7 @@ Schutzziele sind erfüllt? (Mehrere Antworten möglich.)
 
 Entschlüsseln Sie `FDHVDU` (Verschiebung 3) und nennen Sie die Anzahl möglicher Schlüssel.
 
-Klartext: ______________ Anzahl Schlüssel: ______
+Klartext: <span class="fill-line"></span> Anzahl Schlüssel: <span class="fill-line"></span>
 
 ### 3 · Kerckhoffs
 
@@ -50,7 +50,7 @@ Schlüssel hat?
 Verschlüsseln Sie *abc* mit dem Schlüsselwort BB. Wie unterscheidet sich Vigenère grundsätzlich
 von Caesar?
 
-Geheimtext: ______________ Unterschied: ________________________________
+Geheimtext: <span class="fill-line"></span> Unterschied: <span class="fill-line"></span>
 
 ### 6 · Schlüsselraum
 
@@ -69,7 +69,7 @@ Welches Problem der symmetrischen Verschlüsselung löst die asymmetrische Versc
 
 Gegeben: p = 3, q = 11, e = 7. Berechnen Sie n, φ und d. Verschlüsseln Sie m = 2.
 
-n = ______ φ = ______ d = ______ c = ______
+n = <span class="fill-line"></span> φ = <span class="fill-line"></span> d = <span class="fill-line"></span> c = <span class="fill-line"></span>
 
 ### 9 · Einwegfunktion
 
@@ -79,9 +79,9 @@ Was ist bei RSA die Einwegfunktion, und was ist die «Falltür»?
 
 ### 10 · Signatur
 
-Ordnen Sie zu: Alice signiert mit ihrem __________________ Schlüssel, Bob prüft mit Alices
-__________________ Schlüssel. Signiert wird nicht das ganze Dokument, sondern sein
-__________________.
+Ordnen Sie zu: Alice signiert mit ihrem <span class="fill-line"></span> Schlüssel, Bob prüft mit Alices
+<span class="fill-line"></span> Schlüssel. Signiert wird nicht das ganze Dokument, sondern sein
+<span class="fill-line"></span>.
 
 ### 11 · Zertifikate
 

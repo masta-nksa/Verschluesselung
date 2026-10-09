@@ -17,7 +17,7 @@ Diese Nachricht wurde heute Morgen auf dem Schulhausplatz gefunden:
 
 Versuchen Sie es zuerst ohne Hilfsmittel. Notieren Sie, was Ihnen am Geheimtext auffällt.
 
-Was mir auffällt: ____________________________________________
+Was mir auffällt: <span class="fill-line"></span>
 
 <div class="kasten" markdown="1">
 

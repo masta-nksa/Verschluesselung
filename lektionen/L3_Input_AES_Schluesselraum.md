@@ -77,10 +77,10 @@ Ein Jahr hat rund 3,2 · 10⁷ Sekunden. Rechnen Sie mit dem Taschenrechner.
 | Verfahren | Anzahl Schlüssel | Zeit für alle Schlüssel |
 |---|---|---|
 | Caesar | 26 | 26 Nanosekunden |
-| Vigenère, Schlüsselwort mit 6 Buchstaben | 26⁶ = ______________ | ______________ |
+| Vigenère, Schlüsselwort mit 6 Buchstaben | 26⁶ = <span class="fill-line"></span> | <span class="fill-line"></span> |
 | allgemeine Ersetzung (L2) | 26! ≈ 4 · 10²⁶ | ≈ 1,3 · 10¹⁰ Jahre |
-| AES-128 | 2¹²⁸ ≈ 3,4 · 10³⁸ | ______________ Jahre |
-| AES-256 | 2²⁵⁶ ≈ 1,2 · 10⁷⁷ | ______________ Jahre |
+| AES-128 | 2¹²⁸ ≈ 3,4 · 10³⁸ | <span class="fill-line"></span> Jahre |
+| AES-256 | 2²⁵⁶ ≈ 1,2 · 10⁷⁷ | <span class="fill-line"></span> Jahre |
 
 ### Aufgabe 2 – Mit der ganzen Welt
 

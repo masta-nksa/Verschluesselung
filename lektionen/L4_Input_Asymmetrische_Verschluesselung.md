@@ -49,8 +49,8 @@ Richtung leicht und in die andere Richtung sehr schwer zu berechnen ist – eine
 
 ### Aufgabe 2 – Leicht und schwer
 
-1. Berechnen Sie 19 · 31 von Hand. Zeit: ______ Sekunden. Ergebnis: ______
-2. Welche zwei Primzahlen ergeben multipliziert 731? Zeit: ______ Sekunden. Ergebnis: ______
+1. Berechnen Sie 19 · 31 von Hand. Zeit: <span class="fill-line"></span> Sekunden. Ergebnis: <span class="fill-line"></span>
+2. Welche zwei Primzahlen ergeben multipliziert 731? Zeit: <span class="fill-line"></span> Sekunden. Ergebnis: <span class="fill-line"></span>
 
 Multiplizieren ist leicht, **Faktorisieren** (eine Zahl in ihre Primfaktoren zerlegen) ist
 schwer. Bei Zahlen mit 600 Stellen ist es selbst für alle Computer der Welt praktisch
@@ -59,9 +59,9 @@ unmöglich.
 Eine zweite Einwegfunktion verwendet den **Rest bei der Division** (*modulo*, kurz *mod*):
 17 mod 5 = 2, weil 17 = 3 · 5 + 2.
 
-3. Berechnen Sie 4³ mod 29. Ergebnis: ______
+3. Berechnen Sie 4³ mod 29. Ergebnis: <span class="fill-line"></span>
 4. Für welche ganze Zahl x zwischen 0 und 28 gilt x³ mod 29 = 2? Wie gehen Sie vor?
-   Ergebnis: ______ Vorgehen: ______________________________
+   Ergebnis: <span class="fill-line"></span> Vorgehen: <span class="fill-line"></span>
 
 Eine Einwegfunktion allein nützt noch nichts – auch der Empfänger könnte die Nachricht nicht
 zurückrechnen. Man braucht eine **Falltür**: eine geheime Zusatzinformation, mit der das
@@ -110,4 +110,4 @@ Messenger.
 Verschlüsseln Sie m = 2 von Hand mit dem öffentlichen Schlüssel (3, 55). Kontrollieren Sie
 das Entschlüsseln mit dem RSA-Werkzeug (p = 5, q = 11, e = 3).
 
-c = ______
+c = <span class="fill-line"></span>

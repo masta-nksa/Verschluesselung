@@ -35,16 +35,16 @@ Setzen Sie ein: *Hashwert, privaten, öffentlichen, Signatur, gleich, verändert
 
 **Alice signiert:**
 
-1. Alice berechnet den ________________ des Dokuments.
-2. Sie berechnet daraus mit ihrem ________________ Schlüssel die ________________.
+1. Alice berechnet den <span class="fill-line"></span> des Dokuments.
+2. Sie berechnet daraus mit ihrem <span class="fill-line"></span> Schlüssel die <span class="fill-line"></span>.
 3. Sie verschickt das Dokument zusammen mit der Signatur.
 
 **Bob prüft:**
 
 1. Bob berechnet selbst den Hashwert des erhaltenen Dokuments.
-2. Er rechnet die Signatur mit Alices ________________ Schlüssel zurück.
-3. Sind beide Werte ________________, ist die Signatur gültig. Sonst wurde das Dokument
-   ________________ oder die Signatur stammt nicht von Alice.
+2. Er rechnet die Signatur mit Alices <span class="fill-line"></span> Schlüssel zurück.
+3. Sind beide Werte <span class="fill-line"></span>, ist die Signatur gültig. Sonst wurde das Dokument
+   <span class="fill-line"></span> oder die Signatur stammt nicht von Alice.
 
 ## Ausprobieren
 

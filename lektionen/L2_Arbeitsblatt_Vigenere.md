@@ -78,13 +78,13 @@ ganz links in dieser Zeile den Klartextbuchstaben ablesen.
 
 Verschlüsseln Sie *januar* mit dem Schlüsselwort NKSA fertig (Tabelle oben).
 
-Geheimtext: W K ______________________
+Geheimtext: W K <span class="fill-line"></span>
 
 ### Aufgabe 2 – Entschlüsseln von Hand
 
 Entschlüsseln Sie `RYMXTGSBD` mit dem Schlüsselwort LUFT.
 
-Klartext: ________________________________
+Klartext: <span class="fill-line"></span>
 
 ### Aufgabe 3 – Beobachten mit dem Werkzeug
 
@@ -106,7 +106,7 @@ Klartext: ________________________________
 Ihre Kollegin hat Ihnen mit dem Schlüssel ZUG eine Nachricht geschickt:
 `SLKEZVTHQSUGQUAAUNMBUE`. Wo treffen Sie sich?
 
-Ort: ______________________________
+Ort: <span class="fill-line"></span>
 
 Vigenère galt rund 300 Jahre lang als *le chiffre indéchiffrable* – die unentzifferbare
 Chiffre. In der nächsten Lektion knacken Sie sie trotzdem.

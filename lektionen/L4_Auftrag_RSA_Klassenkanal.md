@@ -26,7 +26,7 @@ Kanal sei das Internet – und alle anderen könnten Eve sein.
 
 1. Klicken Sie im Werkzeug unten auf **«Zufällige Primzahlen wählen»**. Schauen Sie sich den
    Rechenweg an.
-2. Notieren Sie Ihren **privaten Schlüssel** auf Papier: (d, n) = ________________________
+2. Notieren Sie Ihren **privaten Schlüssel** auf Papier: (d, n) = <span class="fill-line"></span>
    Er bleibt bei Ihnen – niemals posten!
 3. Kopieren Sie Ihren **öffentlichen Schlüssel** und posten Sie ihn im Kanal, z. B.:
    *Öffentlicher Schlüssel von Lea: (17, 323663)*
@@ -56,9 +56,9 @@ Ihrem eigenen privaten Schlüssel zu entschlüsseln. Was passiert?
 
 ### Aufgabe 1 – Wer braucht was?
 
-Ergänzen Sie: Um Lea eine Nachricht zu schicken, verschlüssle ich mit __________________.
-Lea entschlüsselt mit __________________. Eve kennt __________________, kann die Nachricht
-aber nicht lesen, weil __________________.
+Ergänzen Sie: Um Lea eine Nachricht zu schicken, verschlüssle ich mit <span class="fill-line"></span>.
+Lea entschlüsselt mit <span class="fill-line"></span>. Eve kennt <span class="fill-line"></span>, kann die Nachricht
+aber nicht lesen, weil <span class="fill-line"></span>.
 
 ### Aufgabe 2 – Gleiche Nachricht, gleicher Geheimtext?
 

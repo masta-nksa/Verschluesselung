@@ -46,7 +46,7 @@ So finden Sie das Zertifikat:
 - **Firefox:** Schloss → «Verbindung sicher» → «Weitere Informationen» → «Zertifikat anzeigen»
 - **Safari:** Schloss → «Zertifikat einblenden»
 
-| | Website 1: ______________ | Website 2: ______________ |
+| | Website 1: <span class="fill-line"></span> | Website 2: <span class="fill-line"></span> |
 |---|---|---|
 | Ausgestellt für (Name/Domain) | | |
 | Ausgestellt von (CA) | | |

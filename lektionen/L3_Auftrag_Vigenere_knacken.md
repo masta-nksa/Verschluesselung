@@ -47,7 +47,7 @@ Für die Arbeit auf Papier:
 Schauen Sie sich die gefundenen Wiederholungen und ihre Abstände an. Welche Schlüssellänge
 vermuten Sie? Begründen Sie mit den Abständen.
 
-Schlüssellänge: ______ Begründung: ____________________________________
+Schlüssellänge: <span class="fill-line"></span> Begründung: <span class="fill-line"></span>
 
 ### Aufgabe 2 – Schlüsselwort
 
@@ -55,7 +55,7 @@ Tragen Sie die Länge ein. Schieben Sie in jeder Spalte mit − und + so lange, 
 Balken zu den orangen Linien (Deutsch) passen. Den Knopf «Vorschlag» dürfen Sie erst benutzen,
 wenn Sie es selbst versucht haben.
 
-Schlüsselwort: ______________________
+Schlüsselwort: <span class="fill-line"></span>
 
 ### Aufgabe 3 – Wer hat's erfunden?
 
