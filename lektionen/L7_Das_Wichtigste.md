@@ -20,11 +20,15 @@ Sie können …
 
 Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
 
+<div class="nur-online" markdown="1">
+
 ## Zum Besprechen
 
 1. Wie knackt man RSA – und warum gelingt das bei echten Schlüsseln nicht?
 2. Warum braucht echtes RSA ein zufälliges «Padding»?
 3. Welches Argument aus der Debatte hat Sie am meisten überzeugt?
+
+</div>
 
 ## RSA knacken
 

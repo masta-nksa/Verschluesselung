@@ -21,12 +21,16 @@ Sie können …
 
 Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
 
+<div class="nur-online" markdown="1">
+
 ## Zum Besprechen
 
 1. Welche Bausteine der Einheit kommen in fast allen fünf Themen vor?
 2. Was bleibt bei Ende-zu-Ende-Verschlüsselung trotzdem sichtbar?
 3. Warum stellt man schon heute auf Post-Quanten-Verfahren um, obwohl es noch keine passenden
    Quantencomputer gibt?
+
+</div>
 
 ## Die fünf Themen in Kürze
 

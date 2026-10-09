@@ -21,11 +21,15 @@ Sie können …
 
 Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
 
+<div class="nur-online" markdown="1">
+
 ## Zum Besprechen
 
 1. Was ist der Unterschied zwischen *verschlüsseln* und *signieren*?
 2. Warum signiert man den Hashwert und nicht das ganze Dokument?
 3. Woher weiss Ihr Browser, dass er wirklich mit Ihrer Bank spricht?
+
+</div>
 
 ## Hashfunktionen
 

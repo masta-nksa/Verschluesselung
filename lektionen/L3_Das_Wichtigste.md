@@ -22,11 +22,15 @@ Sie können …
 
 Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
 
+<div class="nur-online" markdown="1">
+
 ## Zum Besprechen
 
 1. In welchen zwei Schritten knackt man eine Vigenère-Verschlüsselung?
 2. Jede Person kann den AES-Algorithmus nachlesen. Warum ist AES trotzdem sicher?
 3. Was kann AES nicht lösen?
+
+</div>
 
 ## Vigenère knacken (Kasiski-Test)
 

@@ -21,12 +21,16 @@ Sie können …
 
 Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
 
+<div class="nur-online" markdown="1">
+
 ## Zum Besprechen
 
 1. Die allgemeine Ersetzung hat rund 4 · 10²⁶ Schlüssel. Warum haben Sie den Brief trotzdem in
    20 Minuten geknackt?
 2. Was unterscheidet Vigenère grundsätzlich von Caesar?
 3. Vigenère galt 300 Jahre als unknackbar. Haben Sie eine Idee, wo die Schwachstelle liegt?
+
+</div>
 
 ## Monoalphabetische Verschlüsselung
 

@@ -110,7 +110,7 @@ Sie zum ersten Mal einkaufen?
 
 </div>
 
-<div class="kasten" markdown="1">
+<div class="kasten nur-online" markdown="1">
 
 **Und Quantencomputer?** Sie könnten das Durchprobieren (Grover-Algorithmus) so beschleunigen,
 als wäre der Schlüssel halb so lang. AES-256 bliebe so sicher wie AES-128 heute. Für die

@@ -21,12 +21,16 @@ Sie können …
 
 Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
 
+<div class="nur-online" markdown="1">
+
 ## Zum Besprechen
 
 1. Sie schicken Lea eine Nachricht. Welchen Schlüssel brauchen Sie, welchen braucht Lea, und
    was weiss Eve?
 2. Was ist eine Einwegfunktion – und was ist bei RSA die «Falltür»?
 3. Warum verschlüsselt man die eigentlichen Daten trotzdem mit AES?
+
+</div>
 
 ## Das Schlüsselpaar
 

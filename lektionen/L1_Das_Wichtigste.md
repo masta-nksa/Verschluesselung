@@ -23,11 +23,15 @@ Sie können …
 
 Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassung unten.
 
+<div class="nur-online" markdown="1">
+
 ## Zum Besprechen
 
 1. Welches Schutzziel sichert eine Verschlüsselung – und welche nicht?
 2. Die Römer hielten das Caesar-Verfahren geheim. Warum war es trotzdem unsicher?
 3. Ist Morsecode eine Verschlüsselung?
+
+</div>
 
 ## Die vier Schutzziele
 
