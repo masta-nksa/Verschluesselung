@@ -113,7 +113,7 @@ Post-Quanten-Anteil, VÜPF), steht als Kommentar in `index.md`.
 ## Interaktive Übungen schreiben
 
 `assets/js/uebungen.js` macht aus Platzhaltern Eingabefelder mit Kontrolle. Auf Papier
-erscheinen sie als Schreiblinien bzw. als Optionen zum Einkreisen. Pro Abschnitt (`##`/`###`)
+erscheinen sie als Schreiblinien bzw. als Kästchen zum Ankreuzen. Pro Abschnitt (`##`/`###`)
 mit prüfbaren Feldern erscheint automatisch ein Knopf «Prüfen»; Eingaben bleiben im Browser
 der SuS gespeichert (nur lokal).
 

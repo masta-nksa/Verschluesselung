@@ -3,7 +3,7 @@
 
    Macht aus einfachen Platzhaltern im Markdown Eingabefelder mit Kontrolle.
    Auf Papier erscheinen dieselben Stellen als Schreiblinien bzw. als Optionen
-   zum Einkreisen (siehe CSS, Abschnitt 8).
+   zum Ankreuzen (siehe CSS, Abschnitt 6).
 
    PLATZHALTER (im Markdown als HTML schreiben)
 

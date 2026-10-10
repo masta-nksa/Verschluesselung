@@ -29,7 +29,7 @@ In der Fachsprache will *Alice* ihrem Kollegen *Bob* eine Nachricht schicken, un
 ### Aufgabe 1 – Szenarien zuordnen
 
 Welches Schutzziel wird **verletzt** oder soll **geschützt** werden? Wählen Sie an – manchmal
-passen zwei. (Auf Papier: einkreisen.)
+passen zwei. (Auf Papier: ankreuzen.)
 
 | Nr. | Szenario | Schutzziel(e) |
 |---|---|---|
