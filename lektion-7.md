@@ -2,6 +2,7 @@
 layout: lektion
 lektion: 7
 titel: "Vertiefung: Wie sicher ist RSA? Verschlüsselung und Überwachung"
+stichwort: "Vertiefung"
 kurz: "Optionale Vertiefung: RSA selbst knacken, den Aufwand abschätzen und über Hintertüren in der Verschlüsselung debattieren."
 methode: "Eve-Modus, Aufwandsrechnung, strukturierte Debatte, Besprechung"
 output: "geknackte Nachrichten, Aufwandsabschätzung, begründete Positionen"

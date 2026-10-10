@@ -2,6 +2,7 @@
 layout: lektion
 lektion: 2
 titel: "Häufigkeitsanalyse und Vigenère"
+stichwort: "Vigenère"
 kurz: "Warum 400 Quadrillionen Schlüssel nicht genügen – und wie Vigenère die Häufigkeiten verwischt."
 methode: "Knack-Wettbewerb in Zweiergruppen, Handarbeit am Vigenère-Quadrat, Besprechung"
 output: "Brief von 1586 entschlüsselt, Vigenère von Hand angewendet"

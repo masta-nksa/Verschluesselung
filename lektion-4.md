@@ -2,6 +2,7 @@
 layout: lektion
 lektion: 4
 titel: "Asymmetrische Verschlüsselung und RSA"
+stichwort: "RSA"
 kurz: "Zwei Schlüssel statt einem: Wie man mit Fremden geheim kommuniziert, ohne je einen Schlüssel auszutauschen."
 methode: "Auflösung Kistenrätsel, Kurzinput, Klassen-Experiment im Teams-Kanal, Besprechung"
 output: "eigenes RSA-Schlüsselpaar, verschlüsselte Nachrichten ausgetauscht"

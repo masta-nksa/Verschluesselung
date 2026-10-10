@@ -2,6 +2,7 @@
 layout: lektion
 lektion: 3
 titel: "Vigenère knacken, AES und das Schlüsselproblem"
+stichwort: "AES"
 kurz: "Wie Babbage und Kasiski Vigenère knackten, warum AES nicht zu knacken ist und welches Problem trotzdem bleibt."
 methode: "Werkzeug, Kurzinput, Rechenauftrag, Besprechung, Denkrätsel"
 output: "Vigenère-Text geknackt, Schlüsselraum abgeschätzt, Schlüsselaustauschproblem formuliert"

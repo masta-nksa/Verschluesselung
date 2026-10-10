@@ -9,23 +9,6 @@
   <meta name="robots" content="noindex, nofollow">
   {%- endif %}
   <meta name="color-scheme" content="light dark">
-  {%- comment -%}
-    Gewähltes Design setzen, BEVOR das Stylesheet greift – sonst blitzt beim
-    Laden kurz das Standarddesign auf. Deshalb steht dieses Skript hier oben
-    und nicht am Seitenende. Ohne JavaScript passiert nichts und es gilt das
-    Standarddesign.
-  {%- endcomment -%}
-  <script>
-    (function () {
-      var erlaubt = ["standard", "raster", "heft"];
-      try {
-        var t = localStorage.getItem("thema");
-        if (t && erlaubt.indexOf(t) !== -1 && t !== "standard") {
-          document.documentElement.setAttribute("data-thema", t);
-        }
-      } catch (e) { /* localStorage gesperrt (privates Fenster o. ä.) */ }
-    })();
-  </script>
   <link rel="stylesheet" href="{{ '/assets/css/unterricht.css' | relative_url }}">
   {%- comment -%} Interaktive Krypto-Werkzeuge (nur aktiv, wo ein <div class="krypto"> steht) {%- endcomment -%}
   <script src="{{ '/assets/js/krypto.js' | relative_url }}" defer></script>
@@ -46,16 +29,18 @@
         </span>
       </a>
       <div class="header-tools">
-        <nav class="site-nav" aria-label="Lektionen">
+        <nav class="site-nav" aria-label="Hauptnavigation">
           {%- for l in lektionen %}
-          <a href="{{ l.url | relative_url }}"{% if page.url == l.url %} aria-current="page"{% endif %} title="{{ l.titel }}">{{ l.lektion }}</a>
+          <a href="{{ l.url | relative_url }}"{% if page.url == l.url %} aria-current="page"{% endif %} title="Lektion {{ l.lektion }}: {{ l.titel }}">{{ l.lektion | prepend: "0" | slice: -2, 2 }}</a>
           {%- endfor %}
+          {%- comment -%} Zusatzeinträge aus _config.yml (hauptnav), z. B. Werkzeuge oder Glossar {%- endcomment -%}
+          {%- if site.hauptnav %}
+          <span class="nav-trenner" aria-hidden="true">|</span>
+          {%- for n in site.hauptnav %}
+          <a class="nav-text" href="{{ n.url | relative_url }}"{% if page.url == n.url %} aria-current="page"{% endif %}>{{ n.titel }}</a>
+          {%- endfor %}
+          {%- endif %}
         </nav>
-        {%- comment -%}
-          Bis das Skript am Seitenende den Knopf aktiviert, bleibt er
-          ausgeblendet – ohne JavaScript wäre er wirkungslos.
-        {%- endcomment -%}
-        <button type="button" class="thema-schalter" id="thema-schalter" hidden></button>
       </div>
     </div>
   </header>
@@ -72,48 +57,6 @@
   </footer>
 
   <script>
-    // 0) Design-Umschalter. Ein Klick schaltet zum nächsten Design weiter; die
-    //    Wahl bleibt im localStorage des Browsers – also auf diesem Gerät, in
-    //    diesem Browser, bis sie jemand löscht. Gesetzt wird sie beim Laden
-    //    bereits im <head>, hier wird nur die Bedienung nachgerüstet.
-    (function () {
-      var knopf = document.getElementById('thema-schalter');
-      if (!knopf) return;
-
-      var designs = [
-        { wert: 'standard', name: 'Standard' },
-        { wert: 'raster',   name: 'Raster' },
-        { wert: 'heft',     name: 'Arbeitsheft' }
-      ];
-
-      var aktuell = document.documentElement.getAttribute('data-thema') || 'standard';
-      var i = designs.findIndex(function (d) { return d.wert === aktuell; });
-      if (i === -1) i = 0;
-
-      function anzeigen() {
-        var d = designs[i];
-        var naechstes = designs[(i + 1) % designs.length];
-        knopf.textContent = d.name;
-        knopf.setAttribute('aria-label', 'Design: ' + d.name + '. Weiter zu ' + naechstes.name + '.');
-        knopf.title = 'Design wechseln';
-      }
-
-      anzeigen();
-      knopf.hidden = false;
-
-      knopf.addEventListener('click', function () {
-        i = (i + 1) % designs.length;
-        var wert = designs[i].wert;
-        if (wert === 'standard') {
-          document.documentElement.removeAttribute('data-thema');
-        } else {
-          document.documentElement.setAttribute('data-thema', wert);
-        }
-        try { localStorage.setItem('thema', wert); } catch (e) { /* gesperrt */ }
-        anzeigen();
-      });
-    })();
-
     // 1) Breite Tabellen auf schmalen Bildschirmen horizontal scrollbar machen.
     document.querySelectorAll('.prose table').forEach(function (t) {
       var box = document.createElement('div');

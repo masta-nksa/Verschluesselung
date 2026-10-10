@@ -2,6 +2,7 @@
 layout: lektion
 lektion: 5
 titel: "Hashfunktionen, Signaturen und Zertifikate"
+stichwort: "Signatur"
 kurz: "Verschlüsselung schützt Geheimnisse. Aber woher wissen Sie, dass eine Nachricht echt und unverändert ist?"
 methode: "Werkzeug-Experimente, Untersuchung im Browser, Besprechung"
 output: "Signaturablauf skizziert, Zertifikatskette einer echten Website gelesen"

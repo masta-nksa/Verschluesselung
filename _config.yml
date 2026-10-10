@@ -20,6 +20,29 @@ url: ""
 # Fusszeile
 schule: "Neue Kantonsschule Aarau"
 
+# Signet: Zeichenleiste unter dem Titel der Startseite. Das eine Gestaltungs-
+# element, das jede Einheit aus ihrem eigenen Stoff füllt – hier der Titel als
+# Caesar-Chiffre. Jede Zeile hat ein Etikett und eine Zeichenfolge (alle gleich
+# lang); "markiert: true" hinterlegt die Zeile mit Leuchtstift. "text" ist die
+# Beschreibung für Screenreader. Ohne diesen Block entfällt die Leiste.
+signet:
+  text: "Der Titel als Caesar-Chiffre mit Schlüssel 3: Aus VERSCHLUESSELUNG wird YHUVFKOXHVVHOXQJ."
+  zeilen:
+    - label: "Klartext"
+      zeichen: "VERSCHLUESSELUNG"
+    - label: "Schlüssel 3"
+      zeichen: "YHUVFKOXHVVHOXQJ"
+      markiert: true
+
+# Zusatzeinträge in der Kopfzeile, hinter den Lektionsnummern (optional).
+hauptnav:
+  - titel: "Werkzeuge"
+    url: "/werkzeuge.html"
+  - titel: "Dossier"
+    url: "/dossier.html"
+  - titel: "Glossar"
+    url: "/lektionen/L1_Glossar.html"
+
 # Kein Theme: Layouts und CSS liegen vollständig in diesem Repo. GitHub Pages
 # würde sonst das Standard-Theme "primer" laden, dessen Stylesheet den Pfad
 # assets/css/style.css belegt – darum heisst unseres unterricht.css.

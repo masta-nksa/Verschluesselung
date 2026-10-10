@@ -2,6 +2,7 @@
 layout: lektion
 lektion: 1
 titel: "Geheimnisse schützen: Schutzziele und Caesar"
+stichwort: "Caesar"
 kurz: "Warum man Informationen schützt, welche Schutzziele es gibt und wie man die älteste Verschlüsselung der Welt knackt."
 methode: "Einstiegsrätsel, Partnerarbeit, Werkzeug, Besprechung"
 output: "Schutzziele zugeordnet, Caesar geknackt, Prinzip von Kerckhoffs formuliert"

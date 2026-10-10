@@ -2,6 +2,7 @@
 layout: lektion
 lektion: 6
 titel: "Kryptografie im Alltag – heute und morgen"
+stichwort: "Alltag"
 kurz: "HTTPS, Messenger, Passkeys, E-ID und Quantencomputer: Wo die Bausteine dieser Einheit täglich für Sie arbeiten."
 methode: "Gruppenpuzzle mit fünf Expertenthemen, Besprechung, Selbsttest als Hausaufgabe"
 output: "Kurzvorstellungen der fünf Themen, gemeinsame Zusammenfassung"
