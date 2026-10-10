@@ -14,12 +14,14 @@ titel: "Übersicht"
   - Ressourcenschätzungen Quantencomputer (Gidney 2025: < 1 Mio. Qubits für RSA-2048) → L6 Thema E
 -->
 
+> Drei können ein Geheimnis bewahren, wenn zwei von ihnen tot sind.
+> *(Benjamin Franklin, 1735)*
+
 Jedes Mal, wenn Sie eine Nachricht verschicken, mit dem Handy bezahlen oder sich bei einem
 Konto anmelden, wird verschlüsselt – Hunderte Male am Tag, ohne dass Sie es merken. Dabei läuft
 jede dieser Nachrichten über fremde Leitungen und Server, auf denen jemand mitlesen könnte.
 
-**Wie kann man mit einem Online-Shop ein Geheimnis teilen, den man noch nie getroffen hat –
-wenn alle mithören?**
+**Wie vereinbart man ein Geheimnis, wenn alle mithören?**
 
 In dieser Einheit knacken Sie Verschlüsselungen, die jahrhundertelang als sicher galten, und
 finden heraus, warum heutige Verfahren selbst mit allen Computern der Welt nicht zu knacken
