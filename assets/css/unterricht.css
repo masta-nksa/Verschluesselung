@@ -911,6 +911,20 @@ select.luecke-feld { cursor: pointer; }
   .dossier-intro { display: none; }
   #dossier-inhalt > section:not([hidden]) ~ section .dossier-lektion { page-break-before: always; }
   #dossier-inhalt > section:first-of-type .dossier-lektion { page-break-before: avoid; }
+  /* Dossier als leere Vorlage: Was am Bildschirm schon ausgefüllt ist, bleibt
+     auf Papier weg (ausser die Option «Eigene Eingaben mitdrucken» ist an).
+     Eingeblendete Lösungen werden weiterhin gedruckt. Der Einzug schiebt den
+     Text der Lücken aus dem Feld, damit er auch in einem gespeicherten PDF
+     nicht als unsichtbarer Text steckt. */
+  .dossier-leer .luecke-feld {
+    color: transparent; -webkit-text-fill-color: transparent; border-bottom-color: #444;
+    text-indent: -999em; overflow: hidden;
+  }
+  .dossier-leer .chip[aria-pressed="true"]::before { content: ""; }
+  .loesungen-an .dossier-leer .chip.ist-loesung::before,
+  .loesungen-an .dossier-leer .chip.auch-loesung::before { content: "\00D7"; }
+  .dossier-leer .antwort.hat-text .antwort-druck { display: block; }
+  .dossier-leer .antwort.hat-text .antwort-text { display: none; }
   /* Listen mit Kästchen: hängender Einzug. Das Kästchen steht bündig am
      linken Rand (auch in zwei Spalten), umbrochene Zeilen stehen unter dem
      Text. Kästchen plus Abstand ergeben genau den Einzug von 1.5em. */
@@ -926,6 +940,7 @@ select.luecke-feld { cursor: pointer; }
   }
   .prose li > input[type="checkbox"]:checked { background: none; border-color: #000; }
   .prose li > input[type="checkbox"]:checked::after { content: "\00D7"; color: #000; font-size: 9pt; font-weight: 700; line-height: .7; }
+  .dossier-leer li > input[type="checkbox"]:checked::after { content: none; }
   .prose ul.checkliste, .prose ul.mc-liste.kurz { column-gap: 2em; }
   .prose ul.checkliste { break-inside: avoid; }
   .prose p:has(+ ul.checkliste) { break-after: avoid; }

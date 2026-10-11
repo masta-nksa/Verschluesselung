@@ -54,6 +54,12 @@
   var neueSeite = document.getElementById("dossier-neue-seite");
   if (neueSeite) neueSeite.addEventListener("change", function () { ziel.classList.toggle("dossier-neue-seite", neueSeite.checked); });
 
+  // Gedruckt wird eine leere Vorlage, ausser die eigenen Eingaben sind gewünscht.
+  var eingaben = document.getElementById("dossier-eingaben");
+  function eingabenSetzen() { ziel.classList.toggle("dossier-leer", !(eingaben && eingaben.checked)); }
+  if (eingaben) eingaben.addEventListener("change", eingabenSetzen);
+  eingabenSetzen();
+
   function laden(url) {
     return fetch(url, { credentials: "same-origin", cache: "no-cache" }).then(function (r) {
       if (!r.ok) throw new Error(r.status);

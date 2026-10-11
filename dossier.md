@@ -18,11 +18,13 @@ wählen Sie im Druckdialog «Als PDF speichern».</p>
 
 <label class="dossier-option"><input type="checkbox" id="dossier-neue-seite"> Jede Unterlage auf einer neuen Seite beginnen (sonst wird Papier gespart)</label>
 
+<label class="dossier-option"><input type="checkbox" id="dossier-eingaben"> Eigene Eingaben mitdrucken (sonst bleiben Linien und Kästchen leer)</label>
+
 <span id="dossier-status" class="dossier-status">Unterlagen werden geladen …</span>
 
 Tipp für den Druck: Im Druckdialog unter «Weitere Einstellungen» die Kopf- und Fusszeilen
 ausschalten. Jede Lektion beginnt auf einer neuen Seite. Interaktive Werkzeuge und Knöpfe
-erscheinen nicht auf Papier; Ihre eigenen Eingaben werden mitgedruckt.
+erscheinen nicht auf Papier.
 
 </div>
 
