@@ -7,7 +7,7 @@ Die Website wird von GitHub Pages direkt aus diesem Repository mit Jekyll gebaut
 ## Aufbau
 
 ```
-├── _config.yml            Konfiguration (Titel, baseurl, Badge-Beschriftungen, Signet, Kopfzeile, Besucherstatistik)
+├── _config.yml            Konfiguration (Titel, baseurl, Badge-Beschriftungen, Signet, Kopfzeile, Besucherstatistik, Lektionsuhr)
 ├── index.md               Startseite
 ├── lektion-1.md …         Lektionsseiten: Metadaten + Ablauf als Aufträge für die SuS
 ├── lektionen/             Arbeitsblätter (SuS) und Ablaufpläne (Lehrperson)
@@ -21,8 +21,9 @@ Die Website wird von GitHub Pages direkt aus diesem Repository mit Jekyll gebaut
 ├── assets/js/krypto.js    interaktive Werkzeuge (Caesar … Diffie-Hellman), laufen lokal im Browser
 ├── assets/js/dossier.js   sammelt Seiten für die Dossiers
 ├── assets/js/uebungen.js  interaktive Übungen (Lücken, Auswahl, Prüfen-Knopf)
+├── assets/js/lektionsuhr.js  Lektionsuhr: wann der nächste Schritt der Lektion spätestens beginnt
 ├── assets/fonts/          Schriften (Inter, IBM Plex Mono), lokal statt von fremden Servern
-└── assets/css/unterricht.css   Gestaltung inkl. Dark Mode und Druckansicht; Werkzeuge (Abschnitt 5), Übungen (Abschnitt 6)
+└── assets/css/unterricht.css   Gestaltung inkl. Dark Mode und Druckansicht; Werkzeuge (Abschnitt 5), Übungen (Abschnitt 6), Lektionsuhr (Abschnitt 7)
 ```
 
 ## Wer sieht was
@@ -78,6 +79,26 @@ darauf, auf einer eigenen eingerückten Zeile:
 
 Als Linktext dient die Beschriftung des Badges (Arbeitsblatt, Auftrag, Theorie-Input, Das
 Wichtigste). `&nbsp;` hält Pfeil und Link auf derselben Zeile.
+
+**Lektionsuhr:** Mit `lektionsuhr: true` in `_config.yml` startet eine Uhr, sobald jemand eine
+Lektionsseite öffnet. Eine Leiste am unteren Rand zeigt danach auf jeder Seite der Einheit,
+welcher Schritt nach Plan dran ist und wann man spätestens zum nächsten wechselt («weiter
+spätestens um 10:32 (noch 9 Min.)»). Ist die Zeit eines Schritts um, färbt sie sich gelb und
+verlinkt die Unterlage des nächsten. Im Ablauf der Lektionsseite steht hinter jeder Richtzeit die
+Uhrzeit, der aktuelle Schritt ist markiert; die Zeile «Lektionsuhr» darüber startet die Uhr neu
+oder blendet sie aus.
+
+- Die Zeiten kommen aus dem Ablauf in `lektion-N.md`: die Minuten aus `*(ca. 13 Min., …)*`
+  direkt hinter dem fetten Schrittnamen, die Unterlage aus dem Link des Schritts. Wer dort eine
+  Zeit ändert, ändert die Uhr – eine zweite Stelle gibt es nicht. Ein Schritt ohne Minutenangabe
+  zählt mit 0 Minuten.
+- Die Uhr läuft im Browser der SuS (nur lokal, wie die Eingaben der Übungen), also auf jedem
+  Gerät für sich ab dem Moment, in dem die Lektionsseite geöffnet wird. Die Zeiten sind
+  Richtzeiten – den Takt gibt die Lehrperson an.
+- Sie läuft bis zehn Minuten nach der letzten Richtzeit und verschwindet dann. Läuft noch die
+  Uhr einer anderen Lektion, startet beim Öffnen einer Lektionsseite nichts von selbst; die
+  Zeile über dem Ablauf bietet den Wechsel an.
+- Gedruckt wird nichts davon.
 
 **Externe Links** als normale Markdown-Links schreiben. Sie öffnen von selbst in einem
 neuen Tab (Skript in `_layouts/default.html`), interne Links bleiben im selben Tab.

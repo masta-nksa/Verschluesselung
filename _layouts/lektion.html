@@ -25,7 +25,8 @@ layout: default
   {%- if content != "" %}
   <section class="material-block block-ablauf">
     <h2><span class="block-icon" aria-hidden="true">&#128203;</span> Ablauf</h2>
-    <div class="prose ablauf">
+    {%- comment -%} data-lektion: Daran erkennt die Lektionsuhr (lektionsuhr.js) den Ablauf mit den Richtzeiten. {%- endcomment %}
+    <div class="prose ablauf" data-lektion="{{ page.lektion }}">
       {{ content }}
     </div>
   </section>
