@@ -12,6 +12,9 @@ Alle Werkzeuge laufen direkt in Ihrem Browser. Es wird nichts übertragen oder g
 In den Arbeitsblättern finden Sie dieselben Werkzeuge, dort schon mit den passenden Texten
 gefüllt.
 
+Jedes Werkzeug zeigt auch, wie das Ergebnis entsteht. Klicken Sie einen Buchstaben, ein Bit
+oder eine Tabellenzeile an: Das Bild daneben hebt die Stelle hervor, und eine Zeile rechnet nach.
+
 | Werkzeug | Lektion | Wozu |
 |---|---|---|
 | [Caesar](#caesar) | 1 | ver- und entschlüsseln, alle 26 Schlüssel durchprobieren |

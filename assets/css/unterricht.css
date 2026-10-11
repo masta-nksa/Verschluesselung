@@ -650,22 +650,29 @@ a { color: var(--accent); text-decoration-thickness: .07em; text-underline-offse
 .kt-zeile + .kt-zeile span:not(.kt-zeilenkopf) { font-weight: 700; color: var(--accent); }
 
 /* Balkendiagramme */
-.kt-balken { display: flex; align-items: flex-end; gap: 2px; height: 9rem; padding-top: 1rem; overflow-x: auto; }
-.kt-balken-klein { height: 6rem; }
-.kt-balken-spalte { flex: 1 1 0; min-width: .7rem; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
-.kt-balken-bar { width: 72%; background: var(--accent); border-radius: 2px 2px 0 0; min-height: 1px; }
-.kt-balken-wert { font-size: .62rem; color: var(--text-muted); }
-.kt-balken-buchstabe { font-family: var(--font-mono); font-size: .78rem; font-weight: 600; }
+.kt-balken { display: flex; align-items: flex-end; gap: 2px; height: 10.5rem; padding-top: 1rem; overflow-x: auto; }
+.kt-balken-klein { height: 7rem; }
+.kt-balken-spalte { flex: 1 1 0; min-width: .7rem; display: flex; flex-direction: column; align-items: center; height: 100%; }
+.kt-balken-feld { position: relative; flex: 1 1 0; min-height: 0; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.kt-balken-bar { position: relative; width: 72%; background: var(--accent); min-height: 1px; }
+.kt-balken-ref { position: absolute; left: 0; right: 0; bottom: 0; background: color-mix(in srgb, var(--lp) 22%, transparent); border-top: 2px solid var(--lp); }
+.kt-balken-wert { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); padding-bottom: 1px; font-size: .62rem; line-height: 1.2; color: var(--text-muted); }
+.kt-balken-buchstabe { font-family: var(--font-mono); font-size: .78rem; font-weight: 600; padding: 0 .2em; }
+.kt-balken-zusatz { font-family: var(--font-mono); font-size: .72rem; font-weight: 600; color: var(--lp); line-height: 1.3; }
+.kt-balken-spalte[data-c] { cursor: pointer; }
+.kt-balken-spalte.kt-gewaehlt .kt-balken-bar { background: var(--marker); outline: 1px solid var(--text); outline-offset: -1px; }
+.kt-balken-spalte.kt-gewaehlt .kt-balken-buchstabe { background: var(--marker); color: var(--on-marker); }
 
 /* Ersetzungstabelle */
 .kt-subst { display: grid; grid-template-columns: repeat(auto-fill, minmax(2.1rem, 1fr)); gap: 3px; }
 .kt-subst-zelle { display: flex; flex-direction: column; align-items: center; font-family: var(--font-mono); font-weight: 700; font-size: .8rem; }
 .krypto .kt-subst-zelle input { text-align: center; padding: .25rem 0; color: var(--sus); font-weight: 700; }
+.kt-subst-zelle.kt-gewaehlt > span { padding: 0 .3em; background: var(--marker); color: var(--on-marker); }
 .krypto .kt-subst-zelle input.kt-doppelt { border-color: #c0392b; background: color-mix(in srgb, #c0392b 15%, transparent); }
 
 /* Vigenère-Raster und Tabellen */
 .kt-raster-wrap { overflow-x: auto; margin: .4rem 0; }
-.kt-raster { border-collapse: collapse; font-family: var(--font-mono); font-size: .85rem; }
+.krypto .kt-raster { width: auto; border: 0; border-collapse: collapse; font-family: var(--font-mono); font-size: .85rem; }
 .kt-raster th { text-align: left; font-family: var(--font-body); font-weight: 600; font-size: .78rem; color: var(--text-muted); padding-right: .6rem; white-space: nowrap; }
 .kt-raster td { width: 1.3rem; text-align: center; border: 1px solid var(--border); padding: .1rem 0; }
 .kt-raster .kt-schluesselzeile td { color: var(--lp); }
@@ -673,6 +680,135 @@ a { color: var(--accent); text-decoration-thickness: .07em; text-underline-offse
 .krypto .kt-tabelle th, .krypto .kt-tabelle td { border: 1px solid var(--border); padding: .25rem .5rem; text-align: left; }
 .krypto .kt-tabelle th { background: var(--accent-soft); }
 .krypto .kt-ergebniszeile td { font-weight: 700; color: var(--accent); }
+
+/* Wie ein Ergebnis entsteht: ein Bild des Verfahrens neben den Eingaben
+   (.kt-mit-bild), der gewählte Buchstabe oder das gewählte Bit im Leuchtstift
+   (.kt-marke, .kt-gewaehlt) und eine Zeile, die nachrechnet (.kt-ablesen). */
+.kt-mit-bild { display: grid; gap: .2rem 1.4rem; margin-bottom: .4rem; }
+@media (min-width: 48rem) { .kt-mit-bild { grid-template-columns: minmax(0, 1fr) auto; align-items: start; } }
+.kt-bild .kt-hilfe { margin-bottom: 0; max-width: 21rem; }
+.kt-ablesen p { margin: 0 0 .25rem; }
+.kt-ablesen:empty { display: none; }
+.kt-ablesen .kt-mono { font-size: .86rem; white-space: pre-wrap; }
+.kt-marke { padding: 0 .25em; font-family: var(--font-mono); font-weight: 700; background: var(--marker); color: var(--on-marker); }
+.kt-klickbar { cursor: pointer; }
+
+/* Caesar: Chiffrierscheibe und anklickbare Alphabetzeilen */
+.kt-scheibe { display: block; width: 13.5rem; max-width: 100%; height: auto; margin: 0 auto; font-family: var(--font-mono); user-select: none; }
+.kt-scheibe circle { fill: none; stroke: var(--text); stroke-width: 1; }
+.kt-scheibe .kt-scheibe-ring { fill: var(--accent-soft); }
+.kt-scheibe .kt-scheibe-loch { fill: var(--bg-elev); }
+.kt-scheibe path { fill: transparent; cursor: pointer; }
+.kt-scheibe path:hover { fill: color-mix(in srgb, var(--marker) 45%, transparent); }
+.kt-scheibe path.kt-gewaehlt { fill: var(--marker); stroke: var(--text); stroke-width: 1; }
+.kt-scheibe text { fill: var(--text); font-size: 11px; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.kt-scheibe text.kt-gewaehlt { fill: var(--on-marker); font-weight: 700; }
+.kt-scheibe-innen { transition: transform .3s ease-out; }
+.kt-scheibe-innen text { font-weight: 600; }
+.kt-scheibe .kt-scheibe-mitte { font-size: 24px; font-weight: 500; }
+.kt-zeile span[data-i] { cursor: pointer; }
+.kt-zeile span.kt-gewaehlt { background: var(--accent-soft); }
+.kt-zeile + .kt-zeile span.kt-gewaehlt { background: var(--marker); color: var(--on-marker); }
+
+/* Vigenère-Quadrat im Werkzeug: klein neben den Eingaben, unter der Maus gross.
+   Alle Masse hängen an der Schriftgrösse --q, damit das Vergrössern nur eine
+   Zahl ändert. Ohne Maus oder auf schmalen Bildschirmen bleibt es, wie es ist. */
+.kt-quadrat-rahmen { --q: clamp(.42rem, 2vw, .8rem); overflow-x: auto; }
+.krypto .kt-quadrat {
+  width: auto; border: 0; border-collapse: collapse; background: var(--bg-elev);
+  font-family: var(--font-mono); font-size: var(--q); line-height: 1; cursor: pointer; user-select: none;
+}
+.krypto .kt-quadrat th, .krypto .kt-quadrat td {
+  width: 1.35em; height: 1.35em; padding: 0; font-size: inherit;
+  text-align: center; vertical-align: middle; border: 1px solid var(--border);
+}
+.krypto .kt-quadrat th { font-weight: 600; color: var(--text-muted); background: var(--bg); }
+.krypto .kt-quadrat caption {
+  display: none; caption-side: bottom; padding: .5em .6em; text-align: left; white-space: pre-wrap;
+  background: var(--bg-elev); border-top: 1px solid var(--border); cursor: default;
+}
+.krypto .kt-quadrat .kt-q-ecke { border-color: transparent; background: none; cursor: default; }
+.krypto .kt-quadrat .kt-q-weg { background: var(--accent-soft); }
+.krypto .kt-quadrat .kt-q-rand { background: var(--text); color: var(--bg); }
+.krypto .kt-quadrat .kt-q-treffer, .kt-raster td.kt-gewaehlt.kt-r-geheim {
+  background: var(--marker); color: var(--on-marker); font-weight: 700;
+}
+.krypto .kt-quadrat .kt-q-treffer { outline: 2px solid var(--text); outline-offset: -1px; }
+.kt-raster td[data-pos] { cursor: pointer; }
+.kt-raster td.kt-gewaehlt { background: var(--accent-soft); }
+.kt-schritt { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .8rem; margin: .5rem 0 .3rem; }
+.kt-schritt .kt-label { margin: 0 auto 0 0; }
+.kt-schritt-wahl { display: inline-flex; align-items: center; gap: .4rem; white-space: nowrap; }
+.kt-schritt-text { font-size: .84rem; color: var(--text-muted); }
+@media (min-width: 48rem) { .kt-quadrat-rahmen { --q: .62rem; } }
+@media (hover: hover) and (min-width: 48rem) {
+  .kt-quadrat-rahmen {
+    --q: .5rem; --seite: calc(27 * 1.35 * var(--q) + 28px);
+    position: relative; width: var(--seite); height: var(--seite); overflow: visible;
+  }
+  .krypto .kt-quadrat { position: absolute; top: 0; right: 0; width: max-content; transition: font-size .15s ease-out .12s; }
+  .kt-quadrat-rahmen:hover .kt-quadrat { font-size: .9rem; z-index: 5; outline: var(--linie-b) solid var(--linie); }
+  .kt-quadrat-rahmen:hover .kt-quadrat caption { display: table-caption; }
+  .krypto .kt-quadrat td:hover, .krypto .kt-quadrat th[data-p]:hover, .krypto .kt-quadrat th[data-k]:hover {
+    background: var(--marker); color: var(--on-marker);
+  }
+}
+@media (prefers-reduced-motion: reduce) { .krypto .kt-quadrat, .kt-scheibe-innen { transition: none; } }
+
+/* Vigenère knacken: Fundstellen im Text und der Text in Spalten */
+.kt-fundtext { max-height: 7.5rem; overflow-y: auto; margin-top: .4rem; font-size: .82rem; letter-spacing: .04em; }
+.krypto .kt-tabelle tr[data-folge] { cursor: pointer; }
+.krypto .kt-tabelle tr.kt-gewaehlt td { background: var(--accent-soft); }
+.krypto .kt-streifen { width: auto; border: 0; border-collapse: collapse; font-family: var(--font-mono); font-size: .85rem; }
+.krypto .kt-streifen th {
+  padding: .1rem .6rem .1rem 0; border: 0; text-align: left; white-space: nowrap;
+  font-family: var(--font-body); font-weight: 600; font-size: .78rem; color: var(--text-muted);
+}
+.krypto .kt-streifen th[data-s] { padding: .1rem 0; text-align: center; cursor: pointer; }
+.krypto .kt-streifen td { width: 1.5rem; padding: .1rem 0; text-align: center; border: 1px solid var(--border); cursor: pointer; }
+.krypto .kt-streifen .kt-gewaehlt { background: var(--accent-soft); }
+.krypto .kt-streifen .kt-schluesselzeile td { color: var(--lp); font-weight: 700; }
+.krypto .kt-streifen .kt-schluesselzeile td.kt-gewaehlt { background: var(--marker); color: var(--on-marker); }
+.kt-spalte { cursor: pointer; }
+.kt-spalte.kt-gewaehlt { outline: 2px solid var(--text); outline-offset: -1px; }
+
+/* XOR: Wahrheitstabelle und anklickbare Bits */
+.kt-wahrheit th, .kt-wahrheit td { text-align: center; }
+.krypto .kt-wahrheit tr.kt-gewaehlt td:last-child { background: var(--marker); color: var(--on-marker); font-weight: 700; }
+.kt-xor span[data-b] { padding: 0 .06em; cursor: pointer; }
+.kt-xor span.kt-gewaehlt { background: var(--accent-soft); outline: 1px solid var(--border-strong); }
+
+/* SHA-256: ein Kästchen pro Bit */
+.kt-hash span[data-i] { cursor: pointer; }
+.kt-hash span.kt-gewaehlt, .kt-bits span.kt-gewaehlt { outline: 2px solid var(--lp); outline-offset: -1px; }
+.kt-bitbild { display: grid; gap: .45rem; margin: .6rem 0 .3rem; }
+.kt-bitzeile { display: grid; grid-template-columns: 3.4rem minmax(0, 1fr); align-items: center; font-family: var(--font-mono); font-size: .8rem; font-weight: 600; }
+.kt-bits { display: grid; grid-template-columns: repeat(64, minmax(0, 1fr)); gap: 1px; }
+.kt-bits span { aspect-ratio: 1; background: var(--bg); border: 1px solid var(--border); cursor: pointer; }
+.kt-bits span.kt-an { background: var(--text); border-color: var(--text); }
+.kt-bits-anders span.kt-an { background: var(--marker); border-color: var(--border-strong); }
+@media (max-width: 40rem) { .kt-bits { grid-template-columns: repeat(32, minmax(0, 1fr)); } }
+
+/* RSA, Eve-Modus und Signatur: Rechenweg, Suchbereich, Weg mit Pfeilen */
+.kt-schritte { margin: .5rem 0 .2rem; padding: .5rem .8rem; background: var(--bg); border-left: 3px solid var(--marker); }
+.kt-schritte p { margin: 0 0 .4rem; }
+.kt-schritte .table-scroll { margin: 0 0 .4rem; }
+.kt-suche { margin: .5rem 0; }
+.kt-strecke { height: .8rem; background: var(--bg); border: 1px solid var(--border-strong); }
+.kt-strecke span { display: block; height: 100%; min-width: 2px; background: var(--marker); border-right: 2px solid var(--text); }
+.kt-strecke-text { display: flex; justify-content: space-between; gap: .6rem; font-size: .78rem; color: var(--text-muted); }
+.kt-weg { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .5rem; margin: .5rem 0; }
+.kt-knoten { padding: .2rem .55rem; background: var(--bg); border: 1px solid var(--text); font-family: var(--font-mono); font-size: .84rem; word-break: break-all; }
+.kt-pfeil {
+  position: relative; flex: 1 1 9rem; padding: 0 .7rem .15rem; text-align: center;
+  font-size: .76rem; color: var(--text-muted); border-bottom: 1.5px solid var(--border-strong);
+}
+.kt-pfeil::after {
+  content: ""; position: absolute; right: -1px; bottom: -5px;
+  border: 4px solid transparent; border-right-width: 0; border-left-color: var(--border-strong);
+}
+.kt-rechenweg .kt-weg > .kt-knoten:last-child { min-width: 7.5rem; text-align: center; }
+.kt-urteil.kt-ok, .kt-urteil.kt-fehler { width: 7.5rem; margin: -.3rem 0 -.3rem auto; text-align: center; font-size: 1.5rem; line-height: 1; }
 
 /* Vigenère knacken: Spaltenkarten */
 .kt-spalten { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .7rem; margin: .5rem 0 .8rem; }

@@ -12,6 +12,10 @@
    Werkzeuge: caesar, haeufigkeit, vigenere, vigenere-knacken, xor, sha256,
               rsa, rsa-eve, signatur, diffie-hellman
 
+   Jedes Werkzeug zeigt neben dem Ergebnis, wie es entsteht: ein Bild des
+   Verfahrens (Scheibe, Quadrat, Wahrheitstabelle, Bitraster …), in dem das
+   Angeklickte hervorgehoben ist, und eine Zeile, die nachrechnet.
+
    Alles läuft lokal im Browser – es wird nichts übertragen.
    ========================================================================== */
 
@@ -82,6 +86,41 @@
 
   function titel(text) {
     return el("p", { class: "kt-titel" }, [el("span", { "aria-hidden": "true", text: "⚙ " }), text]);
+  }
+
+  // Bausteine für die Ansichten, die zeigen, wie ein Ergebnis entsteht.
+  function fett(text, klasse) { return el("b", klasse ? { class: klasse, text: text } : { text: text }); }
+  function ablesefeld() { return el("div", { class: "kt-ablesen", "aria-live": "polite" }); }
+
+  function svg(tag, attrs, kinder) {
+    var e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === "text") e.textContent = attrs[k]; else e.setAttribute(k, attrs[k]);
+    });
+    (kinder || []).forEach(function (k) { e.appendChild(k); });
+    return e;
+  }
+
+  // Eine Spalte im Balkendiagramm: Wert oben, Balken (anteil 0 … 1, dahinter
+  // optional eine Vergleichslinie), darunter Beschriftung und Zusatzzeile.
+  function balkenSpalte(hinweis, wert, anteil, beschriftung, vergleich, zusatz) {
+    return el("div", { class: "kt-balken-spalte", title: hinweis }, [
+      el("span", { class: "kt-balken-feld" }, [
+        vergleich == null ? null : el("span", { class: "kt-balken-ref", style: "height:" + (vergleich * 100) + "%" }),
+        el("span", { class: "kt-balken-bar", style: "height:" + (anteil * 100) + "%" }, [el("span", { class: "kt-balken-wert", text: wert })])
+      ]),
+      el("span", { class: "kt-balken-buchstabe", text: beschriftung }),
+      zusatz == null ? null : el("span", { class: "kt-balken-zusatz", text: zusatz || " " })
+    ]);
+  }
+
+  // Rechnung im Alphabet: «9 + 13 = 22», mit Überlauf «20 + 18 = 38,  38 − 26 = 12».
+  // richtung −1 zieht ab (entschlüsseln).
+  function rechnung26(a, b, richtung) {
+    var s = a + richtung * b;
+    function z(x) { return x < 0 ? "−" + (-x) : String(x); }
+    return a + (richtung > 0 ? " + " : " − ") + b + " = " + z(s) +
+      (s > 25 ? ",  " + s + " − 26 = " + (s - 26) : s < 0 ? ",  " + z(s) + " + 26 = " + (s + 26) : "");
   }
 
   function kopierKnopf(quelle) {
@@ -269,6 +308,49 @@
     return gross(text).replace(/[A-Z]/g, function (c) { return ABC[mod(idx(c) + k, 26)]; });
   }
 
+  // Chiffrierscheibe: aussen das Klartextalphabet (fest), innen das
+  // Geheimtextalphabet, das sich um den Schlüssel dreht. zeige(k, p) dreht die
+  // innere Scheibe und markiert das Paar zum Klartextbuchstaben p.
+  function caesarScheibe(beiWahl) {
+    var W = 360 / 26, felder = [], aussen = [], innen = [], markiert = [], drehung = 0;
+    function punkt(r, grad) {
+      var a = (grad - 90) * Math.PI / 180;
+      return (r * Math.cos(a)).toFixed(2) + " " + (r * Math.sin(a)).toFixed(2);
+    }
+    function sektor(i) {
+      var a = (i - .5) * W, b = (i + .5) * W;
+      return "M" + punkt(98, a) + " A98 98 0 0 1 " + punkt(98, b) + " L" + punkt(54, b) + " A54 54 0 0 0 " + punkt(54, a) + " Z";
+    }
+    var bild = svg("svg", { class: "kt-scheibe", viewBox: "-100 -100 200 200", role: "img", "aria-label": "Chiffrierscheibe: aussen Klartext, innen Geheimtext" },
+      [svg("circle", { r: "98" }), svg("circle", { class: "kt-scheibe-ring", r: "76" }), svg("circle", { class: "kt-scheibe-loch", r: "54" })]);
+    var ring = svg("g", { class: "kt-scheibe-innen" }), mitte = svg("text", { class: "kt-scheibe-mitte" });
+    for (var i = 0; i < 26; i++) {
+      felder[i] = svg("path", { d: sektor(i), "data-i": String(i) });
+      bild.appendChild(felder[i]);
+    }
+    for (i = 0; i < 26; i++) {
+      var dreh = "rotate(" + (i * W).toFixed(3) + ") ";
+      aussen[i] = svg("text", { transform: dreh + "translate(0 -87)", text: ABC[i].toLowerCase() });
+      innen[i] = svg("text", { transform: dreh + "translate(0 -65)", text: ABC[i] });
+      bild.appendChild(aussen[i]); ring.appendChild(innen[i]);
+    }
+    bild.appendChild(ring); bild.appendChild(mitte);
+    bild.addEventListener("click", function (ev) {
+      var i = ev.target.getAttribute("data-i");
+      if (i !== null) beiWahl(+i);
+    });
+    function zeige(k, p) {
+      // auf dem kürzeren Weg weiterdrehen, sonst läuft der Schritt 25 → 0 eine ganze Runde zurück
+      drehung += mod(-k * W - drehung + 180, 360) - 180;
+      ring.style.transform = "rotate(" + drehung.toFixed(3) + "deg)";
+      mitte.textContent = "+" + k;
+      markiert.forEach(function (e) { e.classList.remove("kt-gewaehlt"); });
+      markiert = [felder[p], aussen[p], innen[(p + k) % 26]];
+      markiert.forEach(function (e) { e.classList.add("kt-gewaehlt"); });
+    }
+    return { bild: bild, zeige: zeige };
+  }
+
   function toolCaesar(root) {
     var d = root.dataset;
     var text = textfeld(d.text || "Treffpunkt beim Brunnen", 3);
@@ -277,25 +359,47 @@
     var modus = el("select", {}, [el("option", { value: "ver", text: "verschlüsseln" }), el("option", { value: "ent", text: "entschlüsseln" })]);
     modus.value = d.mode === "ent" ? "ent" : "ver";
     var tabelle = el("div", { class: "kt-alphabet" });
+    var ablesen = ablesefeld();
     var out = ausgabe("kt-mono");
     var alle = ausgabe("kt-mono kt-liste");
     alle.hidden = true;
+    // wahl: Klartextbuchstabe, den Scheibe und Tabelle hervorheben – zu Beginn
+    // der erste Buchstabe des Texts.
+    var erster = idx(nurBuchstaben(text.value)[0] || "E");
+    var wahl = modus.value === "ver" ? erster : mod(erster - parseInt(schieber.value, 10), 26);
+    var scheibe = caesarScheibe(function (p) { wahl = p; rechne(); });
 
     function rechne() {
-      var k = parseInt(schieber.value, 10);
+      var k = parseInt(schieber.value, 10), ver = modus.value === "ver";
       zahl.textContent = k;
       tabelle.innerHTML = "";
       var oben = el("div", { class: "kt-zeile" }, [el("span", { class: "kt-zeilenkopf", text: "Klartext" })]);
       var unten = el("div", { class: "kt-zeile" }, [el("span", { class: "kt-zeilenkopf", text: "Geheimtext" })]);
       for (var i = 0; i < 26; i++) {
-        oben.appendChild(el("span", { text: ABC[i].toLowerCase() }));
-        unten.appendChild(el("span", { text: ABC[(i + k) % 26] }));
+        var klasse = i === wahl ? "kt-gewaehlt" : "";
+        oben.appendChild(el("span", { "data-i": String(i), class: klasse, text: ABC[i].toLowerCase() }));
+        unten.appendChild(el("span", { "data-i": String(i), class: klasse, text: ABC[(i + k) % 26] }));
       }
       tabelle.appendChild(oben); tabelle.appendChild(unten);
-      var r = caesarText(text.value, modus.value === "ver" ? k : -k);
-      out.textContent = modus.value === "ver" ? r : r.toLowerCase();
+      scheibe.zeige(k, wahl);
+      var g = (wahl + k) % 26, P = ABC[wahl].toLowerCase(), G = ABC[g];
+      ablesen.innerHTML = "";
+      ablesen.append(
+        el("p", {}, ver ?
+          ["Aussen ", fett(P), " (Klartext), innen darunter ", fett(G, "kt-marke"), " (Geheimtext)."] :
+          ["Innen ", fett(G, "kt-marke"), " (Geheimtext), aussen darüber ", fett(P), " (Klartext)."]),
+        el("p", { class: "kt-mono", text: ver ?
+          P + " = " + wahl + ":  " + rechnung26(wahl, k, 1) + "  →  " + G :
+          G + " = " + g + ":  " + rechnung26(g, k, -1) + "  →  " + P })
+      );
+      var r = caesarText(text.value, ver ? k : -k);
+      out.textContent = ver ? r : r.toLowerCase();
       if (!alle.hidden) zeigeAlle();
     }
+    tabelle.addEventListener("click", function (ev) {
+      var i = ev.target.dataset.i;
+      if (i !== undefined) { wahl = +i; rechne(); }
+    });
     function zeigeAlle() {
       alle.innerHTML = "";
       for (var s = 0; s < 26; s++) {
@@ -311,8 +415,18 @@
 
     root.append(
       titel("Caesar-Werkzeug"),
-      feld("Text", text),
-      el("div", { class: "kt-reihe" }, [feld("Verschiebung (Schlüssel)", schieber), zahl, feld("Modus", modus)]),
+      el("div", { class: "kt-mit-bild" }, [
+        el("div", {}, [
+          feld("Text", text),
+          el("div", { class: "kt-reihe" }, [feld("Verschiebung (Schlüssel)", schieber), zahl, feld("Modus", modus)]),
+          el("p", { class: "kt-label", text: "Auf der Scheibe ablesen" }),
+          ablesen
+        ]),
+        el("div", { class: "kt-bild" }, [
+          scheibe.bild,
+          el("p", { class: "kt-hilfe", text: "Aussen Klartext, innen Geheimtext. Buchstaben anklicken." })
+        ])
+      ]),
       tabelle,
       el("p", { class: "kt-label", text: "Ergebnis" }), out,
       el("div", { class: "kt-knopfreihe" }, [bruteKnopf, kopierKnopf(out)]),
@@ -332,7 +446,9 @@
     var ref = el("p", { class: "kt-hilfe" });
     var tabelle = el("div", { class: "kt-subst" });
     var out = ausgabe("kt-mono kt-klartext");
+    var ablesen = ablesefeld();
     var felder = {};
+    var fokus = null;   // Geheimtextbuchstabe, dessen Vorkommen hervorgehoben sind
 
     var refSortiert = ABC.split("").sort(function (a, b) { return DEUTSCH[b] - DEUTSCH[a]; });
     ref.innerHTML = "<strong>Deutsch zum Vergleich:</strong> " + refSortiert.slice(0, 12).map(function (c) {
@@ -342,39 +458,62 @@
     ABC.split("").forEach(function (c) {
       var i = el("input", { type: "text", maxlength: "1", "aria-label": "Klartextbuchstabe für " + c, autocomplete: "off", spellcheck: "false" });
       i.addEventListener("input", function () { i.value = i.value.toLowerCase().replace(/[^a-z]/g, ""); zeichne(); });
+      i.addEventListener("focus", function () { if (fokus !== c) { fokus = c; zeichne(); } });
       felder[c] = i;
       tabelle.appendChild(el("label", { class: "kt-subst-zelle" }, [el("span", { text: c }), i]));
     });
 
     function zeichne() {
       var t = gross(text.value), st = zaehle(t);
-      var reihe = ABC.split("");
-      if (sortierung.value === "freq") reihe.sort(function (a, b) { return st.z[b] - st.z[a] || a.localeCompare(b); });
-      var max = Math.max.apply(null, reihe.map(function (c) { return st.z[c]; })) || 1;
+      function prozent(c) { return st.n ? st.z[c] / st.n * 100 : 0; }
+      var nachRang = sortierung.value === "freq";
+      var rang = ABC.split("").sort(function (a, b) { return st.z[b] - st.z[a] || a.localeCompare(b); });
+      var reihe = nachRang ? rang : ABC.split("");
+      // Nach Häufigkeit sortiert steht hinter jedem Balken, wie häufig der Buchstabe
+      // ist, der im Deutschen auf diesem Rang liegt – verglichen wird die Form der
+      // Verteilung. Welcher Buchstabe das ist, steht bewusst nicht dabei.
+      var max = Math.max(prozent(rang[0]), nachRang ? DEUTSCH[refSortiert[0]] : 0) || 1;
       balken.innerHTML = "";
-      reihe.forEach(function (c) {
-        var p = st.n ? st.z[c] / st.n * 100 : 0;
-        balken.appendChild(el("div", { class: "kt-balken-spalte", title: c + ": " + st.z[c] + " (" + p.toFixed(1) + " %)" }, [
-          el("span", { class: "kt-balken-wert", text: st.z[c] ? p.toFixed(0) : "" }),
-          el("span", { class: "kt-balken-bar", style: "height:" + (st.z[c] / max * 100) + "%" }),
-          el("span", { class: "kt-balken-buchstabe", text: c })
-        ]));
+      reihe.forEach(function (c, nr) {
+        var p = prozent(c);
+        var spalte = balkenSpalte(c + ": " + st.z[c] + " (" + p.toFixed(1) + " %)", st.z[c] ? p.toFixed(0) : "", p / max, c,
+          nachRang ? DEUTSCH[refSortiert[nr]] / max : null);
+        spalte.dataset.c = c;
+        spalte.classList.toggle("kt-gewaehlt", c === fokus);
+        balken.appendChild(spalte);
       });
       // Doppelte Zuordnungen markieren
       var benutzt = {};
       ABC.split("").forEach(function (c) { var v = felder[c].value; if (v) benutzt[v] = (benutzt[v] || 0) + 1; });
-      ABC.split("").forEach(function (c) { felder[c].classList.toggle("kt-doppelt", !!felder[c].value && benutzt[felder[c].value] > 1); });
-      // Teilentschlüsselung: ersetzte Buchstaben klein und farbig, Rest gross
+      ABC.split("").forEach(function (c) {
+        felder[c].classList.toggle("kt-doppelt", !!felder[c].value && benutzt[felder[c].value] > 1);
+        felder[c].parentNode.classList.toggle("kt-gewaehlt", c === fokus);
+      });
+      // Teilentschlüsselung: ersetzte Buchstaben klein und farbig, Rest gross;
+      // der gewählte Buchstabe ist an allen Stellen markiert
       out.innerHTML = "";
       var frag = document.createDocumentFragment(), puffer = "";
       function flush() { if (puffer) { frag.appendChild(document.createTextNode(puffer)); puffer = ""; } }
       for (var i = 0; i < t.length; i++) {
-        var c = t[i];
-        if (felder[c] && felder[c].value) { flush(); frag.appendChild(el("span", { class: "kt-ersetzt", text: felder[c].value })); }
-        else puffer += c;
+        var c = t[i], ersetzt = felder[c] && felder[c].value;
+        if (ersetzt || c === fokus) {
+          flush();
+          frag.appendChild(el("span", { class: (ersetzt ? "kt-ersetzt" : "") + (c === fokus ? " kt-marke" : ""), text: ersetzt || c }));
+        } else puffer += c;
       }
       flush(); out.appendChild(frag);
+      ablesen.innerHTML = "";
+      if (fokus && st.z[fokus]) {
+        var r = rang.indexOf(fokus), dt = refSortiert[r];
+        ablesen.append(el("p", {}, [fett(fokus, "kt-marke"), " kommt " + st.z[fokus] + "-mal vor (" + prozent(fokus).toFixed(1).replace(".", ",") +
+          " %) und liegt auf Rang " + (r + 1) + ". Im Deutschen liegt auf diesem Rang ", fett(dt.toLowerCase()),
+          " (" + DEUTSCH[dt].toFixed(1).replace(".", ",") + " %)."]));
+      } else if (fokus) ablesen.append(el("p", {}, [fett(fokus, "kt-marke"), " kommt im Text nicht vor."]));
     }
+    balken.addEventListener("click", function (ev) {
+      var spalte = ev.target.closest("[data-c]");
+      if (spalte) { fokus = fokus === spalte.dataset.c ? null : spalte.dataset.c; zeichne(); }
+    });
     text.addEventListener("input", zeichne);
     sortierung.addEventListener("input", zeichne);
 
@@ -383,6 +522,8 @@
       feld("Geheimtext", text),
       el("div", { class: "kt-reihe" }, [feld("Balken sortieren", sortierung)]),
       balken, ref,
+      el("p", { class: "kt-hilfe", text: "Nach Häufigkeit sortiert zeigt die Linie hinter den Balken, wie steil die Häufigkeiten im Deutschen abfallen. Balken anklicken: Der Buchstabe wird im Text markiert." }),
+      ablesen,
       el("p", { class: "kt-label", text: "Ersetzungstabelle – tragen Sie unter jedem Geheimtextbuchstaben Ihre Vermutung ein (rot = doppelt vergeben)" }),
       tabelle,
       el("p", { class: "kt-label", text: "Teilweise entschlüsselt (klein = schon ersetzt, GROSS = noch offen)" }),
@@ -407,6 +548,50 @@
     return { text: r, schluesselFolge: k };
   }
 
+  // Vigenère-Quadrat mit derselben Leserichtung wie auf dem Arbeitsblatt:
+  // Zeile = Klartext, Spalte = Schlüssel, Feld = Geheimtext. zeige(p, k) hebt
+  // den Weg von den beiden Rändern bis zum Kreuzungsfeld hervor; ein Klick ruft
+  // beiWahl(p, k) auf (null für die Richtung, die der Klick offen lässt). Die
+  // Fusszeile ist nur im vergrösserten Quadrat zu sehen: Dort verdeckt es die
+  // Erklärung daneben.
+  function vigenereQuadrat(beiWahl) {
+    var oben = [], links = [], zellen = [], markiert = [];
+    var fuss = el("caption", { "aria-hidden": "true" });
+    var tab = el("table", { class: "kt-quadrat", "aria-label": "Vigenère-Quadrat: Zeile Klartext, Spalte Schlüssel" }, [fuss]);
+    var kopfzeile = el("tr", {}, [el("th", { class: "kt-q-ecke", "aria-hidden": "true" })]);
+    ABC.split("").forEach(function (c, k) {
+      oben[k] = el("th", { "data-k": String(k), title: "Schlüssel " + c + " = Verschiebung um " + k, text: c });
+      kopfzeile.appendChild(oben[k]);
+    });
+    tab.appendChild(kopfzeile);
+    ABC.split("").forEach(function (c, p) {
+      links[p] = el("th", { "data-p": String(p), title: "Klartext " + c.toLowerCase(), text: c.toLowerCase() });
+      var tr = el("tr", {}, [links[p]]);
+      zellen[p] = [];
+      for (var k = 0; k < 26; k++) {
+        zellen[p][k] = el("td", { "data-p": String(p), "data-k": String(k), text: ABC[(p + k) % 26] });
+        tr.appendChild(zellen[p][k]);
+      }
+      tab.appendChild(tr);
+    });
+    tab.addEventListener("click", function (ev) {
+      var z = ev.target.closest("th, td"), w = z ? z.dataset : {};
+      if (w.p === undefined && w.k === undefined) return;
+      beiWahl(w.p === undefined ? null : +w.p, w.k === undefined ? null : +w.k);
+    });
+    function setze(z, klasse) { z.classList.add(klasse); markiert.push([z, klasse]); }
+    function zeige(p, k) {
+      markiert.forEach(function (m) { m[0].classList.remove(m[1]); });
+      markiert = [];
+      if (p == null || k == null) return;
+      setze(links[p], "kt-q-rand"); setze(oben[k], "kt-q-rand");
+      for (var i = 0; i < k; i++) setze(zellen[p][i], "kt-q-weg");
+      for (i = 0; i < p; i++) setze(zellen[i][k], "kt-q-weg");
+      setze(zellen[p][k], "kt-q-treffer");
+    }
+    return { tabelle: tab, fuss: fuss, zeige: zeige };
+  }
+
   function toolVigenere(root) {
     var d = root.dataset;
     var text = textfeld(d.text || "JANUAR", 3);
@@ -415,6 +600,50 @@
     modus.value = d.mode === "ent" ? "ent" : "ver";
     var raster = el("div", { class: "kt-raster-wrap" });
     var out = ausgabe("kt-mono");
+    var ablesen = ablesefeld();
+    var stelleText = el("span", { class: "kt-schritt-text" });
+    // folge: die dargestellten Buchstaben; stelle: gewählte Position darin
+    // (−1 = im Quadrat frei gewählt); wahl: was das Quadrat gerade zeigt.
+    var folge = { klar: "", key: "", geheim: "" }, stelle = 0, wahl = null;
+
+    var quadrat = vigenereQuadrat(function (p, k) {
+      wahl = { p: p == null ? (wahl ? wahl.p : 0) : p, k: k == null ? (wahl ? wahl.k : 0) : k };
+      stelle = -1;
+      zeigeWahl();
+    });
+
+    function waehleStelle(i) {
+      stelle = i;
+      wahl = { p: idx(folge.klar[i]), k: idx(folge.key[i]) };
+      zeigeWahl();
+    }
+    function schritt(richtung) {
+      var n = folge.key.length;
+      if (n) waehleStelle(stelle < 0 ? 0 : mod(stelle + richtung, n));
+    }
+
+    function zeigeWahl() {
+      quadrat.zeige(wahl && wahl.p, wahl && wahl.k);
+      Array.prototype.forEach.call(raster.querySelectorAll("td"), function (td) {
+        td.classList.toggle("kt-gewaehlt", +td.dataset.pos === stelle);
+      });
+      stelleText.textContent = !wahl ? "–" : stelle < 0 ? "frei gewählt" : "Buchstabe " + (stelle + 1) + " von " + folge.key.length;
+      ablesen.innerHTML = ""; quadrat.fuss.textContent = "";
+      if (!wahl) return;
+      var ver = modus.value === "ver", p = wahl.p, k = wahl.k, g = (p + k) % 26;
+      var P = ABC[p].toLowerCase(), K = ABC[k], G = ABC[g];
+      var rechnung = ver ?
+        P + " = " + p + ", " + K + " = " + k + ":  " + rechnung26(p, k, 1) + "  →  " + G :
+        G + " = " + g + ", " + K + " = " + k + ":  " + rechnung26(g, k, -1) + "  →  " + P;
+      ablesen.append(
+        el("p", {}, ver ?
+          ["Zeile ", fett(P), " (Klartext) und Spalte ", fett(K), " (Schlüssel) kreuzen sich bei ", fett(G, "kt-marke"), "."] :
+          ["In Spalte ", fett(K), " (Schlüssel) ", fett(G, "kt-marke"), " suchen – am Zeilenanfang steht ", fett(P), "."]),
+        el("p", { class: "kt-mono", text: rechnung }),
+        el("p", { class: "kt-hilfe", text: "Spalte " + K + " ist ein Caesar-Alphabet mit Verschiebung " + k + "." })
+      );
+      quadrat.fuss.textContent = rechnung;
+    }
 
     function rechne() {
       var ver = modus.value === "ver";
@@ -422,24 +651,52 @@
       out.textContent = ver ? r.text : r.text.toLowerCase();
       // Darstellung der ersten 30 Buchstaben: Text / Schlüssel / Ergebnis
       var ein = nurBuchstaben(text.value).slice(0, 30), aus = nurBuchstaben(r.text).slice(0, 30), ks = (r.schluesselFolge || "").slice(0, 30);
+      folge = { klar: ver ? ein : aus, key: ks, geheim: ver ? aus : ein };
       raster.innerHTML = "";
-      if (!ks) { raster.appendChild(el("p", { class: "kt-hilfe", text: "Bitte ein Schlüsselwort aus Buchstaben eingeben." })); return; }
+      if (!ks) {
+        raster.appendChild(el("p", { class: "kt-hilfe", text: "Bitte ein Schlüsselwort aus Buchstaben eingeben." }));
+        wahl = null; stelle = 0; zeigeWahl();
+        return;
+      }
       var tab = el("table", { class: "kt-raster" });
       [[ver ? "Klartext" : "Geheimtext", ver ? ein.toLowerCase() : ein],
        ["Schlüssel", ks],
        [ver ? "Geheimtext" : "Klartext", ver ? aus : aus.toLowerCase()]].forEach(function (z, nr) {
         var tr = el("tr", nr === 1 ? { class: "kt-schluesselzeile" } : {}, [el("th", { text: z[0] })]);
-        z[1].split("").forEach(function (c) { tr.appendChild(el("td", { text: c })); });
+        var geheim = nr === (ver ? 2 : 0);
+        z[1].split("").forEach(function (c, i) {
+          tr.appendChild(el("td", geheim ? { "data-pos": String(i), class: "kt-r-geheim", text: c } : { "data-pos": String(i), text: c }));
+        });
         tab.appendChild(tr);
       });
       raster.appendChild(tab);
-      if (nurBuchstaben(text.value).length > 30) raster.appendChild(el("p", { class: "kt-hilfe", text: "(Darstellung zeigt die ersten 30 Buchstaben.)" }));
+      raster.appendChild(el("p", { class: "kt-hilfe", text: "Buchstaben anklicken: Das Quadrat zeigt, wie er entsteht." +
+        (nurBuchstaben(text.value).length > 30 ? " (Darstellung zeigt die ersten 30 Buchstaben.)" : "") }));
+      waehleStelle(Math.min(Math.max(stelle, 0), ks.length - 1));
     }
+    raster.addEventListener("click", function (ev) {
+      var td = ev.target.closest("td[data-pos]");
+      if (td) waehleStelle(+td.dataset.pos);
+    });
     [text, key, modus].forEach(function (x) { x.addEventListener("input", rechne); });
+
+    var zurueck = knopf("‹", function () { schritt(-1); }, "kt-klein"), weiter = knopf("›", function () { schritt(1); }, "kt-klein");
+    zurueck.setAttribute("aria-label", "vorheriger Buchstabe");
+    weiter.setAttribute("aria-label", "nächster Buchstabe");
     root.append(
       titel("Vigenère-Werkzeug"),
-      feld("Text", text),
-      el("div", { class: "kt-reihe" }, [feld("Schlüsselwort", key), feld("Modus", modus)]),
+      el("div", { class: "kt-mit-bild" }, [
+        el("div", {}, [
+          feld("Text", text),
+          el("div", { class: "kt-reihe" }, [feld("Schlüsselwort", key), feld("Modus", modus)]),
+          el("div", { class: "kt-schritt" }, [el("span", { class: "kt-label", text: "Im Quadrat ablesen" }), el("span", { class: "kt-schritt-wahl" }, [zurueck, stelleText, weiter])]),
+          ablesen
+        ]),
+        el("div", { class: "kt-bild" }, [
+          el("div", { class: "kt-quadrat-rahmen" }, [quadrat.tabelle]),
+          el("p", { class: "kt-hilfe", text: "Zeile (Klartext) oder Spalte (Schlüssel) anklicken." })
+        ])
+      ]),
       raster,
       el("p", { class: "kt-label", text: "Ergebnis" }), out,
       el("div", { class: "kt-knopfreihe" }, [kopierKnopf(out)])
@@ -456,6 +713,7 @@
     var text = textfeld(d.text || "", 6);
     var kasiski = el("div", { class: "kt-kasiski" });
     var laenge = eingabe(d.length || "", "number", { min: "1", max: "20" });
+    var streifen = el("div", { class: "kt-raster-wrap" });
     var spalten = el("div", { class: "kt-spalten" });
     var schluesselAnzeige = el("output", { class: "kt-zahl kt-schluessel" });
     var out = ausgabe("kt-mono kt-klartext");
@@ -484,21 +742,38 @@
         var p = funde[f], ab = [];
         for (var i = 1; i < p.length; i++) ab.push(p[i] - p[i - 1]);
         ab.forEach(function (a) { abstaende.push(a); });
-        tab.appendChild(el("tr", {}, [el("td", { class: "kt-mono", text: f }), el("td", { text: ab.join(", ") }),
+        tab.appendChild(el("tr", { "data-folge": f }, [el("td", { class: "kt-mono", text: f }), el("td", { text: ab.join(", ") }),
           el("td", { text: ab.map(function (a) { return teiler(a, 12).join(" "); }).join(" | ") })]));
       });
       liste.slice(10).forEach(function (f) { var p = funde[f]; for (var i = 1; i < p.length; i++) abstaende.push(p[i] - p[i - 1]); });
-      kasiski.appendChild(el("p", { class: "kt-label", text: "Schritt 1 – Wiederholungen im Geheimtext (" + liste.length + " gefunden, die längsten 10):" }));
+      // Die gewählte Folge im Geheimtext zeigen: Wiederholung und Abstand werden sichtbar.
+      var fundtext = el("div", { class: "kt-ausgabe kt-mono kt-fundtext" }), fundinfo = el("p", { class: "kt-hilfe" });
+      function zeigeFolge(f) {
+        Array.prototype.forEach.call(tab.querySelectorAll("tr[data-folge]"), function (tr) { tr.classList.toggle("kt-gewaehlt", tr.dataset.folge === f); });
+        fundtext.innerHTML = "";
+        var ende = 0, stellen = [];
+        funde[f].forEach(function (start) {
+          if (start < ende) return;
+          fundtext.appendChild(document.createTextNode(t.slice(ende, start)));
+          fundtext.appendChild(el("mark", { class: "kt-marke", text: f }));
+          ende = start + f.length; stellen.push(start + 1);
+        });
+        fundtext.appendChild(document.createTextNode(t.slice(ende)));
+        fundtext.scrollTop = Math.max(0, fundtext.querySelector("mark").offsetTop - fundtext.offsetTop - 6);
+        fundinfo.textContent = "«" + f + "» beginnt an den Stellen " + stellen.join(", ") + ". Dieselbe Folge entsteht, wenn dasselbe Klartextstück auf dasselbe Stück des Schlüssels trifft – der Abstand ist dann ein Vielfaches der Schlüssellänge.";
+      }
+      tab.addEventListener("click", function (ev) {
+        var tr = ev.target.closest("tr[data-folge]");
+        if (tr) zeigeFolge(tr.dataset.folge);
+      });
+      kasiski.appendChild(el("p", { class: "kt-label", text: "Schritt 1 – Wiederholungen im Geheimtext (" + liste.length + " gefunden, die längsten 10). Zeile anklicken: Die Folge wird im Text markiert." }));
       kasiski.appendChild(el("div", { class: "table-scroll" }, [tab]));
+      if (liste.length) { kasiski.append(fundtext, fundinfo); zeigeFolge(liste[0]); }
       // Wie viele Abstände sind durch 2, 3, … 12 teilbar?
       var bal = el("div", { class: "kt-balken kt-balken-klein" }), max = 1, wert = {};
       for (var n = 2; n <= 12; n++) { wert[n] = abstaende.filter(function (a) { return a % n === 0; }).length; max = Math.max(max, wert[n]); }
       for (n = 2; n <= 12; n++) {
-        bal.appendChild(el("div", { class: "kt-balken-spalte", title: wert[n] + " von " + abstaende.length + " Abständen sind durch " + n + " teilbar" }, [
-          el("span", { class: "kt-balken-wert", text: String(wert[n]) }),
-          el("span", { class: "kt-balken-bar", style: "height:" + (wert[n] / max * 100) + "%" }),
-          el("span", { class: "kt-balken-buchstabe", text: String(n) })
-        ]));
+        bal.appendChild(balkenSpalte(wert[n] + " von " + abstaende.length + " Abständen sind durch " + n + " teilbar", String(wert[n]), wert[n] / max, String(n)));
       }
       kasiski.appendChild(el("p", { class: "kt-label", text: "Wie viele der " + abstaende.length + " Abstände sind durch die Zahl teilbar?" }));
       kasiski.appendChild(bal);
@@ -507,12 +782,40 @@
 
     function spaltenBauen() {
       var t = nurBuchstaben(text.value), L = parseInt(laenge.value, 10);
-      spalten.innerHTML = "";
+      spalten.innerHTML = ""; streifen.innerHTML = "";
       if (!(L >= 1 && L <= 20)) { verschiebungen = []; entschluesseln(); return; }
       while (verschiebungen.length < L) verschiebungen.push(0);
       verschiebungen.length = L;
+      if (t) streifenBauen(t, L);
       for (var s = 0; s < L; s++) spalten.appendChild(spalte(t, L, s));
       entschluesseln();
+    }
+
+    // Der Geheimtext in Zeilen zu L Buchstaben: Was untereinander steht, wurde
+    // mit demselben Schlüsselbuchstaben verschoben.
+    function streifenBauen(t, L) {
+      var tab = el("table", { class: "kt-streifen" }), kopf = el("tr", {}, [el("th", { text: "Spalte" })]);
+      var unten = el("tr", { class: "kt-schluesselzeile" }, [el("th", { text: "Schlüssel" })]);
+      for (var s = 0; s < L; s++) {
+        kopf.appendChild(el("th", { "data-s": String(s), text: String(s + 1) }));
+        unten.appendChild(el("td", { "data-s": String(s) }));
+      }
+      tab.appendChild(kopf);
+      for (var z = 0; z < 5 && z * L < t.length; z++) {
+        var tr = el("tr", {}, [el("th", { text: z === 0 ? "Geheimtext" : "" })]);
+        for (s = 0; s < L; s++) tr.appendChild(el("td", { "data-s": String(s), text: t[z * L + s] || "\u00a0" }));
+        tab.appendChild(tr);
+      }
+      tab.appendChild(unten);
+      tab.addEventListener("click", function (ev) {
+        var z = ev.target.closest("[data-s]");
+        if (z) waehleSpalte(+z.dataset.s);
+      });
+      streifen.append(tab, el("p", { class: "kt-hilfe", text: "Der Geheimtext in Zeilen zu " + L + " Buchstaben (die ersten 5 Zeilen): Was untereinander steht, wurde mit demselben Schlüsselbuchstaben verschoben – jede Spalte ist für sich ein Caesar-Geheimtext. Spalte anklicken: Die passende Karte unten wird hervorgehoben." }));
+    }
+    function waehleSpalte(s) {
+      Array.prototype.forEach.call(streifen.querySelectorAll("[data-s]"), function (z) { z.classList.toggle("kt-gewaehlt", +z.dataset.s === s); });
+      Array.prototype.forEach.call(spalten.children, function (k, i) { k.classList.toggle("kt-gewaehlt", i === s); });
     }
 
     function spalte(t, L, s) {
@@ -544,6 +847,7 @@
         );
       }
       karte._zeichne = zeichne;
+      karte.addEventListener("click", function () { waehleSpalte(s); });
       karte.append(kopf, diagramm, el("p", { class: "kt-hilfe", text: buchstaben.length + " Buchstaben · blau = diese Spalte, orange Linie = Deutsch" }));
       zeichne();
       return karte;
@@ -552,6 +856,7 @@
     function entschluesseln() {
       var key = verschiebungen.map(function (v) { return ABC[v]; }).join("");
       schluesselAnzeige.textContent = key || "–";
+      Array.prototype.forEach.call(streifen.querySelectorAll(".kt-schluesselzeile td"), function (td, s) { td.textContent = ABC[verschiebungen[s]]; });
       out.textContent = key ? vigenereText(nurBuchstaben(text.value), key, -1).text.toLowerCase() : "";
     }
 
@@ -569,6 +874,7 @@
           Array.prototype.forEach.call(spalten.children, function (k) { k._zeichne(); });
           entschluesseln();
         })]),
+      streifen,
       el("p", { class: "kt-hilfe", text: "Verschieben Sie mit − und + so lange, bis die blauen Balken zu den orangen Linien passen – vor allem beim hohen e." }),
       spalten,
       el("p", { class: "kt-label" }, ["Schlüsselwort: ", schluesselAnzeige]),
@@ -586,25 +892,61 @@
     var text = eingabe(d.text || "HALLO");
     var key = eingabe(d.key || "KEY");
     var out = el("div", { class: "kt-xor table-scroll" });
+    var ablesen = ablesefeld();
     var info = el("p", { class: "kt-hilfe" });
+    var wahl = { z: 0, b: 0 };   // gewähltes Zeichen und Bit (0 = ganz links)
+    // Die Wahrheitstabelle ist die ganze Rechenregel von XOR.
+    var regel = {}, wahrheit = el("table", { class: "kt-tabelle kt-mono kt-wahrheit" }, [
+      el("tr", {}, [el("th", { text: "a" }), el("th", { text: "b" }), el("th", { text: "a ⊕ b" })])]);
+    ["00", "01", "10", "11"].forEach(function (ab) {
+      regel[ab] = el("tr", {}, [el("td", { text: ab[0] }), el("td", { text: ab[1] }), el("td", { text: String(ab[0] ^ ab[1]) })]);
+      wahrheit.appendChild(regel[ab]);
+    });
+    function zeichen(byte) { return byte === 32 ? "␣" : byte > 32 && byte < 127 ? String.fromCharCode(byte) : "·"; }
 
     function rechne() {
       var t = new TextEncoder().encode(text.value), k = new TextEncoder().encode(key.value);
-      out.innerHTML = "";
+      out.innerHTML = ""; ablesen.innerHTML = "";
+      Object.keys(regel).forEach(function (ab) { regel[ab].classList.remove("kt-gewaehlt"); });
       if (!t.length || !k.length) return;
-      var c = t.map(function (b, i) { return b ^ k[i % k.length]; });
-      var tab = el("table", { class: "kt-tabelle kt-mono" });
-      [["Klartext", bits(t)], ["Schlüssel", bits(t.map(function (_, i) { return k[i % k.length]; }))], ["XOR = Geheimtext", bits(c)]].forEach(function (z, nr) {
+      var ks = t.map(function (_, i) { return k[i % k.length]; });
+      var c = t.map(function (b, i) { return b ^ ks[i]; });
+      var n = Math.min(t.length, 8);
+      wahl.z = Math.min(wahl.z, n - 1);
+      var tab = el("table", { class: "kt-tabelle kt-mono" }), kopf = el("tr", {}, [el("th", { text: "Zeichen" })]);
+      for (var i = 0; i < n; i++) kopf.appendChild(el("th", { text: zeichen(t[i]) + " ⊕ " + zeichen(ks[i]) }));
+      tab.appendChild(kopf);
+      [["Klartext", t], ["Schlüssel", ks], ["XOR = Geheimtext", c]].forEach(function (z, nr) {
         var tr = el("tr", nr === 2 ? { class: "kt-ergebniszeile" } : {}, [el("th", { text: z[0] })]);
-        z[1].slice(0, 8).forEach(function (b) { tr.appendChild(el("td", { text: b })); });
+        for (var i = 0; i < n; i++) tr.appendChild(bitZelle(z[1][i], i, nr === 2 ? "kt-marke" : "kt-gewaehlt"));
         tab.appendChild(tr);
       });
       out.appendChild(tab);
+      var bitsT = bits([t[wahl.z]])[0], bitsK = bits([ks[wahl.z]])[0], x = bitsT[wahl.b], y = bitsK[wahl.b];
+      regel[x + y].classList.add("kt-gewaehlt");
+      ablesen.append(
+        el("p", { class: "kt-mono", text: "Zeichen " + (wahl.z + 1) + ":  " + zeichen(t[wahl.z]) + " = " + t[wahl.z] + " = " + bitsT +
+          ",  Schlüssel " + zeichen(ks[wahl.z]) + " = " + ks[wahl.z] + " = " + bitsK }),
+        el("p", {}, ["Bit " + (wahl.b + 1) + " von links: " + x + " ⊕ " + y + " = ", fett(String(x ^ y), "kt-marke"),
+          x === y ? " – gleiche Bits ergeben 0." : " – verschiedene Bits ergeben 1."])
+      );
       info.textContent = (t.length > 8 ? "(Es werden die ersten 8 Zeichen gezeigt.) " : "") +
         "Geheimtext als Hex: " + Array.prototype.map.call(c, function (b) { return b.toString(16).padStart(2, "0"); }).join(" ") +
         (k.length >= t.length ? "  –  Schlüssel so lang wie die Nachricht: das ist ein One-Time-Pad, wenn er zufällig ist und nur einmal verwendet wird." :
           "  –  Der Schlüssel wiederholt sich (wie bei Vigenère) – angreifbar!");
     }
+    // Ein Byte als acht anklickbare Bits; das gewählte bekommt die Klasse.
+    function bitZelle(byte, z, klasse) {
+      var td = el("td");
+      bits([byte])[0].split("").forEach(function (bit, b) {
+        td.appendChild(el("span", { "data-z": String(z), "data-b": String(b), class: z === wahl.z && b === wahl.b ? klasse : "", text: bit }));
+      });
+      return td;
+    }
+    out.addEventListener("click", function (ev) {
+      var bit = ev.target.closest("span[data-b]");
+      if (bit) { wahl = { z: +bit.dataset.z, b: +bit.dataset.b }; rechne(); }
+    });
     function zufall() {
       var n = new TextEncoder().encode(text.value).length, s = "";
       var z = new Uint8Array(n); crypto.getRandomValues(z);
@@ -613,9 +955,16 @@
     }
     [text, key].forEach(function (x) { x.addEventListener("input", rechne); });
     root.append(titel("XOR-Werkzeug"),
-      el("div", { class: "kt-reihe" }, [feld("Klartext", text), feld("Schlüssel", key)]),
-      el("div", { class: "kt-knopfreihe" }, [knopf("Zufälliger Schlüssel in Nachrichtenlänge", zufall)]),
-      out, info);
+      el("div", { class: "kt-mit-bild" }, [
+        el("div", {}, [
+          el("div", { class: "kt-reihe" }, [feld("Klartext", text), feld("Schlüssel", key)]),
+          el("div", { class: "kt-knopfreihe" }, [knopf("Zufälliger Schlüssel in Nachrichtenlänge", zufall)])
+        ]),
+        el("div", { class: "kt-bild" }, [wahrheit, el("p", { class: "kt-hilfe", text: "Die Regel: gleich → 0, verschieden → 1." })])
+      ]),
+      out,
+      el("p", { class: "kt-hilfe", text: "Bit anklicken: Die passende Zeile der Regel wird markiert." }),
+      ablesen, info);
     rechne();
   }
 
@@ -627,12 +976,38 @@
     var b = textfeld(d.text2 || "Informatik ist spannend!", 2);
     var ha = ausgabe("kt-mono kt-hash"), hb = ausgabe("kt-mono kt-hash");
     var vergleich = el("p", { class: "kt-label" });
+    var bild = el("div", { class: "kt-bitbild" }), ablesen = ablesefeld();
+    var ziffer = 0;   // gewählte Hex-Ziffer (0 … 63)
+
+    function vierBits(h) { return parseInt(h, 16).toString(2).padStart(4, "0"); }
+    // 256 Kästchen, eines pro Bit; an(j) sagt, ob Bit j gefüllt ist.
+    function bitZeile(name, an, klasse) {
+      var kasten = el("div", { class: "kt-bits" + (klasse ? " " + klasse : "") });
+      for (var j = 0; j < 256; j++) {
+        kasten.appendChild(el("span", { "data-i": String(j >> 2), class: (an(j) ? "kt-an" : "") + ((j >> 2) === ziffer ? " kt-gewaehlt" : "") }));
+      }
+      return el("div", { class: "kt-bitzeile" }, [el("span", { text: name }), kasten]);
+    }
 
     function rechne() {
       var x = sha256(a.value), y = sha256(b.value);
-      ha.textContent = x;
-      hb.innerHTML = "";
-      for (var i = 0; i < y.length; i++) hb.appendChild(el("span", y[i] !== x[i] ? { class: "kt-anders", text: y[i] } : { text: y[i] }));
+      ha.innerHTML = ""; hb.innerHTML = "";
+      for (var i = 0; i < 64; i++) {
+        ha.appendChild(el("span", { "data-i": String(i), class: i === ziffer ? "kt-gewaehlt" : "", text: x[i] }));
+        hb.appendChild(el("span", { "data-i": String(i), class: (y[i] !== x[i] ? "kt-anders" : "") + (i === ziffer ? " kt-gewaehlt" : ""), text: y[i] }));
+      }
+      var bx = x.split("").map(vierBits).join(""), by = y.split("").map(vierBits).join("");
+      bild.innerHTML = "";
+      bild.append(
+        bitZeile("A", function (j) { return bx[j] === "1"; }),
+        bitZeile("B", function (j) { return by[j] === "1"; }),
+        bitZeile("A ≠ B", function (j) { return bx[j] !== by[j]; }, "kt-bits-anders")
+      );
+      var vx = vierBits(x[ziffer]), vy = vierBits(y[ziffer]), ungleich = 0;
+      for (i = 0; i < 4; i++) if (vx[i] !== vy[i]) ungleich++;
+      ablesen.innerHTML = "";
+      ablesen.append(el("p", { class: "kt-mono", text: "Ziffer " + (ziffer + 1) + " von 64:  A = " + x[ziffer] + " = " + vx +
+        ",  B = " + y[ziffer] + " = " + vy + "  →  " + ungleich + " von 4 Bits verschieden" }));
       var diff = 0;
       for (i = 0; i < 64; i += 8) {
         var v = (parseInt(x.substr(i, 8), 16) ^ parseInt(y.substr(i, 8), 16)) >>> 0;
@@ -642,16 +1017,70 @@
         diff + " von 256 Bits unterscheiden sich (" + Math.round(diff / 2.56) + " %). Markiert: abweichende Hex-Ziffern.";
     }
     [a, b].forEach(function (x) { x.addEventListener("input", rechne); });
+    [ha, hb, bild].forEach(function (x) {
+      x.addEventListener("click", function (ev) {
+        var i = ev.target.dataset.i;
+        if (i !== undefined) { ziffer = +i; rechne(); }
+      });
+    });
     root.append(titel("SHA-256-Werkzeug"),
       feld("Text A", a), el("p", { class: "kt-label", text: "SHA-256(A)" }), ha,
       feld("Text B – ändern Sie hier nur ein einziges Zeichen", b), el("p", { class: "kt-label", text: "SHA-256(B)" }), hb,
-      vergleich);
+      vergleich, bild,
+      el("p", { class: "kt-hilfe", text: "Ein Kästchen pro Bit, gefüllt = 1. Unterste Reihe: die Bits, in denen sich A und B unterscheiden. Hex-Ziffer oder Kästchen anklicken: Eine Ziffer steht für 4 Bits." }),
+      ablesen);
     rechne();
   }
 
   // ==================================================================== RSA
 
   function zeile(name, wert) { return el("div", { class: "kt-kv" }, [el("span", { text: name }), el("code", { text: wert })]); }
+
+  // Weg von links nach rechts. teile wechselt ab: Kästchen, Pfeiltext, Kästchen, …
+  function weg(teile) {
+    return el("div", { class: "kt-weg" }, teile.map(function (t, i) {
+      return el("span", { class: i % 2 ? "kt-pfeil" : "kt-knoten", text: t });
+    }));
+  }
+
+  // Rechenweg für basis^exp mod n durch wiederholtes Quadrieren. So rechnet auch
+  // der Computer: Nach jedem Schritt wird der Rest genommen, die Zahlen bleiben klein.
+  function potenzSchritte(basis, exp, n, name) {
+    basis = big(basis); exp = big(exp); n = big(n);
+    var bin = exp.toString(2), box = el("div", { class: "kt-schritte" });
+    if (bin.length > 40) {
+      box.appendChild(el("p", { class: "kt-hilfe", text: "Der Exponent ist zu gross, um den Rechenweg hier zu zeigen." }));
+      return box;
+    }
+    var tab = el("table", { class: "kt-tabelle kt-mono" }, [el("tr", {}, [
+      el("th", { text: "Potenz" }), el("th", { text: "Rechnung" }), el("th", { text: "mod " + n }), el("th", { text: "gebraucht" })])]);
+    var q = basis % n, vorher = null, r = 1n, summe = [], faktoren = [];
+    for (var i = 0; i < bin.length; i++) {
+      var hoch = 1n << big(i), gebraucht = bin[bin.length - 1 - i] === "1";
+      tab.appendChild(el("tr", gebraucht ? { class: "kt-gewaehlt" } : {}, [
+        el("td", { text: name + "^" + hoch }), el("td", { text: i === 0 ? String(basis) : vorher + "²" }),
+        el("td", { text: String(q) }), el("td", { text: gebraucht ? "✓" : "–" })]));
+      if (gebraucht) { summe.unshift(String(hoch)); faktoren.push(String(q)); r = r * q % n; }
+      vorher = q; q = q * q % n;
+    }
+    box.append(
+      el("p", {}, [fett(name + "^" + exp + " mod " + n), " – der Exponent als Summe von Zweierpotenzen: " + exp + " = " + summe.join(" + ") + " (binär " + bin + ")."]),
+      el("div", { class: "table-scroll" }, [tab]),
+      el("p", { class: "kt-mono", text: faktoren.join(" · ") + " mod " + n + " = " + r }),
+      el("p", { class: "kt-hilfe", text: "Jede Zeile quadriert die vorherige und nimmt sofort den Rest. So bleiben die Zahlen klein, auch wenn der Exponent riesig ist." })
+    );
+    return box;
+  }
+  // Zeigt unter einer Tabelle den Rechenweg zur angeklickten Zeile; ein zweiter Klick klappt ihn zu.
+  function zeigeSchritte(behaelter, tr, basis, exp, n, name) {
+    var alt = behaelter.querySelector(".kt-schritte"), war = tr.classList.contains("kt-gewaehlt");
+    if (alt) alt.remove();
+    Array.prototype.forEach.call(behaelter.querySelectorAll("tr.kt-klickbar"), function (z) { z.classList.remove("kt-gewaehlt"); });
+    if (war) return;
+    tr.classList.add("kt-gewaehlt");
+    behaelter.appendChild(potenzSchritte(basis, exp, n, name));
+  }
+  var SCHRITTE_HINWEIS = "Zeile anklicken: Rechenweg in Schritten.";
 
   function toolRsa(root) {
     var d = root.dataset;
@@ -715,10 +1144,12 @@
       var tab = el("table", { class: "kt-tabelle" }, [el("tr", {}, [el("th", { text: "Block" }), el("th", { text: "Zahl m" }), el("th", { text: "c = m^e mod n" })])]);
       var cs = bl.map(function (b) {
         var c = modPow(b.zahl, k.a, k.n);
-        tab.appendChild(el("tr", {}, [el("td", { class: "kt-mono", text: nurZahlen ? "–" : "«" + b.text + "»" }), el("td", { class: "kt-mono", text: b.zahl.toString() }), el("td", { class: "kt-mono", text: c.toString() })]));
+        var tr = el("tr", { class: "kt-klickbar" }, [el("td", { class: "kt-mono", text: nurZahlen ? "–" : "«" + b.text + "»" }), el("td", { class: "kt-mono", text: b.zahl.toString() }), el("td", { class: "kt-mono", text: c.toString() })]);
+        tr.addEventListener("click", function () { zeigeSchritte(tabelleV, tr, b.zahl, k.a, k.n, "m"); });
+        tab.appendChild(tr);
         return c.toString();
       });
-      tabelleV.appendChild(tab);
+      tabelleV.append(tab, el("p", { class: "kt-hilfe", text: SCHRITTE_HINWEIS }));
       geheim.textContent = cs.join(" ");
     }
 
@@ -737,9 +1168,11 @@
       cs.forEach(function (c) {
         var m = modPow(c, k.a, k.n), t = L > 0 ? blockZuText(m, L) : "";
         text += t; ms.push(m.toString());
-        tab.appendChild(el("tr", {}, [el("td", { class: "kt-mono", text: c }), el("td", { class: "kt-mono", text: m.toString() }), el("td", { class: "kt-mono", text: L > 0 ? "«" + t + "»" : "–" })]));
+        var tr = el("tr", { class: "kt-klickbar" }, [el("td", { class: "kt-mono", text: c }), el("td", { class: "kt-mono", text: m.toString() }), el("td", { class: "kt-mono", text: L > 0 ? "«" + t + "»" : "–" })]);
+        tr.addEventListener("click", function () { zeigeSchritte(tabelleE, tr, c, k.a, k.n, "c"); });
+        tab.appendChild(tr);
       });
-      tabelleE.appendChild(tab);
+      tabelleE.append(tab, el("p", { class: "kt-hilfe", text: SCHRITTE_HINWEIS }));
       klar.textContent = L > 0 ? text.trim().toLowerCase() : "Zahlen: " + ms.join(" ");
     }
 
@@ -781,6 +1214,30 @@
 
   // ======================================================== RSA – EVE-MODUS
 
+  // Die ersten Schritte der Probedivision ausgeschrieben, dazu der Treffer.
+  function probeText(n, p) {
+    var teile = [3n, 5n, 7n].filter(function (t) { return t < p; }).map(function (t) { return n + " : " + t + " → Rest " + (n % t); });
+    if (p > 9n) teile.push("…");
+    teile.push(n + " : " + p + " → Rest 0 ✓");
+    return teile.join("   ");
+  }
+  // Balken: wie viel vom Bereich 3 … √n abgesucht wurde.
+  function suchstrecke(n, bis, gefunden) {
+    var wurzel = Math.sqrt(Number(n));
+    if (!isFinite(wurzel) || !(wurzel > 3)) return document.createTextNode("");
+    var prozent = Math.min(1, Math.max(0, (Number(bis) - 3) / (wurzel - 3))) * 100;
+    return el("div", { class: "kt-suche" }, [
+      el("div", { class: "kt-strecke" }, [el("span", { style: "width:" + prozent + "%" })]),
+      el("div", { class: "kt-strecke-text" }, [
+        el("span", { text: "3" }),
+        el("span", { text: (gefunden ? "Treffer bei " : "abgesucht bis ") + bis + " – " +
+          (prozent < 0.01 ? "weniger als 0,01" : prozent.toFixed(prozent < 10 ? 2 : 0).replace(".", ",")) + " % des Bereichs" }),
+        el("span", { text: "√n" })   // ohne Zahl: Die schätzen die SuS in Lektion 7 selbst
+      ]),
+      el("p", { class: "kt-hilfe", text: "Eve probiert 3, 5, 7, … als Teiler. Weiter als bis √n muss sie nie suchen: Von zwei Faktoren ist einer höchstens so gross wie √n." })
+    ]);
+  }
+
   function toolRsaEve(root) {
     var d = root.dataset;
     var oeffFeld = eingabe(d.pub || "", "text", { placeholder: "(e, n)" });
@@ -807,13 +1264,16 @@
           var wurzel = Math.sqrt(Number(n)) / 2;
           var proSek = Number(schritte) / (ms / 1000);
           out.append(el("p", { class: "kt-fehler", text: "Abgebrochen nach " + schritte.toLocaleString("de-CH") + " Versuchen (" + (ms / 1000).toFixed(1) + " s)." }),
-            el("p", { text: "Für alle ≈ " + wurzel.toExponential(1) + " Versuche bräuchte dieser Browser etwa " + dauer(wurzel / proSek) + "." }));
+            el("p", { text: "Für alle ≈ " + wurzel.toExponential(1) + " Versuche bräuchte dieser Browser etwa " + dauer(wurzel / proSek) + "." }),
+            suchstrecke(n, i, false));
         } else out.appendChild(el("p", { class: "kt-fehler", text: "n ist eine Primzahl – das ist kein gültiger RSA-Schlüssel." }));
         return;
       }
       var q = n / p, phi = (p - 1n) * (q - 1n), D = modInv(k.a, phi);
       out.append(
         zeile("Probedivision", schritte.toLocaleString("de-CH") + " Versuche in " + ms.toFixed(1) + " ms"),
+        zeile("getestete Teiler", probeText(n, p)),
+        suchstrecke(n, p, true),
         zeile("n = p · q", n + " = " + p + " · " + q),
         zeile("φ(n)", (p - 1n) + " · " + (q - 1n) + " = " + phi),
         zeile("privater Schlüssel d", D === null ? "existiert nicht (e nicht teilerfremd zu φ)" : D.toString())
@@ -873,7 +1333,8 @@
       var h = hashZahl(text.value, paar.n), s = modPow(h.zahl, paar.d, paar.n);
       signOut.append(zeile("SHA-256(Text)", h.hex.slice(0, 32) + "…"),
         zeile("Hashwert als Zahl mod n", h.zahl.toString()),
-        zeile("Signatur s = h^d mod n", s.toString()));
+        zeile("Signatur s = h^d mod n", s.toString()),
+        weg(["Dokument", "SHA-256, mod n", "h = " + h.zahl, "h^d mod n – privater Schlüssel", "s = " + s]));
       pruefText.value = text.value; pruefSig.value = s.toString(); pruefKey.value = "(" + paar.e + ", " + paar.n + ")";
       pruefen();
     }
@@ -882,8 +1343,10 @@
       var k = schluesselLesen(pruefKey.value), s = zahlen(pruefSig.value)[0];
       if (!k || !s) return;
       var h = hashZahl(pruefText.value, k.n), zurueck = modPow(s, k.a, k.n), ok = zurueck === h.zahl;
-      pruefOut.append(zeile("Hashwert des erhaltenen Texts mod n", h.zahl.toString()),
-        zeile("s^e mod n (aus der Signatur)", zurueck.toString()),
+      pruefOut.append(
+        weg(["erhaltenes Dokument", "SHA-256, mod n", h.zahl.toString()]),
+        el("div", { class: "kt-urteil " + (ok ? "kt-ok" : "kt-fehler"), text: ok ? "=" : "≠" }),
+        weg(["Signatur s", "s^e mod n – öffentlicher Schlüssel", zurueck.toString()]),
         el("p", { class: ok ? "kt-ok" : "kt-fehler", text: ok ? "✓ Signatur gültig: Text unverändert und mit dem passenden privaten Schlüssel signiert." :
           "✗ Signatur ungültig: Text verändert, falsche Signatur oder falscher Schlüssel." }));
     }
@@ -935,6 +1398,7 @@
     a.value = "0"; b.value = "1";
     var buehne = el("div", { class: "kt-dh" });
     var zahlenTeil = el("div", { class: "kt-rechenweg" });
+    var potenzen = el("div", { class: "kt-balken kt-balken-klein" });
     var ga = eingabe("6", "number", { min: "2", max: "21" }), gb = eingabe("15", "number", { min: "2", max: "21" });
 
     function zeichne() {
@@ -960,6 +1424,15 @@
       // Dasselbe mit Zahlen: p = 23, g = 5
       var p = 23n, g = 5n, x = big(ga.value || 2), y = big(gb.value || 2);
       var X = modPow(g, x, p), Y = modPow(g, y, p);
+      // Alle Potenzen von 5 auf einen Blick: vorwärts ablesen ist leicht, rückwärts muss man suchen.
+      potenzen.innerHTML = "";
+      for (var i = 1; i <= 22; i++) {
+        var wert = Number(modPow(g, i, p));
+        var marke = [big(i) === x ? "a" : "", big(i) === y ? "b" : ""].filter(Boolean).join(",");
+        var spalte = balkenSpalte("5^" + i + " mod 23 = " + wert, String(wert), wert / 22, String(i), null, marke);
+        spalte.classList.toggle("kt-gewaehlt", !!marke);
+        potenzen.appendChild(spalte);
+      }
       zahlenTeil.innerHTML = "";
       zahlenTeil.append(
         zeile("öffentlich", "p = 23, g = 5"),
@@ -978,6 +1451,8 @@
       el("p", { class: "kt-hilfe", text: "Die Analogie funktioniert, weil sich gemischte Farben kaum wieder trennen lassen – das ist die Einwegfunktion." }),
       el("p", { class: "kt-label", text: "Dasselbe mit Zahlen (Einwegfunktion: Potenzieren mit Rest)" }),
       el("div", { class: "kt-reihe" }, [feld("Geheimzahl a von Alice", ga), feld("Geheimzahl b von Bob", gb)]),
+      el("p", { class: "kt-hilfe", text: "5^x mod 23 für x = 1 … 22 (unten x, oben der Wert): Jeder Wert kommt genau einmal vor, aber ohne erkennbare Ordnung. Vorwärts liest Alice in Spalte a ihren Wert A ab. Rückwärts müsste Eve die ganze Reihe nach A absuchen." }),
+      potenzen,
       zahlenTeil
     );
     zeichne();

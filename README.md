@@ -152,6 +152,26 @@ Werkzeuge werden nicht gedruckt. Braucht es einen Geheimtext auch auf Papier, ih
 als Absatz mit `class="nur-druck"` ins Arbeitsblatt setzen – am Bildschirm bleibt er dann
 ausgeblendet und steht nicht doppelt da.
 
+Jedes Werkzeug zeigt neben dem Ergebnis auch, wie es entsteht: ein Bild des Verfahrens, in dem
+das Angeklickte im Leuchtstift hervorgehoben ist, und eine Zeile, die nachrechnet.
+
+| Werkzeug | Bild des Verfahrens | anklickbar |
+|---|---|---|
+| Caesar | Chiffrierscheibe, dreht mit dem Schieber | Buchstabe auf der Scheibe oder in der Tabelle |
+| Häufigkeitsanalyse | Linie der deutschen Verteilung hinter den Balken (nur «nach Häufigkeit») | Balken: markiert den Buchstaben im Text |
+| Vigenère | Vigenère-Quadrat, klein neben den Eingaben, unter der Maus gross | Buchstabe im Text, Zeile/Spalte/Feld im Quadrat |
+| Vigenère knacken | Fundstellen einer Folge im Geheimtext; Text in Zeilen zur Schlüssellänge | Zeile der Wiederholungstabelle, Spalte |
+| XOR | Wahrheitstabelle | einzelnes Bit |
+| SHA-256 | ein Kästchen pro Bit für A, B und «A ≠ B» | Hex-Ziffer oder Kästchen |
+| RSA | Rechenweg m^e mod n durch wiederholtes Quadrieren | Zeile der Blocktabelle |
+| Eve-Modus | getestete Teiler und abgesuchter Anteil des Bereichs bis √n | – |
+| Signatur | zwei Wege (Hash des Texts, s^e), die gleich oder ungleich enden | – |
+| Diffie-Hellman | alle Potenzen 5^x mod 23 als Balken, a und b markiert | – |
+
+Die gemeinsamen Bausteine dafür stehen in `krypto.js` (`ablesefeld`, `balkenSpalte`,
+`rechnung26`, `weg`) und im CSS unter «Wie ein Ergebnis entsteht» (`.kt-mit-bild`, `.kt-marke`,
+`.kt-gewaehlt`, `.kt-ablesen`).
+
 Ein Werkzeug darf beim Laden keine Lösung zeigen, die die SuS selbst finden sollen: nicht mit
 dem Geheimtext einer Aufgabe und dem passenden Schlüssel vorbelegen, sondern mit einem neutralen
 Beispiel.
