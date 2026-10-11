@@ -1055,6 +1055,11 @@ select.luecke-feld option { background: var(--bg-elev); color: var(--text); }
   content: ""; grid-area: 2 / 1; justify-self: end;
   border-left: .65em solid var(--linie); border-top: .35em solid transparent; border-bottom: .35em solid transparent;
 }
+/* Auf breiten Bildschirmen bleibt die Beschriftung eines Pfeils auf einer
+   Zeile: Die Pfeile sind gleich lang, solange der Text Platz hat. */
+@media screen and (min-width: 52rem) {
+  .schema:not(.schema-paar) { grid-template-columns: auto minmax(max-content, 1fr) auto minmax(max-content, 1fr) auto; }
+}
 .schema-abzweig {
   grid-area: 2 / 2 / 3 / 5; justify-self: center; position: relative; margin-top: 1.1em;
   display: flex; flex-direction: column; align-items: center; text-align: center;
