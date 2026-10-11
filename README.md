@@ -7,7 +7,7 @@ Die Website wird von GitHub Pages direkt aus diesem Repository mit Jekyll gebaut
 ## Aufbau
 
 ```
-├── _config.yml            Konfiguration (Titel, baseurl, Badge-Beschriftungen)
+├── _config.yml            Konfiguration (Titel, baseurl, Badge-Beschriftungen, Signet, Kopfzeile)
 ├── index.md               Startseite
 ├── lektion-1.md …         Lektionsseiten: Metadaten + Ablauf als Aufträge für die SuS
 ├── lektionen/             Arbeitsblätter (SuS) und Ablaufpläne (Lehrperson)
@@ -21,7 +21,8 @@ Die Website wird von GitHub Pages direkt aus diesem Repository mit Jekyll gebaut
 ├── assets/js/krypto.js    interaktive Werkzeuge (Caesar … Diffie-Hellman), laufen lokal im Browser
 ├── assets/js/dossier.js   sammelt Seiten für die Dossiers
 ├── assets/js/uebungen.js  interaktive Übungen (Lücken, Auswahl, Prüfen-Knopf)
-└── assets/css/unterricht.css   Gestaltung inkl. Dark Mode, Druckansicht, Werkzeuge (Abschnitt 7)
+├── assets/fonts/          Schriften (Inter, IBM Plex Mono), lokal statt von fremden Servern
+└── assets/css/unterricht.css   Gestaltung inkl. Dark Mode und Druckansicht; Werkzeuge (Abschnitt 5), Übungen (Abschnitt 6)
 ```
 
 ## Wer sieht was
@@ -71,6 +72,27 @@ automatisch formatiert.
 
 **Externe Links** als normale Markdown-Links schreiben. Sie öffnen von selbst in einem
 neuen Tab (Skript in `_layouts/default.html`), interne Links bleiben im selben Tab.
+
+## Gestaltung
+
+Es gibt genau ein Design, dasselbe wie in den anderen Unterrichtseinheiten: Tinte auf
+Papier, Schreibmaschinenschrift (IBM Plex Mono) für Titel, Nummern und Etiketten, Inter für
+den Lesetext, Leuchtstift-Gelb als einzige Farbe. Dark Mode folgt der Einstellung des Geräts.
+Die Schriften liegen in `assets/fonts/`, es wird nichts von fremden Servern geladen.
+
+Was diese Einheit von anderen unterscheidet, steht nicht im Stylesheet, sondern hier:
+
+| Angabe | Wo | Wirkung |
+|---|---|---|
+| `signet` | `_config.yml` | Zeichenleiste unter dem Titel der Startseite (hier: der Titel als Caesar-Chiffre) |
+| `hauptnav` | `_config.yml` | Zusatzeinträge in der Kopfzeile, hinter den Lektionsnummern |
+| `stichwort` | Frontmatter von `lektion-N.md` | ein Wort rechts in der Lektionsliste der Startseite |
+
+Alle drei sind optional; fehlt eine Angabe, entfällt das Element. Fett Gesetztes im
+Einstiegstext von `index.md` bekommt den Leuchtstift – gedacht für die Leitfrage.
+
+Farben, Linien und Schriften hängen an den Variablen in Abschnitt 2 von
+`assets/css/unterricht.css`. Gedruckt wird in der Systemschrift des Geräts, schwarz auf weiss.
 
 ## Lokale Vorschau (optional)
 
