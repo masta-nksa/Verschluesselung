@@ -49,14 +49,28 @@ Signaturen. MD5 und SHA-1 gelten als gebrochen.
 
 ## Die digitale Signatur
 
-```
-Alice:  Dokument ──Hash──▶ h ──mit Alices PRIVATEM Schlüssel──▶ Signatur
-        verschickt Dokument + Signatur
+Alice **signiert** und verschickt Dokument und Signatur:
 
-Bob:    Dokument ──Hash──▶ h₁
-        Signatur ──mit Alices ÖFFENTLICHEM Schlüssel──▶ h₂
-        h₁ = h₂ ?  → gültig : verändert oder gefälscht
-```
+<div class="ablauf" role="group" aria-label="Schema: Alice berechnet mit der Hashfunktion den Hashwert h des Dokuments und daraus mit ihrem privaten Schlüssel die Signatur.">
+<div class="ablauf-knoten"><b>Dokument</b></div>
+<div class="ablauf-schritt"><b>Hashfunktion</b></div>
+<div class="ablauf-knoten"><b>Hashwert h</b></div>
+<div class="ablauf-schritt"><b>signieren</b><span>mit Alices <strong>privatem</strong> Schlüssel</span></div>
+<div class="ablauf-knoten"><b>Signatur</b></div>
+</div>
+
+Bob **prüft**: Sind h<sub>1</sub> und h<sub>2</sub> gleich, ist die Signatur gültig. Sonst wurde
+das Dokument verändert oder die Signatur gefälscht.
+
+<div class="ablauf ablauf-paar" role="group" aria-label="Schema: Bob berechnet mit der Hashfunktion den Hashwert h1 des erhaltenen Dokuments. Die Signatur rechnet er mit Alices öffentlichem Schlüssel zurück zum Hashwert h2. Dann vergleicht er h1 und h2.">
+<div class="ablauf-knoten"><b>Dokument</b></div>
+<div class="ablauf-schritt"><b>Hashfunktion</b></div>
+<div class="ablauf-knoten"><b>Hashwert h<sub>1</sub></b></div>
+<div class="ablauf-vergleich">= ?</div>
+<div class="ablauf-knoten"><b>Signatur</b></div>
+<div class="ablauf-schritt"><b>zurückrechnen</b><span>mit Alices <strong>öffentlichem</strong> Schlüssel</span></div>
+<div class="ablauf-knoten"><b>Hashwert h<sub>2</sub></b></div>
+</div>
 
 Man signiert den Hashwert, weil er kurz ist (asymmetrische Verfahren sind langsam) und trotzdem
 jede Änderung am Dokument verrät.
@@ -76,11 +90,13 @@ richtigen Person gehört. Ein **Zertifikat** enthält den öffentlichen Schlüss
 (z. B. *www.ubs.com*) und eine Gültigkeitsdauer – signiert von einer **Zertifizierungsstelle
 (CA)**.
 
-```
-Root-Zertifikat (im Browser vorinstalliert)
-   └─ signiert ─▶ Zwischenzertifikat der CA
-                     └─ signiert ─▶ Zertifikat der Website
-```
+<div class="ablauf" role="group" aria-label="Schema der Vertrauenskette: Das Root-Zertifikat ist im Browser vorinstalliert. Es signiert das Zwischenzertifikat der CA, dieses signiert das Zertifikat der Website.">
+<div class="ablauf-knoten"><b>Root-Zertifikat</b><span>im Browser vorinstalliert</span></div>
+<div class="ablauf-schritt"><b>signiert</b></div>
+<div class="ablauf-knoten"><b>Zwischenzertifikat</b><span>der CA</span></div>
+<div class="ablauf-schritt"><b>signiert</b></div>
+<div class="ablauf-knoten"><b>Zertifikat</b><span>der Website</span></div>
+</div>
 
 Seit März 2026 gelten Zertifikate höchstens 200 Tage, ab 2029 nur noch 47 Tage. Warnt der
 Browser (abgelaufen, falscher Name, unbekannte CA): nicht weiterklicken.

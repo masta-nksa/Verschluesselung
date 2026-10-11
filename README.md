@@ -256,6 +256,15 @@ der SuS gespeichert (nur lokal).
 | … die nur ein Hinweis ist | zusätzlich `data-vergleich="hinweis"` (Knopf «Hinweis zeigen», ohne Selbsteinschätzung) |
 | Tipps in Stufen | Liste `- …` und direkt darunter `{: .tipps}` – ein Knopf deckt einen Tipp nach dem anderen auf |
 | nur im Druck | `class="nur-druck"` (z. B. Geheimtext-Kopie für Papier, wenn das Werkzeug nicht gedruckt wird) |
+| Ablaufschema | `<div class="ablauf">`, darin abwechselnd `<div class="ablauf-knoten"><b>Begriff</b><code>Beispiel</code></div>` und `<div class="ablauf-schritt"><b>Vorgang</b><span>womit</span></div>` |
+
+**Ablaufschemas** (statt Zeichnungen aus Textzeichen): Eine Reihe hat drei Knoten und zwei
+Schritte; auf schmalen Bildschirmen läuft sie von oben nach unten. Ein
+`<div class="ablauf-abzweig">` am Ende hängt gestrichelt am mittleren Knoten (Eve in Lektion 1).
+Mit `class="ablauf ablauf-paar"` stehen zwei kurze Reihen (Knoten – Schritt – Knoten)
+untereinander, dazwischen ein `<div class="ablauf-vergleich">` (Signaturprüfung in Lektion 5).
+Der HTML-Block steht ohne Leerzeilen im Markdown und bekommt ein `aria-label`, das den Ablauf in
+einem Satz beschreibt.
 
 Trennzeichen ist immer das **Semikolon** – ein `|` würde in Markdown-Tabellen die Spalten
 trennen. Schreiblinien nie als Unterstriche `____` setzen (kramdown macht daraus Fett/Kursiv).
