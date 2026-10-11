@@ -51,10 +51,10 @@ Einordnung ergeben – der Rest der Datei ist normales Markdown:
 ---
 lektion: 3              # zu welcher Lektion gehört die Datei
 zielgruppe: sus         # sus | lehrperson  → bestimmt den Bereich auf der Lektionsseite
-art: arbeitsblatt       # Badge; mögliche Werte siehe art_labels in _config.yml
-titel: "Gruppenpuzzle: Schutzmassnahmen"   # Titel in Navigation und Browser-Tab
-kurz: "Sechs Pakete zu den 11 Schutzmassnahmen"   # Kurzbeschrieb auf der Lektionsseite
-reihenfolge: 2          # Sortierung innerhalb des Bereichs
+art: auftrag            # Badge; mögliche Werte siehe art_labels in _config.yml
+titel: "Vigenère knacken"                  # Titel in Navigation und Browser-Tab
+kurz: "Erst die Schlüssellänge, dann jede Spalte einzeln"   # Kurzbeschrieb auf der Lektionsseite
+reihenfolge: 10         # Sortierung innerhalb der Lektion = Reihenfolge im Unterricht
 ---
 ```
 
@@ -73,10 +73,31 @@ automatisch formatiert.
 **Externe Links** als normale Markdown-Links schreiben. Sie öffnen von selbst in einem
 neuen Tab (Skript in `_layouts/default.html`), interne Links bleiben im selben Tab.
 
+## Konventionen der Unterlagen
+
+- **Reihenfolge:** `reihenfolge` folgt dem Ablauf der Lektion – die Unterlagen stehen auf der
+  Lektionsseite und im Dossier so, wie sie im Unterricht gebraucht werden.
+- **Kopf eines Arbeitsblatts:** Titel, dann `## Ziel` (ein bis zwei Sätze). Keine Zeile mit
+  Lektion, Sozialform und Minuten – die Zeiten stehen im Ablauf der Lektionsseite und im
+  Ablaufplan.
+- **Eine A4-Seite pro Unterlage** (Ausnahmen: Glossar, Gruppenpuzzle). Nach Änderungen die
+  Seite als PDF drucken und die Seitenzahl prüfen. Was nur am Gerät Sinn ergibt («Früh
+  fertig?», Ausblicke), mit `nur-online` aus dem Druck nehmen.
+- **Fachbegriffe** dort einführen, wo die SuS dem Verfahren zum ersten Mal begegnen
+  (z. B. «symmetrisch» beim Caesar-Blatt, «monoalphabetisch» zusammen mit der
+  Häufigkeitsanalyse) – nicht erst in der Zusammenfassung.
+- **Einzelfragen untereinander:** Mehrere Eingabefelder in einem Absatz laufen in einer Zeile
+  zusammen. Getrennte Fragen als Liste oder Tabelle setzen; Rechnungen, die zusammengehören,
+  untereinander (Tabelle mit `{: .rechnung}`). Zusammenhängende Lückentexte bleiben Fliesstext.
+- **«Das Wichtigste»** (`art: zusammenfassung`, eine Seite pro Lektion): beginnt mit
+  `## Lernziele dieser Lektion` als Task-Liste zum Abhaken, dann `## Zum Besprechen` mit zwei
+  bis drei Leitfragen (in `nur-online`, also nur am Beamer), danach die Kernkonzepte mit
+  Merksätzen. Sie ist Grundlage der Besprechung im Plenum (8–10 Min.) und Lernzusammenfassung.
+
 ## Gestaltung
 
-Es gibt genau ein Design, dasselbe wie in den anderen Unterrichtseinheiten: Tinte auf
-Papier, Schreibmaschinenschrift (IBM Plex Mono) für Titel, Nummern und Etiketten, Inter für
+Es gibt genau ein Design. Es ist als gemeinsames Design aller Unterrichtseinheiten gedacht
+und steckt so auch im Gerüst für neue Einheiten: Tinte auf Papier, Schreibmaschinenschrift (IBM Plex Mono) für Titel, Nummern und Etiketten, Inter für
 den Lesetext, Leuchtstift-Gelb als einzige Farbe. Dark Mode folgt der Einstellung des Geräts.
 Die Schriften liegen in `assets/fonts/`, es wird nichts von fremden Servern geladen.
 
@@ -127,8 +148,13 @@ Laden auf. Optionale `data-`-Attribute füllen es vor:
 <div class="krypto" data-tool="diffie-hellman"></div>
 ```
 
-Im Druck erscheint statt des Werkzeugs der Hinweis «nur auf der Website verfügbar».
-Geheimtexte für den Druck deshalb zusätzlich als Text ins Arbeitsblatt setzen.
+Werkzeuge werden nicht gedruckt. Braucht es einen Geheimtext auch auf Papier, ihn zusätzlich
+als Absatz mit `class="nur-druck"` ins Arbeitsblatt setzen – am Bildschirm bleibt er dann
+ausgeblendet und steht nicht doppelt da.
+
+Ein Werkzeug darf beim Laden keine Lösung zeigen, die die SuS selbst finden sollen: nicht mit
+dem Geheimtext einer Aufgabe und dem passenden Schlüssel vorbelegen, sondern mit einem neutralen
+Beispiel.
 
 ## Aktualität
 
