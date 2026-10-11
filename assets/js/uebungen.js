@@ -264,6 +264,8 @@
         if (window.confirm("Alle Ihre Eingaben auf dieser Seite löschen?")) {
           alleFelder.forEach(function (f) { f(); });
           Array.prototype.forEach.call(container.querySelectorAll(".pruefen-meldung"), function (m) { m.textContent = ""; });
+          // Auch die Werkzeuge der Seite merken sich ihren Stand (krypto.js).
+          if (window.Krypto && window.Krypto.allesZuruecksetzen) window.Krypto.allesZuruecksetzen(container);
         }
       });
       reset.appendChild(b);

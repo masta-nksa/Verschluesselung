@@ -11,12 +11,16 @@ permalink: /lektion-7.html
 
 1. **Eve-Modus** *(ca. 12 Min., zu zweit)* – Sie haben drei RSA-Nachrichten abgefangen.
    Knacken Sie sie, indem Sie n faktorisieren.
+   →&nbsp;[Auftrag]({{ '/lektionen/L7_Auftrag_Eve.html' | relative_url }})
 2. **Wie lange dauert das bei echten Schlüsseln?** *(ca. 6 Min.)* – Schätzen Sie den
    Aufwand für immer grössere Schlüssel ab – bis 2048 Bit.
+   →&nbsp;[Auftrag, Aufgabe 3]({{ '/lektionen/L7_Auftrag_Eve.html' | relative_url }})
 3. **Debatte: Verschlüsselung und Überwachung** *(ca. 17 Min.)* – Sollen Behörden Zugriff
    auf verschlüsselte Nachrichten erhalten? Bereiten Sie in Ihrer Rolle Argumente vor und
    vertreten Sie sie.
+   →&nbsp;[Auftrag]({{ '/lektionen/L7_Debatte_Verschluesselung_Ueberwachung.html' | relative_url }})
 4. **Das Wichtigste besprechen** *(ca. 8 Min., Plenum)* – Warum ist RSA sicher, und wozu
    braucht es Padding? Welche Argumente aus der Debatte bleiben?
+   →&nbsp;[Das Wichtigste]({{ '/lektionen/L7_Das_Wichtigste.html' | relative_url }})
 
 *Früh fertig?* Warum wird im Eve-Modus jedes «A» zu 1? Was bedeutet das für die Sicherheit?

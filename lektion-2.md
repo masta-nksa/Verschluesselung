@@ -14,9 +14,12 @@ permalink: /lektion-2.html
    gibt es dann?
 2. **Knack-Wettbewerb** *(ca. 17 Min., zu zweit)* – Entschlüsseln Sie den Brief aus dem
    Jahr 1586 mit dem Häufigkeits-Werkzeug. Welches Team schafft es zuerst?
+   →&nbsp;[Auftrag]({{ '/lektionen/L2_Auftrag_Haeufigkeitsanalyse.html' | relative_url }})
 3. **Vigenère-Verschlüsselung** *(ca. 13 Min.)* – Verschlüsseln Sie von Hand mit dem
    Vigenère-Quadrat und kontrollieren Sie mit dem Werkzeug.
+   →&nbsp;[Arbeitsblatt]({{ '/lektionen/L2_Arbeitsblatt_Vigenere.html' | relative_url }})
 4. **Das Wichtigste besprechen** *(ca. 10 Min., Plenum)* – Warum genügt ein riesiger
    Schlüsselraum nicht? Was unterscheidet mono- und polyalphabetische Verfahren?
+   →&nbsp;[Das Wichtigste]({{ '/lektionen/L2_Das_Wichtigste.html' | relative_url }})
 
 *Früh fertig?* Entschlüsseln Sie die Zusatznachricht am Ende des Vigenère-Arbeitsblatts.

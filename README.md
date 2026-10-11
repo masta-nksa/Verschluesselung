@@ -68,7 +68,16 @@ kein HTML und keine Navigation angefasst werden.
 
 **Ablauf einer Lektion ändern:** Der Ablauf steht als nummerierte Liste im Textteil von
 `lektion-N.md` – die Nummerierung und die Zeitangaben (`*(ca. 15 Min.)*`) werden
-automatisch formatiert.
+automatisch formatiert. Ein Schritt, zu dem es eine Unterlage gibt, endet mit einem Link
+darauf, auf einer eigenen eingerückten Zeile:
+
+```markdown
+2. **Vier Schutzziele** *(ca. 10 Min., zu zweit)* – Ordnen Sie die Szenarien …
+   →&nbsp;[Arbeitsblatt]({{ '/lektionen/L1_Arbeitsblatt_Schutzziele.html' | relative_url }})
+```
+
+Als Linktext dient die Beschriftung des Badges (Arbeitsblatt, Auftrag, Theorie-Input, Das
+Wichtigste). `&nbsp;` hält Pfeil und Link auf derselben Zeile.
 
 **Externe Links** als normale Markdown-Links schreiben. Sie öffnen von selbst in einem
 neuen Tab (Skript in `_layouts/default.html`), interne Links bleiben im selben Tab.
@@ -84,7 +93,8 @@ nichts gezählt.
 ## Konventionen der Unterlagen
 
 - **Reihenfolge:** `reihenfolge` folgt dem Ablauf der Lektion – die Unterlagen stehen auf der
-  Lektionsseite und im Dossier so, wie sie im Unterricht gebraucht werden.
+  Lektionsseite und im Dossier so, wie sie im Unterricht gebraucht werden. Daraus ergibt sich
+  auch der Knopf «Nächste Unterlage» am Fuss jeder Unterlage (`_layouts/material.html`).
 - **Kopf eines Arbeitsblatts:** Titel, dann `## Ziel` (ein bis zwei Sätze). Keine Zeile mit
   Lektion, Sozialform und Minuten – die Zeiten stehen im Ablauf der Lektionsseite und im
   Ablaufplan.
@@ -115,7 +125,7 @@ Was diese Einheit von anderen unterscheidet, steht nicht im Stylesheet, sondern 
 | Angabe | Wo | Wirkung |
 |---|---|---|
 | `signet` | `_config.yml` | Zeichenleiste unter dem Titel der Startseite (hier: der Titel als Caesar-Chiffre) |
-| `hauptnav` | `_config.yml` | Zusatzeinträge in der Kopfzeile, hinter den Lektionsnummern |
+| `hauptnav` | `_config.yml` | Zusatzeinträge in der Kopfzeile, hinter den Lektionsnummern (auf dem Handy in einer eigenen Zeile darunter) |
 | `stichwort` | Frontmatter von `lektion-N.md` | ein Wort rechts in der Lektionsliste der Startseite |
 
 Alle drei sind optional; fehlt eine Angabe, entfällt das Element. Fett Gesetztes im
@@ -184,6 +194,15 @@ Die gemeinsamen Bausteine dafür stehen in `krypto.js` (`ablesefeld`, `balkenSpa
 Ein Werkzeug darf beim Laden keine Lösung zeigen, die die SuS selbst finden sollen: nicht mit
 dem Geheimtext einer Aufgabe und dem passenden Schlüssel vorbelegen, sondern mit einem neutralen
 Beispiel.
+
+**Der Stand der Werkzeuge bleibt gespeichert** (im Browser der SuS, nur lokal – wie die
+Eingaben der Übungen): Ein Neuladen der Seite löscht weder die Ersetzungstabelle noch das
+RSA-Schlüsselpaar. «Zurücksetzen» im Titel des Werkzeugs stellt den Anfangszustand wieder her,
+«Alle Eingaben auf dieser Seite löschen» setzt auch die Werkzeuge zurück. Gespeichert wird pro
+Seite und Position des Werkzeugs; wer die Vorbelegung (`data-`-Attribute) ändert, macht den alten
+Stand ungültig. Ein neues Werkzeug braucht dafür nichts zu tun, solange sein Zustand in
+Eingabefeldern steht – sonst gibt die Werkzeugfunktion `{ lesen, setzen }` zurück (Beispiele:
+«Vigenère knacken», «Signatur»).
 
 ## Aktualität
 

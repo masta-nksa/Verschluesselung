@@ -9,6 +9,20 @@ layout: default
 {%- if page.lektion -%}
   {%- assign lektionsseite = site.pages | where: "layout", "lektion" | where: "lektion", page.lektion | first -%}
 {%- endif -%}
+{%- comment -%}
+  Die nächste Unterlage derselben Lektion (Reihenfolge wie auf der Lektionsseite),
+  damit man von Blatt zu Blatt weiterkommt, ohne über die Lektionsseite zu gehen.
+  Nur im SuS-Bereich – Ablaufpläne und Lösungen haben keine solche Abfolge.
+{%- endcomment -%}
+{%- assign naechste = false -%}
+{%- if lektionsseite and page.zielgruppe == 'sus' -%}
+  {%- assign geschwister = site.pages | where: "typ", "material" | where: "lektion", page.lektion | where: "zielgruppe", "sus" | sort: "reihenfolge" -%}
+  {%- for m in geschwister -%}
+    {%- if m.url == page.url -%}
+      {%- assign naechste = geschwister[forloop.index] -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
 
 <div class="wrap wrap-narrow">
 
@@ -52,6 +66,9 @@ layout: default
     <a class="pager-prev" href="{{ lektionsseite.url | relative_url }}"><span>&larr; Zurück</span>Lektion {{ page.lektion }}: {{ lektionsseite.titel }}</a>
     {%- else %}
     <a class="pager-prev" href="{{ '/' | relative_url }}"><span>&larr; Zurück</span>Zur Übersicht</a>
+    {%- endif %}
+    {%- if naechste %}
+    <a class="pager-next" href="{{ naechste.url | relative_url }}"><span>Nächste Unterlage &rarr;</span>{{ naechste.titel }}</a>
     {%- endif %}
   </nav>
 

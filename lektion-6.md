@@ -13,13 +13,15 @@ permalink: /lektion-6.html
 2. **Expertenphase** *(ca. 18 Min.)* – Beantworten Sie die Leitfragen Ihres Themas und
    bereiten Sie eine Kurzvorstellung von 2 Minuten vor: Was ist das? Welche Bausteine der
    Einheit stecken darin? Was ist neu oder umstritten?
+   →&nbsp;[Arbeitsblatt]({{ '/lektionen/L6_Gruppenpuzzle_Krypto_im_Alltag.html' | relative_url }})
 3. **Kurzvorstellungen** *(ca. 13 Min.)* – Jede Gruppe stellt vor. Notieren Sie zu den
    anderen Themen je einen Kernsatz.
 4. **Das Wichtigste besprechen** *(ca. 10 Min., Plenum)* – Wir fassen alle fünf Themen
    zusammen und halten fest, welche Bausteine wo stecken. Die Zusammenfassung ist Ihre
    Lernunterlage für alle Themen, nicht nur für Ihr eigenes.
+   →&nbsp;[Das Wichtigste]({{ '/lektionen/L6_Das_Wichtigste.html' | relative_url }})
 
-**Hausaufgabe:** Lösen Sie den Selbsttest zur ganzen Einheit und kontrollieren Sie mit der Lösung.
+**Hausaufgabe:** Lösen Sie den [Selbsttest]({{ '/lektionen/L6_Selbsttest.html' | relative_url }}) zur ganzen Einheit und kontrollieren Sie mit der Lösung.
 
 *Früh fertig?* Schauen Sie unter
 [Cloudflare Radar](https://radar.cloudflare.com/adoption-and-usage) nach, welcher Anteil

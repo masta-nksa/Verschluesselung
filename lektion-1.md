@@ -11,13 +11,17 @@ permalink: /lektion-1.html
 
 1. **Einstieg: Geheimbotschaft** *(ca. 5 Min.)* – An der Wand steht eine verschlüsselte
    Nachricht. Versuchen Sie, sie zu knacken – ohne Hilfsmittel. Was fällt Ihnen auf?
+   →&nbsp;[Geheimbotschaft]({{ '/lektionen/L1_Einstieg_Geheimbotschaft.html' | relative_url }})
 2. **Vier Schutzziele** *(ca. 10 Min., zu zweit)* – Ordnen Sie die Szenarien auf dem
    Arbeitsblatt den Schutzzielen Vertraulichkeit, Integrität, Authentizität und
    Verbindlichkeit zu. Welches davon kann Verschlüsselung allein sicherstellen?
+   →&nbsp;[Arbeitsblatt]({{ '/lektionen/L1_Arbeitsblatt_Schutzziele.html' | relative_url }})
 3. **Caesar-Verschlüsselung** *(ca. 18 Min., zu zweit)* – Lernen Sie die Fachbegriffe,
    verschlüsseln und entschlüsseln Sie mit dem Caesar-Werkzeug und knacken Sie einen
    Text, dessen Schlüssel Sie nicht kennen (Aufgaben 1–5).
+   →&nbsp;[Arbeitsblatt]({{ '/lektionen/L1_Arbeitsblatt_Caesar.html' | relative_url }})
 4. **Das Wichtigste besprechen** *(ca. 10 Min., Plenum)* – Wir besprechen die Leitfragen und
    halten die Kernkonzepte fest. Die Zusammenfassung dient Ihnen später zum Lernen.
+   →&nbsp;[Das Wichtigste]({{ '/lektionen/L1_Das_Wichtigste.html' | relative_url }})
 
 *Früh fertig?* Lösen Sie Aufgabe 6 und die Rätselkette am Ende des Caesar-Arbeitsblatts.

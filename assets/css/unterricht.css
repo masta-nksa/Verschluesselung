@@ -191,7 +191,7 @@ a { color: var(--accent); text-decoration-thickness: .07em; text-underline-offse
 
 .header-tools { display: flex; align-items: center; gap: .8rem; margin-left: auto; }
 
-.site-nav { display: flex; align-items: center; gap: .1rem; font-family: var(--font-meta); }
+.site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: .1rem; font-family: var(--font-meta); }
 .site-nav a {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 2.1rem; height: 1.9rem; padding-inline: .45rem;
@@ -202,17 +202,29 @@ a { color: var(--accent); text-decoration-thickness: .07em; text-underline-offse
 .site-nav a[aria-current="page"] { background: var(--marker); color: var(--on-marker); }
 .nav-trenner { margin-inline: .4rem; color: var(--border-strong); }
 
-/* Die Zusatzeinträge (hauptnav) stehen auch auf der Startseite; auf schmalen
-   Bildschirmen bleiben darum nur die Lektionsnummern. */
+/* Tablet und Handy: Die Einträge werden mit dem Finger getroffen und sind darum
+   höher. */
 @media (max-width: 52rem) {
-  .nav-text, .nav-trenner { display: none !important; }
+  .site-nav a { min-width: 2.25rem; height: 2.5rem; }
 }
-/* Auf dem Handy passen Wortmarke und Lektionsnummern nicht in eine Zeile –
-   die Nummern rücken darum auf eine zweite. */
-@media (max-width: 30rem) {
-  .header-inner { gap: .4rem; }
-  .header-tools { width: 100%; margin-left: 0; justify-content: space-between; gap: .5rem; }
-  .site-nav a { min-width: 1.9rem; padding-inline: .3rem; }
+/* Reicht die Breite nicht mehr für eine Zeile, rückt die Navigation unter die
+   Wortmarke und steht linksbündig. */
+@media (max-width: 46rem) {
+  .header-inner { gap: .1rem 1rem; padding-block: .35rem .25rem; }
+  .header-tools { width: 100%; margin-left: -.45rem; }
+}
+/* Auf dem Handy passen Lektionsnummern und Zusatzeinträge (hauptnav) nicht in
+   eine Zeile – der Trenner wird zum Zeilenumbruch, die Zusatzeinträge stehen
+   unter den Nummern. */
+@media (max-width: 36rem) {
+  .nav-trenner { flex-basis: 100%; height: 0; margin: 0; overflow: hidden; }
+  .site-nav a.nav-text { height: 2.1rem; }
+  /* Drei Zeilen wären als feste Kopfzeile zu hoch: Die Wortmarke scrollt weg,
+     stehen bleibt nur die Navigation. Der negative Abstand ist die Höhe der
+     Wortmarken-Zeile (Abstand oben + Zeile). */
+  .site-header { top: -1.9rem; }
+  .header-inner { padding-top: .3rem; row-gap: 0; }
+  .brand { min-height: 1.6rem; }
 }
 
 /* --- Startseite ---------------------------------------------------------- */
@@ -599,6 +611,12 @@ a { color: var(--accent); text-decoration-thickness: .07em; text-underline-offse
 }
 .krypto:empty::before { content: "Das interaktive Werkzeug wird geladen … (JavaScript nötig)"; color: var(--text-muted); }
 .kt-titel { margin: 0 0 .8rem; font-weight: 700; color: var(--accent); }
+/* «Zurücksetzen» steht leise rechts im Titel: Der Stand eines Werkzeugs bleibt
+   gespeichert, hier holt man den Anfangszustand zurück. */
+.kt-knopf.kt-zurueck {
+  float: right; margin-left: .8rem; font-weight: 400;
+  background: none; border-color: var(--border-strong); color: var(--text-muted);
+}
 .kt-label { margin: .9rem 0 .3rem; font-weight: 650; font-size: .88rem; }
 .kt-hilfe { display: block; margin: .3rem 0 .5rem; color: var(--text-muted); font-size: .84rem; }
 .kt-feld { display: flex; flex-direction: column; gap: .25rem; margin: 0 0 .7rem; flex: 1 1 10rem; min-width: 0; }

@@ -16,7 +16,10 @@
    Verfahrens (Scheibe, Quadrat, Wahrheitstabelle, Bitraster …), in dem das
    Angeklickte hervorgehoben ist, und eine Zeile, die nachrechnet.
 
-   Alles läuft lokal im Browser – es wird nichts übertragen.
+   Alles läuft lokal im Browser – es wird nichts übertragen. Der Stand jedes
+   Werkzeugs bleibt im Browser gespeichert (localStorage, nur auf diesem
+   Gerät), damit ein Neuladen der Seite keine Arbeit löscht; «Zurücksetzen»
+   im Werkzeug stellt den Anfangszustand wieder her.
    ========================================================================== */
 
 (function () {
@@ -862,6 +865,15 @@
 
     text.addEventListener("input", function () { analyse(); spaltenBauen(); });
     laenge.addEventListener("input", spaltenBauen);
+    // Die Verschiebungen der Spalten stehen in keinem Eingabefeld – fürs Speichern
+    // darum eigens herausgeben und wieder einsetzen.
+    function verschiebungenSetzen(v) {
+      if (!Array.isArray(v) || v.length !== verschiebungen.length) return;
+      verschiebungen = v.map(function (x) { return mod(parseInt(x, 10) || 0, 26); });
+      Array.prototype.forEach.call(spalten.children, function (k) { k._zeichne(); });
+      entschluesseln();
+    }
+
     root.append(
       titel("Vigenère knacken"),
       feld("Geheimtext", text),
@@ -881,6 +893,7 @@
       out
     );
     analyse(); spaltenBauen();
+    return { lesen: function () { return verschiebungen.slice(); }, setzen: verschiebungenSetzen };
   }
 
   // ==================================================================== XOR
@@ -1321,20 +1334,30 @@
       do { b = zufallsPrim(1009, 9973); } while (b === a);
       var n = big(a) * big(b), phi = big(a - 1) * big(b - 1), e = waehleE(phi);
       paar = { e: e, d: modInv(e, phi), n: n };
+      zeigePaar();
+      signieren();
+    }
+    function zeigePaar() {
       schluesselInfo.innerHTML = "";
       schluesselInfo.append(zeile("Öffentlicher Schlüssel (e, n)", "(" + paar.e + ", " + paar.n + ")"),
         zeile("Privater Schlüssel (d, n)", "(" + paar.d + ", " + paar.n + ")  – geheim"));
-      signieren();
     }
     function hashZahl(t, n) { var h = sha256(t); return { hex: h, zahl: BigInt("0x" + h) % n }; }
-    function signieren() {
+    // Rechnet die Signatur und zeigt den Rechenweg bei Alice.
+    function signaturRechnen() {
       signOut.innerHTML = "";
-      if (!paar) return;
+      if (!paar) return null;
       var h = hashZahl(text.value, paar.n), s = modPow(h.zahl, paar.d, paar.n);
       signOut.append(zeile("SHA-256(Text)", h.hex.slice(0, 32) + "…"),
         zeile("Hashwert als Zahl mod n", h.zahl.toString()),
         zeile("Signatur s = h^d mod n", s.toString()),
         weg(["Dokument", "SHA-256, mod n", "h = " + h.zahl, "h^d mod n – privater Schlüssel", "s = " + s]));
+      return s;
+    }
+    // Signieren und alles an Bob übergeben.
+    function signieren() {
+      var s = signaturRechnen();
+      if (s === null) return;
       pruefText.value = text.value; pruefSig.value = s.toString(); pruefKey.value = "(" + paar.e + ", " + paar.n + ")";
       pruefen();
     }
@@ -1366,6 +1389,17 @@
       ])
     );
     neuesPaar();
+    // Das Schlüsselpaar entsteht zufällig – gespeichert wird es, damit Alices Seite
+    // nach dem Neuladen noch zu dem passt, was bei Bob steht. Bobs Felder bleiben dabei
+    // unberührt (sie können absichtlich verändert sein).
+    return {
+      lesen: function () { return paar ? { e: paar.e.toString(), d: paar.d.toString(), n: paar.n.toString() } : null; },
+      setzen: function (x) {
+        if (!x || !x.e || !x.d || !x.n) return;
+        paar = { e: big(x.e), d: big(x.d), n: big(x.n) };
+        zeigePaar(); signaturRechnen();
+      }
+    };
   }
 
   // ========================================================= DIFFIE-HELLMAN
@@ -1466,19 +1500,79 @@
     "rsa": toolRsa, "rsa-eve": toolRsaEve, "signatur": toolSignatur, "diffie-hellman": toolDh
   };
 
+  // ------------------------------------------------------------ Speicher
+  // Gespeichert wird pro Werkzeug: der Inhalt aller Eingabefelder und, wo ein
+  // Werkzeug mehr braucht, sein innerer Zustand (die Werkzeugfunktion gibt dafür
+  // { lesen, setzen } zurück). Der Schlüssel folgt der Seite, auf der das
+  // Werkzeug steht – im Dossier also der Unterlage, aus der es stammt.
+
+  function standLesen(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
+  function standSchreiben(k, v) {
+    try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* gesperrt oder voll */ }
+  }
+
+  function einrichten(root, f) {
+    var teil = root.closest("[data-quelle]");
+    var nr = Array.prototype.indexOf.call((teil || document).querySelectorAll(".krypto[data-tool]"), root);
+    var key = "krypto:" + (teil ? teil.dataset.quelle : location.pathname) + ":" + nr;
+    // Ändert jemand die Vorbelegung im Markdown, gilt der alte Stand nicht mehr.
+    var vorgabe = sha256(JSON.stringify(root.dataset)).slice(0, 12);
+    var api = {}, felder = [], laedt = false;
+
+    function sichern() {
+      if (laedt) return;
+      standSchreiben(key, { v: vorgabe, f: felder.map(function (x) { return x.value; }), x: api.lesen ? api.lesen() : null });
+    }
+    function bauen(mitStand) {
+      root.textContent = "";
+      api = f(root) || {};
+      felder = Array.prototype.slice.call(root.querySelectorAll("textarea, input, select"));
+      var kopf = root.querySelector(".kt-titel");
+      if (kopf) kopf.appendChild(knopf("Zurücksetzen", function (ev) {
+        ev.stopPropagation();
+        if (window.confirm("Dieses Werkzeug auf den Anfangszustand zurücksetzen?")) zuruecksetzen();
+      }, "kt-klein kt-zurueck"));
+      var stand = mitStand ? standLesen(key) : null;
+      if (!stand || stand.v !== vorgabe || !Array.isArray(stand.f) || stand.f.length !== felder.length) return;
+      laedt = true;
+      try {
+        felder.forEach(function (x, i) {
+          if (x.value === stand.f[i]) return;
+          x.value = stand.f[i];
+          x.dispatchEvent(new Event("input", { bubbles: true }));
+          x.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+        if (api.setzen && stand.x != null) api.setzen(stand.x);
+      } catch (err) { /* unbrauchbarer Stand: Werkzeug bleibt, wie es jetzt ist */ }
+      laedt = false;
+    }
+    function zuruecksetzen() { standSchreiben(key, null); bauen(false); }
+
+    ["input", "change", "click"].forEach(function (e) { root.addEventListener(e, sichern); });
+    root._zuruecksetzen = zuruecksetzen;
+    bauen(true);
+  }
+
+  // Alle Werkzeuge eines Bereichs zurücksetzen (für «Alle Eingaben löschen»).
+  function allesZuruecksetzen(bereich) {
+    Array.prototype.forEach.call((bereich || document).querySelectorAll(".krypto[data-tool]"), function (root) {
+      if (root._zuruecksetzen) root._zuruecksetzen();
+    });
+  }
+
   function start() {
     Array.prototype.forEach.call(document.querySelectorAll(".krypto[data-tool]"), function (root) {
       var f = WERKZEUGE[root.dataset.tool];
       if (!f || root.dataset.bereit) return;
-      root.dataset.bereit = "1";
-      try { f(root); } catch (err) {
+      try { einrichten(root, f); } catch (err) {
         root.textContent = "Das Werkzeug konnte nicht geladen werden (" + err.message + ").";
       }
+      root.dataset.bereit = "1";
     });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
   else start();
 
   // Für Tests in der Konsole
-  window.Krypto = { sha256: sha256, modPow: modPow, modInv: modInv, caesarText: caesarText, vigenereText: vigenereText, textZuBloecken: textZuBloecken, blockLaenge: blockLaenge, start: start };
+  window.Krypto = { sha256: sha256, modPow: modPow, modInv: modInv, caesarText: caesarText, vigenereText: vigenereText, textZuBloecken: textZuBloecken, blockLaenge: blockLaenge, start: start, allesZuruecksetzen: allesZuruecksetzen };
 })();

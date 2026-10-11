@@ -8,7 +8,8 @@ permalink: /werkzeuge.html
 
 # Krypto-Werkzeuge
 
-Alle Werkzeuge laufen direkt in Ihrem Browser. Es wird nichts übertragen oder gespeichert.
+Alle Werkzeuge laufen direkt in Ihrem Browser, es wird nichts übertragen. Ihre Eingaben
+bleiben auf diesem Gerät gespeichert, bis Sie im Werkzeug «Zurücksetzen» wählen.
 In den Arbeitsblättern finden Sie dieselben Werkzeuge, dort schon mit den passenden Texten
 gefüllt.
 

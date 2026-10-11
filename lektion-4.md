@@ -12,10 +12,13 @@ permalink: /lektion-4.html
 1. **Kistenrätsel und Einwegfunktion** *(ca. 10 Min.)* – Wir vergleichen Ihre Lösungen des
    Kistenrätsels und übertragen die Idee auf Schlüssel. Danach: Rechnen Sie 19 · 31 – und
    umgekehrt: Welche zwei Primzahlen ergeben 731?
+   →&nbsp;[Theorie-Input]({{ '/lektionen/L4_Input_Asymmetrische_Verschluesselung.html' | relative_url }})
 2. **RSA im Klassenkanal** *(ca. 25 Min.)* – Erzeugen Sie Ihr Schlüsselpaar, veröffentlichen
    Sie den öffentlichen Schlüssel im Kanal «Verschlüsselung» und tauschen Sie verschlüsselte
    Nachrichten aus. Alle können mitlesen – verstehen kann nur die richtige Person.
+   →&nbsp;[Auftrag]({{ '/lektionen/L4_Auftrag_RSA_Klassenkanal.html' | relative_url }})
 3. **Das Wichtigste besprechen** *(ca. 8 Min., Plenum)* – Welchen Schlüssel braucht wer
    wofür? Was ist die Falltür bei RSA? Warum verschlüsselt man die Daten trotzdem mit AES?
+   →&nbsp;[Das Wichtigste]({{ '/lektionen/L4_Das_Wichtigste.html' | relative_url }})
 
 *Früh fertig?* Rechnen Sie das RSA-Beispiel mit n = 55 im Input von Hand nach.
