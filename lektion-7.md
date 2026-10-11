@@ -9,6 +9,10 @@ output: "geknackte Nachrichten, Aufwandsabschätzung, begründete Positionen"
 permalink: /lektion-7.html
 ---
 
+*Zum Aufwärmen:* Drei Fragen zur letzten Lektion – wissen Sie es noch?
+→&nbsp;[Rückblick]({{ '/lektionen/L7_Rueckblick.html' | relative_url }})
+{: .nur-online}
+
 1. **Eve-Modus** *(ca. 12 Min., zu zweit)* – Sie haben drei RSA-Nachrichten abgefangen.
    Knacken Sie sie, indem Sie n faktorisieren.
    →&nbsp;[Auftrag]({{ '/lektionen/L7_Auftrag_Eve.html' | relative_url }})

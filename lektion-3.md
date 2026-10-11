@@ -9,6 +9,10 @@ output: "Vigenère-Text geknackt, Schlüsselraum abgeschätzt, Schlüsselaustaus
 permalink: /lektion-3.html
 ---
 
+*Zum Aufwärmen:* Drei Fragen zur letzten Lektion – wissen Sie es noch?
+→&nbsp;[Rückblick]({{ '/lektionen/L3_Rueckblick.html' | relative_url }})
+{: .nur-online}
+
 1. **Vigenère knacken** *(ca. 13 Min., zu zweit)* – Finden Sie mit dem Werkzeug zuerst die
    Schlüssellänge, dann das Schlüsselwort.
    →&nbsp;[Auftrag]({{ '/lektionen/L3_Auftrag_Vigenere_knacken.html' | relative_url }})

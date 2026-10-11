@@ -30,6 +30,16 @@
 
    Antwortfeld für Sätze (Block, eigene Zeile, Leerzeilen davor und danach):
      <div class="antwort" data-zeilen="3"></div>
+     data-loesung   Musterlösung. Wer etwas geschrieben hat, kann sie aufdecken
+                    («Mit Musterlösung vergleichen») und schätzt die eigene
+                    Antwort ein.
+     data-vergleich spaeter: kein Knopf, die Auflösung folgt im Unterricht ·
+                    hinweis: der Text ist ein Hinweis, keine Lösung
+
+   Tipps in Stufen: Liste mit IAL direkt darunter
+     - schwacher Hinweis
+     - deutlicher Hinweis
+     {: .tipps}
 
    Multiple Choice: Task-Liste mit IAL direkt darunter
      - [ ] falsch
@@ -205,10 +215,63 @@
       var g = lesen(key); if (g != null) t.value = g;
       t.addEventListener("input", function () { schreiben(key, t.value); spiegeln(); });
       div.append(t, druck, text);
-      if (div.dataset.loesung) div.appendChild(el("div", { class: "loesung-box" }, div.dataset.loesung));
+      var vergleichLeeren = null;
+      if (div.dataset.loesung) {
+        var box = el("div", { class: "loesung-box" }, div.dataset.loesung);
+        div.appendChild(box);
+        if (div.dataset.vergleich !== "spaeter") vergleichLeeren = vergleich(div, t, box, key);
+      }
       spiegeln();
-      alleFelder.push(function () { t.value = ""; schreiben(key, ""); spiegeln(); });
+      alleFelder.push(function () { t.value = ""; schreiben(key, ""); spiegeln(); if (vergleichLeeren) vergleichLeeren(); });
     });
+
+    // --- Offene Fragen selbst kontrollieren: erst schreiben, dann die
+    //     Musterlösung aufdecken, dann die eigene Antwort einschätzen.
+    //     data-vergleich="spaeter": kein Knopf (die Auflösung folgt im Unterricht),
+    //     data-vergleich="hinweis": der Text ist keine Lösung, sondern ein Hinweis.
+    function vergleich(div, t, box, key) {
+      var nurHinweis = div.dataset.vergleich === "hinweis";
+      var MIN = 10;   // so viele Zeichen (ohne Leerzeichen) müssen dastehen
+      var leiste = el("div", { class: "vergleich-leiste" });
+      var knopf = el("button", { type: "button", class: "vergleich-knopf" });
+      var hinweis = el("span", { class: "vergleich-hinweis" });
+      var urteil = el("span", { class: "vergleich-urteil", role: "group", "aria-label": "Selbsteinschätzung" });
+      var offen = lesen(key + ":offen") === "1";
+      var chips = ["ja", "teilweise", "noch nicht"].map(function (wert) {
+        var b = el("button", { type: "button", class: "chip", "aria-pressed": lesen(key + ":urteil") === wert ? "true" : "false" }, wert);
+        b.addEventListener("click", function () {
+          var an = b.getAttribute("aria-pressed") !== "true";
+          chips.forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+          if (an) b.setAttribute("aria-pressed", "true");
+          schreiben(key + ":urteil", an ? wert : "");
+        });
+        return b;
+      });
+      urteil.append(el("span", {}, "Meine Antwort enthält das Wesentliche:"));
+      chips.forEach(function (c) { urteil.appendChild(c); });
+      if (nurHinweis) box.classList.add("ist-hinweis");
+
+      function zeichne() {
+        var genug = nurHinweis || t.value.replace(/\s/g, "").length >= MIN;
+        div.classList.toggle("loesung-offen", offen);
+        knopf.textContent = nurHinweis ? (offen ? "Hinweis ausblenden" : "Hinweis zeigen")
+          : (offen ? "Musterlösung ausblenden" : "Mit Musterlösung vergleichen");
+        knopf.disabled = !offen && !genug;
+        hinweis.textContent = knopf.disabled ? "Schreiben Sie zuerst Ihre eigene Antwort." : "";
+        urteil.hidden = !offen || nurHinweis;
+      }
+      knopf.addEventListener("click", function () { offen = !offen; schreiben(key + ":offen", offen ? "1" : ""); zeichne(); });
+      t.addEventListener("input", zeichne);
+      leiste.append(knopf, hinweis);
+      box.before(leiste);
+      box.after(urteil);
+      zeichne();
+      return function () {
+        offen = false; schreiben(key + ":offen", ""); schreiben(key + ":urteil", "");
+        chips.forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+        zeichne();
+      };
+    }
 
     // --- Task-Listen: Multiple Choice oder Checkliste
     Array.prototype.forEach.call(container.querySelectorAll("ul"), function (ul) {
@@ -231,6 +294,28 @@
           return ok;
         } });
       }
+    });
+
+    // --- Tipps in Stufen: Liste mit {: .tipps}. Ein Knopf deckt einen Tipp nach
+    //     dem anderen auf. (Steht nach den übrigen Feldern, damit deren
+    //     Speicherschlüssel gleich bleiben, wenn eine Seite Tipps bekommt.)
+    Array.prototype.forEach.call(container.querySelectorAll("ul.tipps, ol.tipps"), function (liste) {
+      var key = schluessel();
+      var tipps = Array.prototype.slice.call(liste.children);
+      var offen = Math.min(tipps.length, parseInt(lesen(key), 10) || 0);
+      var knopf = el("button", { type: "button", class: "tipp-knopf" });
+      function zeichne() {
+        tipps.forEach(function (li, i) { li.classList.toggle("zu", i >= offen); });
+        liste.classList.toggle("leer", offen === 0);
+        knopf.hidden = offen >= tipps.length;
+        knopf.textContent = tipps.length === 1 ? "Tipp zeigen" : "Tipp " + (offen + 1) + " von " + tipps.length + " zeigen";
+      }
+      knopf.addEventListener("click", function () { offen++; schreiben(key, String(offen)); zeichne(); });
+      liste.classList.add("tipps-bereit");
+      liste.after(el("p", { class: "tipps-leiste" }, ""));
+      liste.nextSibling.appendChild(knopf);
+      alleFelder.push(function () { offen = 0; schreiben(key, ""); zeichne(); });
+      zeichne();
     });
 
     // --- «Prüfen»-Knöpfe: ein Knopf pro Abschnitt (h2/h3) mit prüfbaren Feldern

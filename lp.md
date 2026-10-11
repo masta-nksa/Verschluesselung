@@ -47,6 +47,16 @@ und Multiple-Choice-Antworten. Nochmals auslösen blendet sie aus. Wer in diesem
 erhält einen Lösungsschlüssel. Ob und wann Sie den Trick der Klasse verraten, entscheiden Sie.
 Passend zum Thema: Das Verfahren steht im öffentlichen Quelltext, das Geheimnis ist das Wort.
 
+**Was die Klasse ohne den Trick sieht:** Lücken, Auswahlfelder und Multiple Choice prüft der
+Knopf «Prüfen». Bei offenen Fragen können die SuS ihre Antwort mit der Musterlösung vergleichen,
+sobald sie selbst etwas geschrieben haben, und schätzen sie danach selbst ein. Ausgenommen sind
+die Stellen, deren Auflösung in den Unterricht gehört: das Einstiegsrätsel (Lektion 1), das
+Kistenrätsel (Lektion 3) und die Frage nach dem Vertrauen (Lektion 4, Aufgabe 3). Wo eine Aufgabe
+erfahrungsgemäss klemmt, lassen sich Tipps einzeln aufdecken.
+
+**Rückblick:** Ab Lektion 2 beginnt jede Lektion mit drei Fragen zur vorangehenden – gedacht
+fürs Ankommen oder als Hausaufgabe, ohne eigene Zeit im Ablauf.
+
 ## Grundlagen
 
 </div>

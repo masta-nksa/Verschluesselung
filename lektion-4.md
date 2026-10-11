@@ -9,6 +9,10 @@ output: "eigenes RSA-Schlüsselpaar, verschlüsselte Nachrichten ausgetauscht"
 permalink: /lektion-4.html
 ---
 
+*Zum Aufwärmen:* Drei Fragen zur letzten Lektion – wissen Sie es noch?
+→&nbsp;[Rückblick]({{ '/lektionen/L4_Rueckblick.html' | relative_url }})
+{: .nur-online}
+
 1. **Kistenrätsel und Einwegfunktion** *(ca. 10 Min.)* – Wir vergleichen Ihre Lösungen des
    Kistenrätsels und übertragen die Idee auf Schlüssel. Danach: Rechnen Sie 19 · 31 – und
    umgekehrt: Welche zwei Primzahlen ergeben 731?

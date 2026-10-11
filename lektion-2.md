@@ -9,6 +9,10 @@ output: "Brief von 1586 entschlüsselt, Vigenère von Hand angewendet"
 permalink: /lektion-2.html
 ---
 
+*Zum Aufwärmen:* Drei Fragen zur letzten Lektion – wissen Sie es noch?
+→&nbsp;[Rückblick]({{ '/lektionen/L2_Rueckblick.html' | relative_url }})
+{: .nur-online}
+
 1. **Rückblick und Problem** *(ca. 3 Min.)* – Caesar ist schnell geknackt. Wird es besser,
    wenn man jeden Buchstaben durch einen *beliebigen* anderen ersetzt? Wie viele Schlüssel
    gibt es dann?

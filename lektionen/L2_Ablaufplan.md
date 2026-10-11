@@ -28,7 +28,9 @@ reihenfolge: 1
 
 ## Tipps in Stufen für den Wettbewerb
 
-Nur geben, wenn eine Gruppe 5 Minuten feststeckt:
+Die Tipps stehen im Auftrag unter dem Werkzeug und lassen sich dort einzeln aufdecken (Knopf
+«Tipp 1 von 4 zeigen»). Regel vorher ansagen: erst aufdecken, wenn die Gruppe 5 Minuten
+feststeckt.
 
 1. Der häufigste Geheimbuchstabe ist **I** (132-mal) → e.
 2. Das häufige Wort `XIE` ist «den», `AEX` ist «und».

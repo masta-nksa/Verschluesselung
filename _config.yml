@@ -80,6 +80,7 @@ art_labels:
   werkzeug:      "Werkzeug"
   dossier:       "Dossier"
   zusammenfassung: "Das Wichtigste"
+  rueckblick:    "Rückblick"
 
 # Alle Dateien in lektionen/ sind Unterrichtsmaterial und teilen dasselbe Layout.
 defaults:

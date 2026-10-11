@@ -58,7 +58,7 @@ Warum könnte das ein Problem sein?
 Woher wissen Sie, dass der Schlüssel «von Lea» im Kanal wirklich von Lea stammt? Was könnte
 passieren, wenn ihn jemand anderes gepostet hat?
 
-<div class="antwort" data-loesung="Gar nicht – jede Person könnte unter Leas Namen einen Schlüssel posten. Sie würde dann alle Nachrichten an «Lea» lesen und könnte sie, mit Leas echtem Schlüssel neu verschlüsselt, unbemerkt weiterleiten (Man-in-the-Middle). Die Lösung sind Zertifikate (Lektion 5)." data-zeilen="2"></div>
+<div class="antwort" data-loesung="Gar nicht – jede Person könnte unter Leas Namen einen Schlüssel posten. Sie würde dann alle Nachrichten an «Lea» lesen und könnte sie, mit Leas echtem Schlüssel neu verschlüsselt, unbemerkt weiterleiten (Man-in-the-Middle). Die Lösung sind Zertifikate (Lektion 5)." data-zeilen="2" data-vergleich="spaeter"></div>
 
 <div class="kasten" markdown="1">
 

@@ -9,6 +9,10 @@ output: "Kurzvorstellungen der fünf Themen, gemeinsame Zusammenfassung"
 permalink: /lektion-6.html
 ---
 
+*Zum Aufwärmen:* Drei Fragen zur letzten Lektion – wissen Sie es noch?
+→&nbsp;[Rückblick]({{ '/lektionen/L6_Rueckblick.html' | relative_url }})
+{: .nur-online}
+
 1. **Gruppen bilden** *(ca. 2 Min.)* – Ihre Gruppe erhält eines von fünf Themen.
 2. **Expertenphase** *(ca. 18 Min.)* – Beantworten Sie die Leitfragen Ihres Themas und
    bereiten Sie eine Kurzvorstellung von 2 Minuten vor: Was ist das? Welche Bausteine der

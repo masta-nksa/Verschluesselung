@@ -107,6 +107,10 @@ nichts gezählt.
 - **Einzelfragen untereinander:** Mehrere Eingabefelder in einem Absatz laufen in einer Zeile
   zusammen. Getrennte Fragen als Liste oder Tabelle setzen; Rechnungen, die zusammengehören,
   untereinander (Tabelle mit `{: .rechnung}`). Zusammenhängende Lückentexte bleiben Fliesstext.
+- **«Rückblick»** (`art: rueckblick`, ab Lektion 2): drei Fragen zur vorangehenden Lektion
+  mit automatischer Kontrolle, `reihenfolge: 2` (erste Karte der Lektion), `drucken: false`.
+  Auf der Lektionsseite steht dazu vor dem Ablauf die Zeile «Zum Aufwärmen» – bewusst ohne
+  Richtzeit, damit das Zeitraster der Lektion gleich bleibt.
 - **«Das Wichtigste»** (`art: zusammenfassung`, eine Seite pro Lektion): beginnt mit
   `## Lernziele dieser Lektion` als Task-Liste zum Abhaken, dann `## Zum Besprechen` mit zwei
   bis drei Leitfragen (in `nur-online`, also nur am Beamer), danach die Kernkonzepte mit
@@ -227,13 +231,27 @@ der SuS gespeichert (nur lokal).
 | Multiple Choice | Task-Liste `- [ ] …` und direkt darunter `{: .mc data-antwort="2 3"}` |
 | nur am Bildschirm | `<div class="nur-online" markdown="1"> … </div>` (z. B. «Früh fertig?») |
 | Musterlösung zu einem Antwortfeld | `<div class="antwort" data-zeilen="2" data-loesung="…"></div>` |
+| … die erst im Unterricht aufgelöst wird | zusätzlich `data-vergleich="spaeter"` (kein Knopf «Mit Musterlösung vergleichen») |
+| … die nur ein Hinweis ist | zusätzlich `data-vergleich="hinweis"` (Knopf «Hinweis zeigen», ohne Selbsteinschätzung) |
+| Tipps in Stufen | Liste `- …` und direkt darunter `{: .tipps}` – ein Knopf deckt einen Tipp nach dem anderen auf |
 | nur im Druck | `class="nur-druck"` (z. B. Geheimtext-Kopie für Papier, wenn das Werkzeug nicht gedruckt wird) |
 
 Trennzeichen ist immer das **Semikolon** – ein `|` würde in Markdown-Tabellen die Spalten
 trennen. Schreiblinien nie als Unterstriche `____` setzen (kramdown macht daraus Fett/Kursiv).
 Die Kontrolle ist formativ: Wer den Seitenquelltext liest, sieht die Antworten.
 
+**Offene Fragen selbst kontrollieren:** Unter jedem Antwortfeld mit `data-loesung` steht der
+Knopf «Mit Musterlösung vergleichen». Er wird erst aktiv, wenn etwas im Feld steht (mindestens
+zehn Zeichen); danach schätzen die SuS ein, ob ihre Antwort das Wesentliche enthält (ja /
+teilweise / noch nicht). Wo die Auflösung dem Unterricht gehört – Einstiegsrätsel, Kistenrätsel,
+die offene Frage am Ende von Lektion 4 –, steht `data-vergleich="spaeter"`: Dort gibt es die
+Lösung weiterhin nur über das Easter Egg und unter `/lsg/`.
+
+**Tipps in Stufen** erscheinen nur am Bildschirm (nicht im Druck) und in der Reihenfolge der
+Liste: zuerst der schwächste Hinweis, zuletzt der deutlichste.
+
 **Lösungen einblenden (Easter Egg):** «kerckhoffs» tippen oder 5× auf den Seitentitel klicken.
+Dann sind auch alle Tipps aufgedeckt.
 
 Seiten, die nicht ins Dossier sollen (z. B. eine Projektionsseite): `drucken: false` im
 Frontmatter.

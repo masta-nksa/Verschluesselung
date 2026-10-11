@@ -9,6 +9,10 @@ output: "Signaturablauf skizziert, Zertifikatskette einer echten Website gelesen
 permalink: /lektion-5.html
 ---
 
+*Zum Aufwärmen:* Drei Fragen zur letzten Lektion – wissen Sie es noch?
+→&nbsp;[Rückblick]({{ '/lektionen/L5_Rueckblick.html' | relative_url }})
+{: .nur-online}
+
 1. **Das Problem** *(ca. 2 Min.)* – Sie erhalten einen öffentlichen Schlüssel, angeblich von
    Galaxus. Woher wissen Sie, dass er wirklich von Galaxus stammt?
 2. **Hashfunktionen** *(ca. 8 Min., zu zweit)* – Untersuchen Sie mit dem SHA-256-Werkzeug,

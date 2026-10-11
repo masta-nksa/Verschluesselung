@@ -33,6 +33,10 @@ Führen Sie die Experimente durch und wählen Sie die passende Eigenschaft.
 | c) Ändern Sie in Text B nur ein Zeichen. Wie viele der 256 Bits ändern sich ungefähr? <span class="luecke" data-typ="groesse" data-toleranz="0.2" data-antwort="128" data-breite="5"></span> | <span class="luecke" data-optionen="feste Länge;deterministisch;Lawineneffekt;Einwegfunktion" data-antwort="Lawineneffekt"></span> |
 | d) `f5538dfab339f14dd4564c7a733475ed5a74e55a5b33cc8846f72520b2c4a6b1` gehört zu einem Tier (deutsch, klein geschrieben). Rückrechnen geht nicht – finden Sie es trotzdem: <span class="luecke" data-antwort="pinguin" data-breite="12"></span> | <span class="luecke" data-optionen="feste Länge;deterministisch;Lawineneffekt;Einwegfunktion" data-antwort="Einwegfunktion"></span> |
 
+- Zu Experiment d: Zurückrechnen geht nicht – aber Sie können Tiernamen ins Werkzeug tippen und die Hashwerte vergleichen.
+- Das gesuchte Tier ist ein Vogel, der nicht fliegen kann.
+{: .tipps}
+
 ### Aufgabe 2 – Kollisionen
 
 Es gibt unendlich viele Texte, aber «nur» 2²⁵⁶ ≈ 10⁷⁷ Hashwerte – also muss es verschiedene

@@ -960,11 +960,39 @@ select.luecke-feld { cursor: pointer; }
   border: 1px dashed var(--sus);
 }
 .loesungen-an .loesung-tag::before { content: "\2713 "; }
-.loesungen-an .loesung-box {
+.loesungen-an .loesung-box, .loesung-offen > .loesung-box {
   display: block; margin-top: .4rem; padding: .5rem .7rem; font-size: .9rem;
   background: var(--sus-soft); border-left: 3px solid var(--sus); border-radius: var(--radius-code);
 }
-.loesungen-an .loesung-box::before { content: "Musterlösung: "; font-weight: 700; color: var(--sus); }
+.loesungen-an .loesung-box::before, .loesung-offen > .loesung-box::before { content: "Musterlösung: "; font-weight: 700; color: var(--sus); }
+.loesung-box.ist-hinweis::before { content: "Hinweis: " !important; }
+
+/* Offene Fragen selbst kontrollieren: Wer etwas geschrieben hat, deckt die
+   Musterlösung auf und schätzt die eigene Antwort ein. Tipps in Stufen
+   (Liste mit {: .tipps}) deckt ein Knopf einzeln auf. */
+.vergleich-leiste { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .8rem; margin-top: .4rem; }
+.vergleich-knopf, .tipp-knopf {
+  font: inherit; font-size: .84rem; cursor: pointer;
+  padding: .22rem .75rem; border-radius: var(--radius-knopf);
+  border: 1px solid var(--accent); background: none; color: var(--accent);
+}
+.vergleich-knopf:hover:not(:disabled), .tipp-knopf:hover { background: var(--accent); color: var(--bg-elev); }
+.vergleich-knopf:disabled { cursor: default; border-color: var(--border-strong); color: var(--text-muted); }
+.vergleich-hinweis { font-size: .82rem; color: var(--text-muted); }
+.vergleich-urteil { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .5rem; margin-top: .45rem; font-size: .86rem; }
+.vergleich-urteil[hidden], .tipp-knopf[hidden] { display: none; }
+
+.prose ul.tipps, .prose ol.tipps {
+  list-style: none; counter-reset: tipp; margin: .8rem 0 .5rem; padding: .6rem .9rem;
+  background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.prose .tipps > li { counter-increment: tipp; margin-bottom: .3rem; }
+.prose .tipps > li:last-child { margin-bottom: 0; }
+.prose .tipps > li::before { content: "Tipp " counter(tipp) ": "; font-weight: 700; }
+.prose .tipps.leer, .prose .tipps > li.zu { display: none; }
+.loesungen-an .prose .tipps.leer { display: block; }
+.loesungen-an .prose .tipps > li.zu { display: list-item; }
+.tipps-leiste { margin: .3rem 0 1rem; }
 .loesungen-an .chip.ist-loesung { box-shadow: 0 0 0 2px var(--sus); }
 .loesungen-an .chip.auch-loesung { box-shadow: 0 0 0 2px var(--sus); border-style: dashed; }
 .loesungen-an .prose li.ist-loesung, .loesungen-an li.ist-loesung { color: var(--sus); font-weight: 650; }
@@ -1012,6 +1040,11 @@ select.luecke-feld { cursor: pointer; }
   .table-scroll { margin: 0 0 .5em; overflow: visible; }
   .kasten { padding: .3em .6em; margin: .45em 0; }
   .material-bar, .hinweis, .pruefen-leiste, .eingaben-loeschen, .dossier-steuerung { display: none !important; }
+  /* Selbstkontrolle und Tipps gibt es nur am Bildschirm. Eine einzeln
+     aufgedeckte Musterlösung wird nicht gedruckt – nur der Lösungsschlüssel
+     (alle Lösungen eingeblendet). */
+  .vergleich-leiste, .vergleich-urteil, .tipps-leiste, .prose ul.tipps, .prose ol.tipps { display: none !important; }
+  html:not(.loesungen-an) .loesung-offen > .loesung-box { display: none; }
   .krypto, .krypto:empty { display: none !important; }
 
   /* «Ziel» als eine Zeile statt Überschrift + Absatz */

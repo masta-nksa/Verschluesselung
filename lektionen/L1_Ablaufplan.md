@@ -21,7 +21,7 @@ reihenfolge: 1
 
 | Zeit | Phase | Was passiert | Material |
 |---|---|---|---|
-| 0–5 | Einstieg | Geheimbotschaft an der Wand. SuS versuchen ohne Hilfsmittel. Nach 3 Min. Tipp 1, bei Bedarf Tipp 2. Wer es hat, flüstert der LP das Passwort. | Einstiegsseite |
+| 0–5 | Einstieg | Geheimbotschaft an der Wand. SuS versuchen ohne Hilfsmittel. Nach 3 Min. Tipp 1 aufdecken (Knopf auf der Seite), bei Bedarf Tipp 2. Wer es hat, flüstert der LP das Passwort. | Einstiegsseite |
 | 5–15 | Schutzziele | Partnerarbeit: 8 Szenarien zuordnen. Nur strittige Fälle kurz klären – die Sicherung folgt am Schluss. | Arbeitsblatt Schutzziele |
 | 15–33 | Caesar | Partnerarbeit mit Werkzeug, Aufgaben 1–5. LP zirkuliert, v. a. bei Aufgabe 5 (Kerckhoffs). | Arbeitsblatt Caesar |
 | 33–43 | Besprechung | Das Wichtigste: Schutzziele, Begriffe, Brute Force, Kerckhoffs, Codierung. | Das Wichtigste L1 |
