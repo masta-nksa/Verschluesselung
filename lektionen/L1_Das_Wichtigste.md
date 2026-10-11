@@ -46,13 +46,13 @@ Haken Sie ab, was Sie sicher können. Wo es noch hapert, hilft die Zusammenfassu
 
 ## Die Fachbegriffe
 
-<div class="ablauf" role="group" aria-label="Schema: Aus dem Klartext wird durch Verschlüsseln der Geheimtext, durch Entschlüsseln wieder der Klartext – beides mit Algorithmus und Schlüssel. Eve versucht, den Geheimtext ohne Schlüssel zu knacken.">
-<div class="ablauf-knoten"><b>Klartext</b><code>caesar</code></div>
-<div class="ablauf-schritt"><b>verschlüsseln</b><span>Algorithmus + Schlüssel</span></div>
-<div class="ablauf-knoten"><b>Geheimtext</b><code>FDHVDU</code></div>
-<div class="ablauf-schritt"><b>entschlüsseln</b><span>Algorithmus + Schlüssel</span></div>
-<div class="ablauf-knoten"><b>Klartext</b><code>caesar</code></div>
-<div class="ablauf-abzweig"><b>knacken</b><span>Eve – ohne Schlüssel</span></div>
+<div class="schema" role="group" aria-label="Schema: Aus dem Klartext wird durch Verschlüsseln der Geheimtext, durch Entschlüsseln wieder der Klartext – beides mit Algorithmus und Schlüssel. Eve versucht, den Geheimtext ohne Schlüssel zu knacken.">
+<div class="schema-knoten"><b>Klartext</b><code>caesar</code></div>
+<div class="schema-schritt"><b>verschlüsseln</b><span>Algorithmus + Schlüssel</span></div>
+<div class="schema-knoten"><b>Geheimtext</b><code>FDHVDU</code></div>
+<div class="schema-schritt"><b>entschlüsseln</b><span>Algorithmus + Schlüssel</span></div>
+<div class="schema-knoten"><b>Klartext</b><code>caesar</code></div>
+<div class="schema-abzweig"><b>knacken</b><span>Eve – ohne Schlüssel</span></div>
 </div>
 
 - Im Beispiel: Caesar mit Schlüssel 3. Klartext schreiben wir klein, Geheimtext GROSS.
