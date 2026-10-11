@@ -69,6 +69,9 @@ kein HTML und keine Navigation angefasst werden.
 `lektion-N.md` – die Nummerierung und die Zeitangaben (`*(ca. 15 Min.)*`) werden
 automatisch formatiert.
 
+**Externe Links** als normale Markdown-Links schreiben. Sie öffnen von selbst in einem
+neuen Tab (Skript in `_layouts/default.html`), interne Links bleiben im selben Tab.
+
 ## Lokale Vorschau (optional)
 
 Nicht nötig, um die Seite zu aktualisieren – GitHub baut serverseitig. Wer trotzdem
@@ -138,3 +141,7 @@ Die Kontrolle ist formativ: Wer den Seitenquelltext liest, sieht die Antworten.
 
 Seiten, die nicht ins Dossier sollen (z. B. eine Projektionsseite): `drucken: false` im
 Frontmatter.
+
+**Druck und eigene Eingaben:** Ein einzelnes Arbeitsblatt druckt mit, was am Bildschirm
+schon ausgefüllt ist. Das Dossier druckt als leere Vorlage; wer seine Eingaben auf Papier
+will, setzt dort das Häkchen «Eigene Eingaben mitdrucken».
