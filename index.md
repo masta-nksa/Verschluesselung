@@ -15,7 +15,7 @@ titel: "Übersicht"
 -->
 
 > Drei können ein Geheimnis bewahren, wenn zwei von ihnen tot sind.
-> *(Benjamin Franklin, 1735)*
+> *(Benjamin Franklin, 1735 – der Mann auf der [100-Dollar-Note](https://www.uscurrency.gov/denominations/100))*
 
 Jedes Mal, wenn Sie eine Nachricht verschicken, mit dem Handy bezahlen oder sich bei einem
 Konto anmelden, wird verschlüsselt – Hunderte Male am Tag, ohne dass Sie es merken. Dabei läuft

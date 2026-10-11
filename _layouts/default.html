@@ -105,6 +105,13 @@
         node.parentNode.replaceChild(frag, node);
       });
     })();
+
+    // 4) Externe Links öffnen in einem neuen Tab. Erst beim Klick gesetzt, damit
+    //    es auch für nachgeladene Inhalte gilt (Dossier, Werkzeuge).
+    document.addEventListener('click', function (ev) {
+      var a = ev.target.closest && ev.target.closest('a[href]');
+      if (a && /^https?:$/.test(a.protocol) && a.host !== location.host) { a.target = '_blank'; a.rel = 'noopener'; }
+    });
   </script>
 </body>
 </html>
