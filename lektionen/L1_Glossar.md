@@ -47,7 +47,7 @@ Lektion, in der der Begriff eingeführt wird.
 | Begriff | Bedeutung |
 |---|---|
 | **Asymmetrische Verschlüsselung** | Zwei verschiedene Schlüssel: Mit dem **öffentlichen** wird verschlüsselt, mit dem **privaten** entschlüsselt. (4) |
-| **Einwegfunktion** | Eine Funktion, die leicht zu berechnen, aber praktisch nicht umzukehren ist (Multiplizieren ↔ Faktorisieren). (4) |
+| **Einwegfunktion** | Eine Funktion, die leicht zu berechnen, aber praktisch nicht umzukehren ist. Beispiele: Multiplizieren ↔ Faktorisieren, Hashfunktionen. (4–5) |
 | **Falltür (Hintertür)** | Geheime Zusatzinformation, mit der man eine Einwegfunktion doch umkehren kann – bei RSA der private Schlüssel. (4) |
 | **RSA** | Asymmetrisches Verfahren von Rivest, Shamir und Adleman (1977). Seine Sicherheit beruht darauf, dass kein effizientes Verfahren zum Faktorisieren grosser Zahlen bekannt ist. (4) |
 | **modulo (mod)** | Rest bei der ganzzahligen Division: 17 mod 5 = 2. (4) |
@@ -59,6 +59,9 @@ Lektion, in der der Begriff eingeführt wird.
 | Begriff | Bedeutung |
 |---|---|
 | **Hashfunktion** | Berechnet aus beliebigen Daten einen kurzen «Fingerabdruck» fester Länge (z. B. SHA-256: 256 Bit). Kleinste Änderungen ändern den Hashwert völlig. (5) |
+| **Deterministisch** | Dieselbe Eingabe ergibt jedes Mal dasselbe Ergebnis – bei einer Hashfunktion denselben Hashwert. (5) |
+| **Lawineneffekt** | Schon eine winzige Änderung der Eingabe verändert rund die Hälfte aller Bits des Hashwerts. (5) |
+| **Kollision** | Zwei verschiedene Eingaben mit demselben Hashwert. Eine gute Hashfunktion ist *kollisionsresistent*: Kollisionen gibt es, aber niemand kann sie finden. (5) |
 | **Digitale Signatur** | Der Hashwert eines Dokuments wird mit dem privaten Schlüssel signiert. Jede Person kann mit dem öffentlichen Schlüssel prüfen, ob das Dokument unverändert ist und von wem es stammt. (5) |
 | **Zertifikat** | Elektronische Bescheinigung, dass ein öffentlicher Schlüssel zu einer bestimmten Website, Firma oder Person gehört – signiert von einer Zertifizierungsstelle. (5) |
 | **Zertifizierungsstelle (CA)** | Vertrauenswürdige Stelle, die Zertifikate ausstellt und signiert (z. B. Let's Encrypt, SwissSign). (5) |

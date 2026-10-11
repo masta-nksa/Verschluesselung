@@ -20,6 +20,14 @@ Eine **Hashfunktion** berechnet aus beliebigen Daten – einem Wort, einem Vertr
 einen kurzen Wert fester Länge, den **Hashwert**: eine Art Fingerabdruck. Die verbreitetste
 heisst **SHA-256**; sie liefert immer 256 Bit, geschrieben als 64 Hexadezimalziffern.
 
+Eine kryptografische Hashfunktion hat unter anderem diese vier Eigenschaften – in Aufgabe 1
+weisen Sie sie nach:
+
+- **feste Länge** – der Hashwert ist immer gleich lang, egal wie lang die Eingabe ist
+- **deterministisch** – dieselbe Eingabe ergibt jedes Mal denselben Hashwert
+- **Lawineneffekt** – schon eine winzige Änderung der Eingabe ergibt einen völlig anderen Hashwert
+- **Einwegfunktion** – aus dem Hashwert lässt sich die Eingabe nicht zurückrechnen (vgl. Lektion 4)
+
 <div class="krypto" data-tool="sha256"></div>
 
 ### Aufgabe 1 – Eigenschaften herausfinden
