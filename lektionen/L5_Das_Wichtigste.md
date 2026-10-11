@@ -66,7 +66,7 @@ das Dokument verändert oder die Signatur gefälscht.
 <div class="ablauf-knoten"><b>Dokument</b></div>
 <div class="ablauf-schritt"><b>Hashfunktion</b></div>
 <div class="ablauf-knoten"><b>Hashwert h<sub>1</sub></b></div>
-<div class="ablauf-vergleich">= ?</div>
+<div class="ablauf-vergleich"><span>h<sub>1</sub> = h<sub>2</sub> ?</span></div>
 <div class="ablauf-knoten"><b>Signatur</b></div>
 <div class="ablauf-schritt"><b>zurückrechnen</b><span>mit Alices <strong>öffentlichem</strong> Schlüssel</span></div>
 <div class="ablauf-knoten"><b>Hashwert h<sub>2</sub></b></div>

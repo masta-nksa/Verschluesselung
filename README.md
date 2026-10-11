@@ -262,7 +262,8 @@ der SuS gespeichert (nur lokal).
 Schritte; auf schmalen Bildschirmen läuft sie von oben nach unten. Ein
 `<div class="ablauf-abzweig">` am Ende hängt gestrichelt am mittleren Knoten (Eve in Lektion 1).
 Mit `class="ablauf ablauf-paar"` stehen zwei kurze Reihen (Knoten – Schritt – Knoten)
-untereinander, dazwischen ein `<div class="ablauf-vergleich">` (Signaturprüfung in Lektion 5).
+untereinander; ein `<div class="ablauf-vergleich"><span>…</span></div>` nach der ersten Reihe
+erscheint rechts neben einer Klammer um beide Reihen (Signaturprüfung in Lektion 5).
 Der HTML-Block steht ohne Leerzeilen im Markdown und bekommt ein `aria-label`, das den Ablauf in
 einem Satz beschreibt.
 
