@@ -13,6 +13,10 @@
   {%- comment -%} Interaktive Krypto-Werkzeuge (nur aktiv, wo ein <div class="krypto"> steht) {%- endcomment -%}
   <script src="{{ '/assets/js/krypto.js' | relative_url }}" defer></script>
   <script src="{{ '/assets/js/uebungen.js' | relative_url }}" defer></script>
+  {%- comment -%} Besucherstatistik (nur mit "goatcounter" in _config.yml): zählt Aufrufe ohne Cookies; lokale Vorschauen zählt das Skript von sich aus nicht mit {%- endcomment -%}
+  {%- if site.goatcounter %}
+  <script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  {%- endif %}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128272;</text></svg>">
 </head>
 <body>
@@ -53,6 +57,9 @@
     <div class="wrap">
       <p>{{ site.title }} – {{ site.untertitel }} · {{ site.schule }}</p>
       <p class="footer-meta">&copy; {{ site.time | date: "%Y" }} masta · zuletzt aktualisiert am {{ site.time | date: "%d.%m.%Y" }}</p>
+      {%- if site.goatcounter %}
+      <p class="footer-meta">Diese Seite zählt Aufrufe anonym, ohne Cookies und ohne gespeicherte IP-Adressen (<a href="https://www.goatcounter.com/help/privacy">GoatCounter</a>).</p>
+      {%- endif %}
     </div>
   </footer>
 

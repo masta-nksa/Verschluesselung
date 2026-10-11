@@ -7,7 +7,7 @@ Die Website wird von GitHub Pages direkt aus diesem Repository mit Jekyll gebaut
 ## Aufbau
 
 ```
-├── _config.yml            Konfiguration (Titel, baseurl, Badge-Beschriftungen, Signet, Kopfzeile)
+├── _config.yml            Konfiguration (Titel, baseurl, Badge-Beschriftungen, Signet, Kopfzeile, Besucherstatistik)
 ├── index.md               Startseite
 ├── lektion-1.md …         Lektionsseiten: Metadaten + Ablauf als Aufträge für die SuS
 ├── lektionen/             Arbeitsblätter (SuS) und Ablaufpläne (Lehrperson)
@@ -73,6 +73,14 @@ automatisch formatiert.
 **Externe Links** als normale Markdown-Links schreiben. Sie öffnen von selbst in einem
 neuen Tab (Skript in `_layouts/default.html`), interne Links bleiben im selben Tab.
 
+**Besucherstatistik:** Mit `goatcounter: "<code>"` in `_config.yml` zählt
+[GoatCounter](https://www.goatcounter.com/) die Aufrufe jeder Seite – ohne Cookies und ohne
+gespeicherte IP-Adressen, darum ohne Einwilligungsbanner; die Fusszeile weist darauf hin. Die
+Auswertung steht unter `https://<code>.goatcounter.com` (Anmeldung nötig). Lokale Vorschauen
+werden nicht gezählt. Das eigene Gerät nimmt man aus, indem man die Seite einmal mit
+`#toggle-goatcounter` am Ende der Adresse aufruft. Ohne die Zeile in `_config.yml` wird
+nichts gezählt.
+
 ## Konventionen der Unterlagen
 
 - **Reihenfolge:** `reihenfolge` folgt dem Ablauf der Lektion – die Unterlagen stehen auf der
@@ -99,7 +107,8 @@ neuen Tab (Skript in `_layouts/default.html`), interne Links bleiben im selben T
 Es gibt genau ein Design. Es ist als gemeinsames Design aller Unterrichtseinheiten gedacht
 und steckt so auch im Gerüst für neue Einheiten: Tinte auf Papier, Schreibmaschinenschrift (IBM Plex Mono) für Titel, Nummern und Etiketten, Inter für
 den Lesetext, Leuchtstift-Gelb als einzige Farbe. Dark Mode folgt der Einstellung des Geräts.
-Die Schriften liegen in `assets/fonts/`, es wird nichts von fremden Servern geladen.
+Die Schriften liegen in `assets/fonts/`; von fremden Servern kommt einzig das Zählskript
+der Besucherstatistik (siehe oben).
 
 Was diese Einheit von anderen unterscheidet, steht nicht im Stylesheet, sondern hier:
 

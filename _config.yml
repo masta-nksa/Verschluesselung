@@ -43,6 +43,14 @@ hauptnav:
   - titel: "Glossar"
     url: "/lektionen/L1_Glossar.html"
 
+# Besucherstatistik (optional): Code des GoatCounter-Kontos, also der Teil vor
+# ".goatcounter.com". Gezählt wird ohne Cookies und ohne gespeicherte
+# IP-Adressen; die Auswertung steht unter https://<code>.goatcounter.com.
+# Mehrere Einheiten können denselben Code teilen – sie unterscheiden sich im
+# Pfad (baseurl). Ohne diese Zeile wird nichts gezählt und der Hinweis in der
+# Fusszeile entfällt.
+goatcounter: "nksa"
+
 # Kein Theme: Layouts und CSS liegen vollständig in diesem Repo. GitHub Pages
 # würde sonst das Standard-Theme "primer" laden, dessen Stylesheet den Pfad
 # assets/css/style.css belegt – darum heisst unseres unterricht.css.
