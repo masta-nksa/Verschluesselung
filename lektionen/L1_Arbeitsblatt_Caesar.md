@@ -21,7 +21,8 @@ Caesar soll seine Nachrichten so verschlüsselt haben: Jeder Buchstabe wird durc
 ersetzt, der eine feste Anzahl Stellen weiter hinten im Alphabet steht; nach Z geht es bei A
 weiter. Bei Verschiebung 3 wird aus *caesar* **FDHVDU** (Klartext klein, Geheimtext GROSS).
 Zum Entschlüsseln schiebt man um dieselbe Zahl zurück: Caesar ist ein **symmetrisches**
-Verfahren – derselbe Schlüssel dient zum Ver- und zum Entschlüsseln.
+Verfahren – derselbe Schlüssel dient zum Ver- und zum Entschlüsseln. Das Gegenstück sind
+**asymmetrische** Verfahren mit zwei verschiedenen Schlüsseln (Lektion 4).
 
 | Klartext | a | b | c | d | e | f | g | … | w | x | y | z |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|

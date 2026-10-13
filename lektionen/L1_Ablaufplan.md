@@ -42,7 +42,7 @@ abschreiben: Die Seite ist ihre Lernzusammenfassung (auch im Dossier).
 
 ## Hinweise
 
-- **Einstieg:** Das Rätsel ist mit Verschiebung 7 verschlüsselt. Das Passwort «Rubikon» spielt auf Caesar an (Überschreitung des Rubikon, 49 v. Chr.) – gut als Überleitung: «Wer war das noch mal?». Die Lösung erst nach Aufgabe 4 des Caesar-Arbeitsblatts (Knacken) auflösen, dann können es alle mit dem Werkzeug selbst knacken.
+- **Einstieg:** Das Rätsel ist mit Verschiebung 1 verschlüsselt, damit es im Kopf lösbar ist (EFS → der). Das Passwort «Rubikon» spielt auf Caesar an (Überschreitung des Rubikon, 49 v. Chr.) – gut als Überleitung: «Wer war das noch mal?». Die Lösung erst nach Aufgabe 4 des Caesar-Arbeitsblatts (Knacken) auflösen, dann können es alle mit dem Werkzeug selbst knacken.
 - **Stolperstein Schutzziele:** Integrität und Authentizität werden oft verwechselt. Faustregel für die SuS: *Integrität = Ist der Inhalt unverändert? Authentizität = Stammt er wirklich von der Person, die er vorgibt?* Bei Szenario 7 (Software-Update) sind beide betroffen – das ist gewollt.
 - **Verfügbarkeit:** Wer die Cybersicherheits-Einheit erinnert, nennt evtl. «Verfügbarkeit». Das ist korrekt, wird aber nicht mit Kryptografie geschützt (sondern mit Backups, Redundanz). Darum ist es hier nur im Infokasten erwähnt.
 - **Moderne Verfahren:** Falls jemand fragt, ob Verschlüsselung nicht auch die Integrität schützt: Moderne Verfahren (z. B. AES-GCM) kombinieren Verschlüsselung mit einer Prüfsumme. Das ist dann aber ein zusätzlicher Baustein – genau den lernen wir in Lektion 5 kennen.

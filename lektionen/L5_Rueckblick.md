@@ -27,7 +27,7 @@ Drei Fragen zum Aufwärmen. Antworten Sie aus dem Kopf, ohne nachzuschlagen – 
    <span class="luecke" data-optionen="schneller;langsamer;unsicherer" data-antwort="langsamer"></span>
    als AES. In der Praxis vereinbart man asymmetrisch darum nur einen Schlüssel und verschlüsselt
    die Daten selbst mit
-   <span class="luecke" data-optionen="RSA;AES;SHA-256" data-antwort="AES"></span>.
+   <span class="luecke" data-optionen="RSA;AES;Vigenère" data-antwort="AES"></span>.
 
 Unsicher? Die Antworten stehen in
 [Das Wichtigste: Asymmetrische Verschlüsselung und RSA]({{ '/lektionen/L4_Das_Wichtigste.html' | relative_url }}).

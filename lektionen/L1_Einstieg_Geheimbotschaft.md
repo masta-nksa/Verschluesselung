@@ -12,11 +12,11 @@ drucken: false
 
 Diese Nachricht wurde heute Morgen auf dem Schulhausplatz gefunden:
 
-<p style="font-family: var(--font-mono); font-size: clamp(1.3rem, 3.5vw, 2rem); line-height: 1.6; letter-spacing: .08em; font-weight: 600;">AYLMMWBURA OLBAL UHJO KLY ZJOBSL ILPT IYBUULU. KHZ WHZZDVYA SHBALA YBIPRVU.</p>
+<p style="font-family: var(--font-mono); font-size: clamp(1.3rem, 3.5vw, 2rem); line-height: 1.6; letter-spacing: .08em; font-weight: 600;">USFGGQVOLU IFVUF OBDI EFS TDIVMF CFJN CSVOOFO. EBT QBTTXPSU MBVUFU SVCJLPO.</p>
 
 Versuchen Sie es zuerst ohne Hilfsmittel. Was fällt Ihnen am Geheimtext auf?
 
-<div class="antwort" data-loesung="Zum Beispiel: Wortlängen und Satzzeichen sind erhalten, einige Buchstaben kommen sehr oft vor, das Wort KLY könnte ein Artikel sein. Lösung (Verschiebung 7): «Treffpunkt heute nach der Schule beim Brunnen. Das Passwort lautet Rubikon.»" data-zeilen="2" data-vergleich="spaeter"></div>
+<div class="antwort" data-loesung="Zum Beispiel: Wortlängen und Satzzeichen sind erhalten, einige Buchstaben kommen sehr oft vor, das Wort EFS könnte ein Artikel sein. Lösung (Verschiebung 1 – jeder Buchstabe steht eine Stelle weiter hinten im Alphabet): «Treffpunkt heute nach der Schule beim Brunnen. Das Passwort lautet Rubikon.»" data-zeilen="2" data-vergleich="spaeter"></div>
 
 **Wie lautet das Passwort?** <span class="luecke" data-antwort="Rubikon" data-breite="14"></span>
 

@@ -8,7 +8,7 @@ kurz: "Lösungen zum Einstieg, zu den Schutzzielen und zum Caesar-Arbeitsblatt i
 
 ## Einstieg: Geheimbotschaft
 
-Verschiebung 7: *Treffpunkt heute nach der Schule beim Brunnen. Das Passwort lautet Rubikon.*
+Verschiebung 1: *Treffpunkt heute nach der Schule beim Brunnen. Das Passwort lautet Rubikon.*
 Das Passwort spielt auf Caesar an, der 49 v. Chr. den Grenzfluss Rubikon überschritt.
 
 ## Schutzziele
