@@ -58,7 +58,7 @@ Warum lässt sich eine allgemeine Ersetzung knacken, obwohl sie rund 4 · 10²�
 ### 7 · Schlüsselaustausch
 
 Welches Problem der symmetrischen Verschlüsselung löst die asymmetrische?
-<span class="luecke" data-antwort="Schlüsselaustausch;Schlüsselaustauschproblem;das Schlüsselaustauschproblem;der Schlüsselaustausch" data-breite="28"></span>
+<span class="luecke" data-antwort="Schlüsselaustausch;Schlüsselaustauschproblem;Schlüsselübergabe;Schlüsselübergabeproblem;Schlüsselverteilung;Schlüsselverteilungsproblem;Schlüsseltausch;sicherer Schlüsselaustausch;sichere Schlüsselübergabe;Austausch des Schlüssels;Übergabe des Schlüssels;Verteilung des Schlüssels;Austausch der Schlüssel;Übergabe der Schlüssel" data-breite="28"></span>
 
 ### 8 · RSA
 

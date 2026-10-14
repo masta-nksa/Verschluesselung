@@ -269,6 +269,10 @@ einem Satz beschreibt.
 
 Trennzeichen ist immer das **Semikolon** – ein `|` würde in Markdown-Tabellen die Spalten
 trennen. Schreiblinien nie als Unterstriche `____` setzen (kramdown macht daraus Fett/Kursiv).
+Beim Vergleich von Textantworten zählen Gross-/Kleinschreibung, Leer- und Satzzeichen nicht,
+ä gilt wie ae, und ein Artikel am Anfang («der», «eine» …) wird ignoriert. Gleichwertige
+Begriffe als weitere Antworten anhängen (z. B. Schlüsselaustausch, Schlüsselübergabe,
+Schlüsselverteilung) – angezeigt wird als Lösung immer die erste.
 Die Kontrolle ist formativ: Wer den Seitenquelltext liest, sieht die Antworten.
 
 **Offene Fragen selbst kontrollieren:** Unter jedem Antwortfeld mit `data-loesung` steht der

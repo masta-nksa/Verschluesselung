@@ -68,7 +68,9 @@
 
   // ------------------------------------------------------------ Vergleich
   function norm(s) {
-    return String(s).toLowerCase()
+    return String(s).toLowerCase().trim()
+      // Ein Artikel am Anfang zählt nicht: «der Schlüsselaustausch» = «Schlüsselaustausch»
+      .replace(/^(der|die|das|den|dem|des|ein|eine|einen|einem|einer)\s+/, "")
       .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
       .replace(/[^a-z0-9]/g, "");
   }

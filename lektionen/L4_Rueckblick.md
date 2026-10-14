@@ -21,7 +21,7 @@ Drei Fragen zum Aufwärmen. Antworten Sie aus dem Kopf, ohne nachzuschlagen – 
 2. 1100 ⊕ 1010 = <span class="luecke" data-antwort="0110" data-breite="6"></span>
 3. AES verrät keine Muster, und sein Schlüsselraum ist zu gross zum Durchprobieren. Welches
    Problem bleibt trotzdem ungelöst?
-   <span class="luecke" data-antwort="Schlüsselaustausch;Schlüsselaustauschproblem;das Schlüsselaustauschproblem;der Schlüsselaustausch" data-breite="28"></span>
+   <span class="luecke" data-antwort="Schlüsselaustausch;Schlüsselaustauschproblem;Schlüsselübergabe;Schlüsselübergabeproblem;Schlüsselverteilung;Schlüsselverteilungsproblem;Schlüsseltausch;sicherer Schlüsselaustausch;sichere Schlüsselübergabe;Austausch des Schlüssels;Übergabe des Schlüssels;Verteilung des Schlüssels;Austausch der Schlüssel;Übergabe der Schlüssel" data-breite="28"></span>
 
 Unsicher? Die Antworten stehen in
 [Das Wichtigste: Vigenère knacken, AES und das Schlüsselproblem]({{ '/lektionen/L3_Das_Wichtigste.html' | relative_url }}).
