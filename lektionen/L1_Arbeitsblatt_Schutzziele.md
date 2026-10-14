@@ -33,23 +33,23 @@ passen zwei. (Auf Papier: ankreuzen.)
 
 | Nr. | Szenario | Schutzziel(e) |
 |---|---|---|
-| 1 | Ihre Krankenakte soll nur Ihre Ärztin lesen können. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Vertraulichkeit"></span> |
-| 2 | Jemand ändert in einer Online-Überweisung unbemerkt die Kontonummer des Empfängers. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Integrität" data-auch="Authentizität"></span> |
-| 3 | Sie erhalten eine Mail «von Ihrer Bank» – in Wahrheit stammt sie von Betrügern. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Authentizität" data-auch="Integrität"></span> |
-| 4 | Eine Kundin bestellt online ein teures Velo und behauptet danach, sie habe nie bestellt. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Verbindlichkeit"></span> |
-| 5 | Im Gratis-WLAN am Bahnhof liest jemand Ihre Nachrichten mit. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Vertraulichkeit"></span> |
-| 6 | Ein Schüler fängt die Notenliste ab und ändert seine Note, bevor sie weitergeleitet wird. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Integrität"></span> |
-| 7 | Ihr Laptop installiert ein Update, das angeblich von Microsoft stammt. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Authentizität" data-auch="Integrität"></span> |
-| 8 | Ein Mietvertrag wird digital unterschrieben. Später will der Mieter nichts davon wissen. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Verbindlichkeit"></span> |
+| 1 | Ein Schüler fängt die Notenliste ab und ändert seine Note, bevor sie weitergeleitet wird. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Integrität"></span> |
+| 2 | Eine Kundin bestellt online ein teures Velo und behauptet danach, sie habe nie bestellt. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Verbindlichkeit"></span> |
+| 3 | Ihre Krankenakte soll nur Ihre Ärztin lesen können. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Vertraulichkeit"></span> |
+| 4 | Ihr Laptop installiert ein Update, das angeblich von Microsoft stammt. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Authentizität" data-auch="Integrität"></span> |
+| 5 | Ein Mietvertrag wird digital unterschrieben. Später will der Mieter nichts davon wissen. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Verbindlichkeit"></span> |
+| 6 | Sie erhalten eine Mail «von Ihrer Bank» – in Wahrheit stammt sie von Betrügern. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Authentizität" data-auch="Integrität"></span> |
+| 7 | Im Gratis-WLAN am Bahnhof liest jemand Ihre Nachrichten mit. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Vertraulichkeit"></span> |
+| 8 | Jemand ändert in einer Online-Überweisung unbemerkt die Kontonummer des Empfängers. | <span class="wahl" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Integrität" data-auch="Authentizität"></span> |
 
 ### Aufgabe 2 – Was leistet Verschlüsselung?
 
 Verschlüsselung macht eine Nachricht für Unbefugte unlesbar. Welches Schutzziel stellt sie
 damit **allein** sicher? <span class="luecke" data-optionen="Vertraulichkeit;Integrität;Authentizität;Verbindlichkeit" data-antwort="Vertraulichkeit"></span>
 
-Begründen Sie an Szenario 3 oder 6, warum die anderen Schutzziele nicht automatisch erfüllt sind.
+Begründen Sie an Szenario 1 oder 6, warum die anderen Schutzziele nicht automatisch erfüllt sind.
 
-<div class="antwort" data-loesung="Nur die Vertraulichkeit. Szenario 6: Der Schüler kann eine verschlüsselte Notenliste zwar nicht lesen, aber Bits verändern oder eine ganz andere Datei schicken – ob der Inhalt unverändert ist und vom richtigen Absender stammt, verrät die Verschlüsselung nicht. Szenario 3: Auch Betrüger können verschlüsselte Mails schicken. Dafür braucht es Hashwerte und Signaturen (Lektion 5)." data-zeilen="2"></div>
+<div class="antwort" data-loesung="Nur die Vertraulichkeit. Szenario 1: Der Schüler kann eine verschlüsselte Notenliste zwar nicht lesen, aber Bits verändern oder eine ganz andere Datei schicken – ob der Inhalt unverändert ist und vom richtigen Absender stammt, verrät die Verschlüsselung nicht. Szenario 6: Auch Betrüger können verschlüsselte Mails schicken. Dafür braucht es Hashwerte und Signaturen (Lektion 5)." data-zeilen="2"></div>
 
 <div class="kasten" markdown="1">
 

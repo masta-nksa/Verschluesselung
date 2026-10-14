@@ -24,23 +24,23 @@ kann mit **ihrem privaten Schlüssel** eine **Signatur** berechnen – und jede 
 
 ### Aufgabe 1 – Ablaufschema ergänzen
 
-Setzen Sie ein: *Hashwert, privaten, Signatur, öffentlichen, gleich, verändert*.
+Setzen Sie ein: *gleich, Hashwert, öffentlichen, privaten, Signatur, verändert*.
 
 **Alice signiert:** Sie berechnet den
-<span class="luecke" data-optionen="Hashwert;privaten;Signatur;öffentlichen;gleich;verändert" data-antwort="Hashwert"></span>
+<span class="luecke" data-optionen="gleich;Hashwert;öffentlichen;privaten;Signatur;verändert" data-antwort="Hashwert"></span>
 des Dokuments und daraus mit ihrem
-<span class="luecke" data-optionen="Hashwert;privaten;Signatur;öffentlichen;gleich;verändert" data-antwort="privaten"></span>
+<span class="luecke" data-optionen="gleich;Hashwert;öffentlichen;privaten;Signatur;verändert" data-antwort="privaten"></span>
 Schlüssel die
-<span class="luecke" data-optionen="Hashwert;privaten;Signatur;öffentlichen;gleich;verändert" data-antwort="Signatur"></span>.
+<span class="luecke" data-optionen="gleich;Hashwert;öffentlichen;privaten;Signatur;verändert" data-antwort="Signatur"></span>.
 Sie verschickt Dokument und Signatur.
 
 **Bob prüft:** Er berechnet selbst den Hashwert des erhaltenen Dokuments und rechnet die
 Signatur mit Alices
-<span class="luecke" data-optionen="Hashwert;privaten;Signatur;öffentlichen;gleich;verändert" data-antwort="öffentlichen"></span>
+<span class="luecke" data-optionen="gleich;Hashwert;öffentlichen;privaten;Signatur;verändert" data-antwort="öffentlichen"></span>
 Schlüssel zurück. Sind beide Werte
-<span class="luecke" data-optionen="Hashwert;privaten;Signatur;öffentlichen;gleich;verändert" data-antwort="gleich"></span>,
+<span class="luecke" data-optionen="gleich;Hashwert;öffentlichen;privaten;Signatur;verändert" data-antwort="gleich"></span>,
 ist die Signatur gültig. Sonst wurde das Dokument
-<span class="luecke" data-optionen="Hashwert;privaten;Signatur;öffentlichen;gleich;verändert" data-antwort="verändert"></span>
+<span class="luecke" data-optionen="gleich;Hashwert;öffentlichen;privaten;Signatur;verändert" data-antwort="verändert"></span>
 oder die Signatur stammt nicht von Alice.
 
 <div class="krypto" data-tool="signatur"></div>

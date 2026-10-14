@@ -15,19 +15,19 @@ Das Passwort spielt auf Caesar an, der 49 v. Chr. den Grenzfluss Rubikon übersc
 
 | Nr. | Szenario | Schutzziel(e) |
 |---|---|---|
-| 1 | Krankenakte nur für die Ärztin | Vertraulichkeit |
-| 2 | Kontonummer in der Überweisung geändert | Integrität |
-| 3 | Mail «von der Bank» stammt von Betrügern | Authentizität |
-| 4 | Kundin bestreitet die Bestellung | Verbindlichkeit |
-| 5 | Mitlesen im Gratis-WLAN | Vertraulichkeit |
-| 6 | Note in der Notenliste geändert | Integrität |
-| 7 | Update angeblich von Microsoft | Authentizität (und Integrität: unverändert?) |
-| 8 | Mieter bestreitet die Unterschrift | Verbindlichkeit |
+| 1 | Note in der Notenliste geändert | Integrität |
+| 2 | Kundin bestreitet die Bestellung | Verbindlichkeit |
+| 3 | Krankenakte nur für die Ärztin | Vertraulichkeit |
+| 4 | Update angeblich von Microsoft | Authentizität (und Integrität: unverändert?) |
+| 5 | Mieter bestreitet die Unterschrift | Verbindlichkeit |
+| 6 | Mail «von der Bank» stammt von Betrügern | Authentizität |
+| 7 | Mitlesen im Gratis-WLAN | Vertraulichkeit |
+| 8 | Kontonummer in der Überweisung geändert | Integrität |
 
-Bei 3 und 7 ist auch «Integrität» vertretbar, bei 2 auch «Authentizität» (wer hat die
+Bei 4 und 6 ist auch «Integrität» vertretbar, bei 8 auch «Authentizität» (wer hat die
 Überweisung wirklich ausgelöst?). Entscheidend ist die Begründung.
 
-**Aufgabe 2:** Verschlüsselung allein sichert nur die **Vertraulichkeit**. Bei Szenario 6
+**Aufgabe 2:** Verschlüsselung allein sichert nur die **Vertraulichkeit**. Bei Szenario 1
 könnte der Schüler die verschlüsselte Notenliste zwar nicht lesen, aber trotzdem Bits
 verändern oder eine ganz andere Datei schicken – ob der Inhalt unverändert ist und vom
 richtigen Absender stammt, verrät die Verschlüsselung nicht. Dafür braucht es Hashwerte und

@@ -37,7 +37,7 @@ Kurz geprüft:
 | = | <span class="luecke" data-antwort="1011" data-breite="6"></span> | Ergebnis |
 {: .rechnung}
 
-Was fällt Ihnen beim Ergebnis auf? Es ist <span class="luecke" data-optionen="wieder der Klartext;wieder der Schlüssel;eine zufällige Zahl" data-antwort="wieder der Klartext"></span>.
+Was fällt Ihnen beim Ergebnis auf? Es ist <span class="luecke" data-optionen="eine zufällige Zahl;wieder der Schlüssel;wieder der Klartext" data-antwort="wieder der Klartext"></span>.
 
 <div class="krypto" data-tool="xor" data-text="HALLO" data-key="KEY"></div>
 

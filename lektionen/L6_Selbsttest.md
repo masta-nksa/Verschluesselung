@@ -46,7 +46,7 @@ Warum lässt sich eine allgemeine Ersetzung knacken, obwohl sie rund 4 · 10²�
 
 - *abc* mit dem Schlüsselwort BB ergibt <span class="luecke" data-antwort="BCD" data-breite="6"></span>.
 - Vigenère ist im Gegensatz zu Caesar
-  <span class="luecke" data-optionen="polyalphabetisch;monoalphabetisch;asymmetrisch" data-antwort="polyalphabetisch"></span>.
+  <span class="luecke" data-optionen="asymmetrisch;polyalphabetisch;monoalphabetisch" data-antwort="polyalphabetisch"></span>.
 
 ### 6 · Schlüsselraum
 
@@ -78,7 +78,7 @@ Was ist bei RSA die Einwegfunktion, und was ist die «Falltür»?
 
 Alice signiert mit ihrem <span class="luecke" data-optionen="privaten;öffentlichen" data-antwort="privaten"></span>
 Schlüssel, Bob prüft mit Alices <span class="luecke" data-optionen="privaten;öffentlichen" data-antwort="öffentlichen"></span>
-Schlüssel. Signiert wird der <span class="luecke" data-optionen="Hashwert;Geheimtext;Schlüssel" data-antwort="Hashwert"></span> des Dokuments.
+Schlüssel. Signiert wird der <span class="luecke" data-optionen="Schlüssel;Hashwert;Geheimtext" data-antwort="Hashwert"></span> des Dokuments.
 
 ### 11 · Zertifikate
 

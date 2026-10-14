@@ -42,7 +42,7 @@ umgekehrten Vorgang nennt man <span class="luecke" data-antwort="Entschlüsseln"
 Liest eine Drittperson die Nachricht ohne Schlüssel, hat sie die Verschlüsselung
 <span class="luecke" data-antwort="geknackt;gebrochen" data-breite="11"></span>.
 Weil beide Seiten denselben Schlüssel brauchen, ist Caesar ein
-<span class="luecke" data-optionen="symmetrisches;asymmetrisches" data-antwort="symmetrisches"></span> Verfahren.
+<span class="luecke" data-optionen="asymmetrisches;symmetrisches" data-antwort="symmetrisches"></span> Verfahren.
 
 <div class="krypto" data-tool="caesar" data-text="caesar" data-shift="3"></div>
 

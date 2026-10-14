@@ -23,10 +23,10 @@ heisst **SHA-256**; sie liefert immer 256 Bit, geschrieben als 64 Hexadezimalzif
 Eine kryptografische Hashfunktion hat unter anderem diese vier Eigenschaften – in Aufgabe 1
 weisen Sie sie nach:
 
-- **feste Länge** – der Hashwert ist immer gleich lang, egal wie lang die Eingabe ist
 - **deterministisch** – dieselbe Eingabe ergibt jedes Mal denselben Hashwert
-- **Lawineneffekt** – schon eine winzige Änderung der Eingabe ergibt einen völlig anderen Hashwert
 - **Einwegfunktion** – aus dem Hashwert lässt sich die Eingabe nicht zurückrechnen (vgl. Lektion 4)
+- **feste Länge** – der Hashwert ist immer gleich lang, egal wie lang die Eingabe ist
+- **Lawineneffekt** – schon eine winzige Änderung der Eingabe ergibt einen völlig anderen Hashwert
 
 <div class="krypto" data-tool="sha256"></div>
 
@@ -36,10 +36,10 @@ Führen Sie die Experimente durch und wählen Sie die passende Eigenschaft.
 
 | Experiment | Eigenschaft |
 |---|---|
-| a) Hashen Sie «a» und danach einen langen Absatz. Vergleichen Sie die Länge der Hashwerte. | <span class="luecke" data-optionen="feste Länge;deterministisch;Lawineneffekt;Einwegfunktion" data-antwort="feste Länge"></span> |
-| b) Hashen Sie denselben Text zweimal. | <span class="luecke" data-optionen="feste Länge;deterministisch;Lawineneffekt;Einwegfunktion" data-antwort="deterministisch"></span> |
-| c) Ändern Sie in Text B nur ein Zeichen. Wie viele der 256 Bits ändern sich ungefähr? <span class="luecke" data-typ="groesse" data-toleranz="0.2" data-antwort="128" data-breite="5"></span> | <span class="luecke" data-optionen="feste Länge;deterministisch;Lawineneffekt;Einwegfunktion" data-antwort="Lawineneffekt"></span> |
-| d) `f5538dfab339f14dd4564c7a733475ed5a74e55a5b33cc8846f72520b2c4a6b1` gehört zu einem Tier (deutsch, klein geschrieben). Rückrechnen geht nicht – finden Sie es trotzdem: <span class="luecke" data-antwort="pinguin" data-breite="12"></span> | <span class="luecke" data-optionen="feste Länge;deterministisch;Lawineneffekt;Einwegfunktion" data-antwort="Einwegfunktion"></span> |
+| a) Hashen Sie «a» und danach einen langen Absatz. Vergleichen Sie die Länge der Hashwerte. | <span class="luecke" data-optionen="deterministisch;Einwegfunktion;feste Länge;Lawineneffekt" data-antwort="feste Länge"></span> |
+| b) Hashen Sie denselben Text zweimal. | <span class="luecke" data-optionen="deterministisch;Einwegfunktion;feste Länge;Lawineneffekt" data-antwort="deterministisch"></span> |
+| c) Ändern Sie in Text B nur ein Zeichen. Wie viele der 256 Bits ändern sich ungefähr? <span class="luecke" data-typ="groesse" data-toleranz="0.2" data-antwort="128" data-breite="5"></span> | <span class="luecke" data-optionen="deterministisch;Einwegfunktion;feste Länge;Lawineneffekt" data-antwort="Lawineneffekt"></span> |
+| d) `f5538dfab339f14dd4564c7a733475ed5a74e55a5b33cc8846f72520b2c4a6b1` gehört zu einem Tier (deutsch, klein geschrieben). Rückrechnen geht nicht – finden Sie es trotzdem: <span class="luecke" data-antwort="pinguin" data-breite="12"></span> | <span class="luecke" data-optionen="deterministisch;Einwegfunktion;feste Länge;Lawineneffekt" data-antwort="Einwegfunktion"></span> |
 
 - Zu Experiment d: Zurückrechnen geht nicht – aber Sie können Tiernamen ins Werkzeug tippen und die Hashwerte vergleichen.
 - Das gesuchte Tier ist ein Vogel, der nicht fliegen kann.

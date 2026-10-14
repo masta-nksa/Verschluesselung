@@ -35,7 +35,7 @@ abschreiben: Die Seite ist ihre Lernzusammenfassung (auch im Dossier).
 
 **Worauf achten:**
 
-- **Verschlüsselung = alle Schutzziele?** Die häufigste Fehlvorstellung. An Szenario 6 klären: Eve kann verschlüsselte Bits verändern, ohne sie lesen zu können.
+- **Verschlüsselung = alle Schutzziele?** Die häufigste Fehlvorstellung. An Szenario 1 klären: Eve kann verschlüsselte Bits verändern, ohne sie lesen zu können.
 - **Integrität vs. Authentizität:** Faustregel *«unverändert?»* vs. *«vom richtigen Absender?»*.
 - **Kerckhoffs:** Wichtigster Gedanke der Lektion, kommt in L3 (AES) und L4 (öffentlicher Schlüssel) wieder. Notfalls bei den Schutzzielen kürzen, nicht hier.
 - **Codierung:** Aufgabe 6 haben nicht alle gelöst – in der Besprechung einfach fragen «Ist Morse eine Verschlüsselung?» und die Begründung (kein Schlüssel) festhalten.
@@ -43,7 +43,7 @@ abschreiben: Die Seite ist ihre Lernzusammenfassung (auch im Dossier).
 ## Hinweise
 
 - **Einstieg:** Das Rätsel ist mit Verschiebung 1 verschlüsselt, damit es im Kopf lösbar ist (EFS → der). Das Passwort «Rubikon» spielt auf Caesar an (Überschreitung des Rubikon, 49 v. Chr.) – gut als Überleitung: «Wer war das noch mal?». Die Lösung erst nach Aufgabe 4 des Caesar-Arbeitsblatts (Knacken) auflösen, dann können es alle mit dem Werkzeug selbst knacken.
-- **Stolperstein Schutzziele:** Integrität und Authentizität werden oft verwechselt. Faustregel für die SuS: *Integrität = Ist der Inhalt unverändert? Authentizität = Stammt er wirklich von der Person, die er vorgibt?* Bei Szenario 7 (Software-Update) sind beide betroffen – das ist gewollt.
+- **Stolperstein Schutzziele:** Integrität und Authentizität werden oft verwechselt. Faustregel für die SuS: *Integrität = Ist der Inhalt unverändert? Authentizität = Stammt er wirklich von der Person, die er vorgibt?* Bei Szenario 4 (Software-Update) sind beide betroffen – das ist gewollt.
 - **Verfügbarkeit:** Wer die Cybersicherheits-Einheit erinnert, nennt evtl. «Verfügbarkeit». Das ist korrekt, wird aber nicht mit Kryptografie geschützt (sondern mit Backups, Redundanz). Darum ist es hier nur im Infokasten erwähnt.
 - **Moderne Verfahren:** Falls jemand fragt, ob Verschlüsselung nicht auch die Integrität schützt: Moderne Verfahren (z. B. AES-GCM) kombinieren Verschlüsselung mit einer Prüfsumme. Das ist dann aber ein zusätzlicher Baustein – genau den lernen wir in Lektion 5 kennen.
 - **Puffer:** Wenn die Zeit knapp wird, Aufgabe 5 (Kerckhoffs) in die Besprechung verlegen – die Leitfrage 2 deckt sie ab.

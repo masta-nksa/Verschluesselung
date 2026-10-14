@@ -37,13 +37,13 @@ das Internet – und alle anderen könnten Eve sein.
 ### Aufgabe 1 – Wer braucht was?
 
 Um Lea eine Nachricht zu schicken, verschlüssle ich mit
-<span class="luecke" data-optionen="Leas öffentlichem Schlüssel;Leas privatem Schlüssel;meinem öffentlichen Schlüssel;meinem privaten Schlüssel" data-antwort="Leas öffentlichem Schlüssel"></span>.
+<span class="luecke" data-optionen="meinem privaten Schlüssel;Leas privatem Schlüssel;Leas öffentlichem Schlüssel;meinem öffentlichen Schlüssel" data-antwort="Leas öffentlichem Schlüssel"></span>.
 Lea entschlüsselt mit
-<span class="luecke" data-optionen="ihrem privaten Schlüssel;ihrem öffentlichen Schlüssel;meinem öffentlichen Schlüssel" data-antwort="ihrem privaten Schlüssel"></span>.
+<span class="luecke" data-optionen="meinem öffentlichen Schlüssel;ihrem privaten Schlüssel;ihrem öffentlichen Schlüssel" data-antwort="ihrem privaten Schlüssel"></span>.
 Eve kennt
-<span class="luecke" data-optionen="den öffentlichen Schlüssel und den Geheimtext;den privaten Schlüssel;den Klartext" data-antwort="den öffentlichen Schlüssel und den Geheimtext"></span>,
+<span class="luecke" data-optionen="den privaten Schlüssel;den Klartext;den öffentlichen Schlüssel und den Geheimtext" data-antwort="den öffentlichen Schlüssel und den Geheimtext"></span>,
 kann die Nachricht aber nicht lesen, weil
-<span class="luecke" data-optionen="sie dafür n faktorisieren müsste;der Geheimtext zu lang ist;RSA geheim gehalten wird" data-antwort="sie dafür n faktorisieren müsste"></span>.
+<span class="luecke" data-optionen="RSA geheim gehalten wird;sie dafür n faktorisieren müsste;der Geheimtext zu lang ist" data-antwort="sie dafür n faktorisieren müsste"></span>.
 
 ### Aufgabe 2 – Gleiche Nachricht, gleicher Geheimtext?
 
