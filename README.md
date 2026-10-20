@@ -78,9 +78,13 @@ darauf, auf einer eigenen eingerückten Zeile:
 ```
 
 Als Linktext dient die Beschriftung des Badges (Arbeitsblatt, Auftrag, Theorie-Input, Das
-Wichtigste). `&nbsp;` hält Pfeil und Link auf derselben Zeile.
+Wichtigste). `&nbsp;` hält Pfeil und Link auf derselben Zeile. Auf der Seite ist der ganze
+Schritt klickbar, nicht nur der Link (CSS im Abschnitt «Ablauf einer Lektion»); dasselbe gilt für
+den «Zum Aufwärmen»-Absatz über der Liste. Darum pro Schritt nur diesen einen Link setzen – ein
+weiterer Link im Schritttext läge unter der Klickfläche.
 
-**Lektionsuhr:** Mit `lektionsuhr: true` in `_config.yml` startet eine Uhr, sobald jemand eine
+**Lektionsuhr** (zurzeit ausgeschaltet: `lektionsuhr: false`; der Code bleibt im Repo)**:** Mit
+`lektionsuhr: true` in `_config.yml` startet eine Uhr, sobald jemand eine
 Lektionsseite öffnet. Eine Leiste am unteren Rand zeigt danach auf jeder Seite der Einheit,
 welcher Schritt nach Plan dran ist und wann man spätestens zum nächsten wechselt («weiter
 spätestens um 10:32 (noch 9 Min.)»). Ist die Zeit eines Schritts um, färbt sie sich gelb und

@@ -54,9 +54,9 @@ goatcounter: "nksa"
 # Lektionsuhr (optional): Öffnet jemand eine Lektionsseite, startet eine Uhr.
 # Eine Leiste am unteren Rand zeigt danach auf jeder Seite, bei welchem Schritt
 # man nach Plan steht und wann man spätestens zum nächsten wechselt. Die Zeiten
-# kommen aus dem Ablauf der Lektionsseite ("ca. 13 Min."). Ohne diese Zeile
-# gibt es keine Uhr.
-lektionsuhr: true
+# kommen aus dem Ablauf der Lektionsseite ("ca. 13 Min."). Mit false oder ohne
+# diese Zeile gibt es keine Uhr. Seit 20.10.2026 auf Wunsch der Lehrperson aus.
+lektionsuhr: false
 
 # Kein Theme: Layouts und CSS liegen vollständig in diesem Repo. GitHub Pages
 # würde sonst das Standard-Theme "primer" laden, dessen Stylesheet den Pfad
