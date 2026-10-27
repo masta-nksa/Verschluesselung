@@ -338,6 +338,8 @@
           ? "✓ Alles richtig!"
           : richtig + " von " + g.felder.length + " richtig – die markierten Stellen nochmals anschauen.";
         meldung.className = "pruefen-meldung " + (richtig === g.felder.length ? "ok" : "noch-nicht");
+        // Design «Grusel» (design.js): Schreck bei Fehlern, aufsteigende Figuren bei lauter Treffern
+        if (window.Design) window.Design.ende(richtig === g.felder.length);
       });
       leiste.append(knopf, meldung);
       g.letztes.parentNode.insertBefore(leiste, g.letztes.nextSibling);

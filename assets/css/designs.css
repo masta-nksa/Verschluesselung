@@ -8,6 +8,15 @@
    Das Design ist themenneutral: Es hängt nicht vom Stoff der Einheit ab.
    ========================================================================== */
 
+/* Creepster (Titel im Grusel): Datei liegt im Repo, siehe assets/fonts/LIZENZ.md */
+@font-face {
+  font-family: "Creepster";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/creepster-latin-400-normal.woff2") format("woff2");
+}
+
 .design-knopf {
   font: inherit; font-family: var(--font-meta); font-size: .8rem; line-height: 1;
   padding: .45rem .7rem; cursor: pointer; white-space: nowrap;
@@ -53,7 +62,11 @@
     color: var(--marker);
     text-shadow: 0 0 14px rgba(255, 122, 24, .5);
   }
-  html[data-design="grusel"] h1 { animation: grusel-flackern 6s steps(1) infinite; }
+  html[data-design="grusel"] h1 {
+    font-family: "Creepster", var(--font-mono);
+    font-weight: 400; letter-spacing: .05em;
+    animation: grusel-flackern 6s steps(1) infinite;
+  }
   html[data-design="grusel"] .brand-icon { display: inline; }
 
   html[data-design="grusel"] .kt-fehler,
@@ -76,3 +89,36 @@
 @media (prefers-reduced-motion: reduce) {
   html[data-design="grusel"] h1 { animation: none; }
 }
+
+/* ---------- Schreck ---------- */
+.schreck{
+  position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#000;cursor:pointer;
+  animation:schreck-rein .08s ease-out both,schreck-wackeln .12s linear 3 .08s;
+}
+.schreck svg{width:min(92vw,78vh);height:auto;animation:schreck-gross .35s cubic-bezier(.2,1.6,.4,1) both}
+.schreck::after{content:"";position:absolute;inset:0;background:#a00;mix-blend-mode:multiply;animation:schreck-rot .9s ease-out both;pointer-events:none}
+.schreck.aus{animation:schreck-raus .35s ease-in both}
+@keyframes schreck-rein{from{opacity:0}to{opacity:1}}
+@keyframes schreck-raus{to{opacity:0}}
+@keyframes schreck-gross{from{transform:scale(.25)}to{transform:scale(1)}}
+@keyframes schreck-wackeln{0%{transform:translate(0,0)}25%{transform:translate(-14px,8px)}50%{transform:translate(12px,-10px)}75%{transform:translate(-8px,-6px)}100%{transform:translate(0,0)}}
+@keyframes schreck-rot{0%{opacity:1}100%{opacity:0}}
+
+/* leiser Schreck: Augenpaar im Dunkeln, kurzes Flackern */
+.schreck-augen{position:fixed;z-index:9000;pointer-events:none;display:flex;gap:18px;animation:augen-auf 2.4s ease-in-out both}
+.schreck-augen i{width:20px;height:11px;border-radius:50%;background:radial-gradient(circle,#fff 0 15%,#f22 25%,#a00 70%);box-shadow:0 0 14px 4px rgba(255,0,0,.6)}
+@keyframes augen-auf{0%,100%{opacity:0}20%,70%{opacity:1}45%{opacity:.1}50%{opacity:1}}
+.schreck-flackern{position:fixed;inset:0;z-index:9000;pointer-events:none;background:#000;animation:flackern .6s steps(1) both}
+@keyframes flackern{0%{opacity:.9}20%{opacity:0}35%{opacity:.8}55%{opacity:0}75%{opacity:.5}100%{opacity:0}}
+
+/* Aufsteigende Figuren bei Erfolg */
+.design-aufstieg{position:fixed;bottom:-10vh;z-index:9000;pointer-events:none;font-size:2.2rem;animation:aufsteigen 3s ease-out both}
+@keyframes aufsteigen{from{transform:translateY(0) rotate(-8deg);opacity:1}to{transform:translateY(-115vh) rotate(14deg);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  .schreck,.schreck svg{animation:none}
+  .schreck::after,.schreck-flackern{animation-duration:.01s}
+  .design-aufstieg{animation-duration:.01s}
+}
+
+@media print{.schreck,.schreck-augen,.schreck-flackern,.design-aufstieg{display:none!important}}
