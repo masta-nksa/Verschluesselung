@@ -10,6 +10,9 @@
   {%- endif %}
   <meta name="color-scheme" content="light dark">
   <link rel="stylesheet" href="{{ '/assets/css/unterricht.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/designs.css' | relative_url }}">
+  {%- comment -%} Design (Grusel als Standard, auf Klassisch umschaltbar): wird hier gesetzt, bevor die Seite erscheint {%- endcomment -%}
+  <script src="{{ '/assets/js/design.js' | relative_url }}"></script>
   {%- comment -%} Interaktive Krypto-Werkzeuge (nur aktiv, wo ein <div class="krypto"> steht) {%- endcomment -%}
   <script src="{{ '/assets/js/krypto.js' | relative_url }}" defer></script>
   <script src="{{ '/assets/js/uebungen.js' | relative_url }}" defer></script>
@@ -49,6 +52,7 @@
           {%- endfor %}
           {%- endif %}
         </nav>
+        <button type="button" class="design-knopf"></button>
       </div>
     </div>
   </header>
