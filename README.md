@@ -22,7 +22,7 @@ Die Website wird von GitHub Pages direkt aus diesem Repository mit Jekyll gebaut
 ├── assets/js/dossier.js   sammelt Seiten für die Dossiers
 ├── assets/js/uebungen.js  interaktive Übungen (Lücken, Auswahl, Prüfen-Knopf)
 ├── assets/js/lektionsuhr.js  Lektionsuhr: wann der nächste Schritt der Lektion spätestens beginnt
-├── assets/js/design.js    wählt das Design (bis 2.11.2026 Grusel), schaltet um, Schreck- und Toneffekte
+├── assets/js/design.js    Halloween-Design: Schalter `AKTIV` (aus), Umschalter, Schreck- und Toneffekte
 ├── assets/css/designs.css Halloween-Design «Grusel» und Umschalter
 ├── assets/fonts/          Schriften (Inter, IBM Plex Mono), lokal statt von fremden Servern
 └── assets/css/unterricht.css   Gestaltung inkl. Dark Mode und Druckansicht; Werkzeuge (Abschnitt 5), Übungen (Abschnitt 6), Lektionsuhr (Abschnitt 7)
@@ -145,12 +145,11 @@ nichts gezählt.
 
 ## Gestaltung
 
-Es gibt zwei Designs; der Knopf rechts in der Kopfzeile schaltet um, die Wahl bleibt im Browser
-(`verschluesselung.design.v1`). Bis zum 2.11.2026 ist **Grusel** der Standard (Halloween, übernommen aus dem Kara-Projekt:
-immer dunkel, orange Akzent, Spinnweben, Titel in Creepster – lokal gespeichert; bei «Prüfen» Schreckbild und Ton
-bei Fehlern, aufsteigende Fledermäuse und Geister bei lauter Treffern; `assets/css/designs.css`, nur am Bildschirm, nie im Druck).
-Ohne gespeicherte Wahl gilt Grusel nur **bis 2. November 2026**, danach Klassisch (wie im Kara-Projekt).
-**Klassisch** ist das Papier-Design aus `unterricht.css`. Es ist als gemeinsames Design aller Unterrichtseinheiten gedacht
+Das Halloween-Design **«Grusel»** (aus dem Kara-Projekt; Creepster-Titel, Spinnweben, bei «Prüfen» Schreck und Ton bei
+Fehlern, aufsteigende Figuren bei Treffern) ist seit dem 3.11.2026 **ausgeschaltet**: `AKTIV = false` in `assets/js/design.js`
+zeigt immer das klassische Design, ohne Umschalter und ohne Effekte. Der Code bleibt (`assets/css/designs.css`, nur am Bildschirm);
+für die nächste Halloween-Zeit `AKTIV = true` setzen und `standard()` anpassen. Die Wahl steht dann in `verschluesselung.design.v1`.
+Das klassische Design ist das Papier-Design aus `unterricht.css`. Es ist als gemeinsames Design aller Unterrichtseinheiten gedacht
 und steckt so auch im Gerüst für neue Einheiten: Tinte auf Papier, Schreibmaschinenschrift (IBM Plex Mono) für Titel, Nummern und Etiketten, Inter für
 den Lesetext, Leuchtstift-Gelb als einzige Farbe. Dark Mode folgt der Einstellung des Geräts.
 Die Schriften liegen in `assets/fonts/`; von fremden Servern kommt einzig das Zählskript

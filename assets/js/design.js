@@ -11,6 +11,9 @@
    Alles per CSS/SVG/WebAudio, ohne Fremddateien. */
 (function () {
   "use strict";
+  // Schalter: false = Halloween-Design aus (immer klassisch, kein Umschalter, keine Effekte).
+  // Für die nächste Halloween-Zeit auf true setzen und standard() unten anpassen.
+  var AKTIV = false;
   var KEY = "verschluesselung.design.v1";
   var root = document.documentElement;
   var KEINE_BEWEGUNG = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -27,11 +30,12 @@
   }
 
   var wahl = gespeichert();
-  anwenden(wahl === "klassisch" || wahl === "grusel" ? wahl : standard());
+  anwenden(AKTIV && (wahl === "klassisch" || wahl === "grusel") ? wahl : AKTIV ? standard() : "klassisch");
 
   document.addEventListener("DOMContentLoaded", function () {
     var knopf = document.querySelector(".design-knopf");
     if (!knopf) return;
+    if (!AKTIV) { knopf.remove(); return; }
     function beschriften() {
       var grusel = aktuell() === "grusel";
       knopf.textContent = grusel ? "\u25A6 Klassisch" : "\uD83C\uDF83 Grusel";
@@ -198,6 +202,7 @@
   /* ---------- Hook für die Übungen ---------- */
   var letzterSchreck = false;
   function ende(ok) {
+    if (!AKTIV) return;
     if (ok) { aufsteigen(); return; }
     if (aktuell() !== "grusel") return;
     // Bei jedem Fehler passiert etwas: meist der grosse Schreck (nie zweimal nacheinander),
